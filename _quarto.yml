@@ -5,6 +5,7 @@ project:
 website:
   site-url: https://hc-sc.github.io/tdu-rph/
   title: "R for Public Health"
+
   navbar:
     pinned: true
     background: primary
@@ -29,3 +30,5 @@ format:
   docx: default
 
 
+execute:
+  freeze: auto
