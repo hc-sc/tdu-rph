@@ -1,0 +1,15 @@
+{
+  "hash": "f77a7f8269e0094e138ba10f514fd7b7",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Welcome to R for Public Health (RPH)\"\n---\n\n\n\n## Overview of the course\n\n1.  Review and prepare the ship's manifest provided to you by the steward.\n2.  Sea shanty\n3.  Illness linelist and manifest. Combine to identify additional details.\n4.  Food exposure linelist - create tables and attack rates / OR\n5.  Epi curve - is the outbreak over?\n6.  Faceting / epi curve + crew manifest\n\n## Preamble: Setting-up your workspace\n\n1.  Create a folder on your computer (preferably somewhere like C:/RPH/)\n2.  Download and save the course folders from the Github website: module5, module6, module7, module8, module9, module10\n3.  Inside each of these, you should see the following:\n\n-   data/\n-   scripts/\n-   output/\n\n4.  Verify your setup looks similar to the screenshot below:\n\n> SCREENSHOT OF WORKSPACE\n\nGreat! Now you should be ready to proceed with the next step of the course.\n\n## Installing required packages\n\nYou may recall that base R only includes a minimal set of packages. For this course, we want to extend our capabilities, which will therefore require that we install some additional packages so that you can experience the wild and wonderful world of coding for data science that R has to offer.\n\nAt it's simplest, the syntax for installing a new package to your computer looks something like this:\n\n> install.packages(\"name of package goes here\")\n\nSo if we wanted to, we could run this same line of code for every package that we want to install. Then, each time we open R, we'd have to invoke each of these packages that we plan on using by including this next line of code at the top of our scripts for each package that we want to load:\n\n> library(name of package)\n\nI don't know about you, but to me, this feels a little tedious. Surely as we become pirate-wizards of the R universe, we can think of something a little more streamlined to help us install and load the packages we need for our exercises? Fret-not! The friendly and helpful R community has already thought of something to make this process as painless as possible, and put together a \"package-manager\" for us to help make our lives that much easier.\n\nThis package-manager, named 'pacman' (get it?), includes the function *p_load()* which checks to see if the package you want is installed, and either finds/installs/loads it for you if you haven't installed it previously, or just loads it into your session if you have already installed it. Clever, right?\n\nWith this in mind, all we need to do is first install the *pacman* package using the old boring way, then let the p_load function take care of the rest for us!\n\nIn your R script, type out and execute the following code:\n\n\n::: {.cell}\n\n```{.r .cell-code}\n#install.packages(\"pacman\")\nlibrary(pacman)\n\np_load(tidyverse)\n```\n:::\n\n\n\n\n\n\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

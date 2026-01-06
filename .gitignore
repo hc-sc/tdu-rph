@@ -8,4 +8,6 @@
 /.Rproj.user
 
 /.quarto/
+/*.quarto_ipynb
+/docs/*.docx
 **/*.quarto_ipynb
