@@ -3,7 +3,7 @@ project:
   output-dir: docs
 
 website:
-  site-url: https://hc-sc.github.io/tdu-rph
+  site-url: https://hc-sc.github.io/tdu-rph/
   title: "R for Public Health"
   navbar:
     pinned: true
