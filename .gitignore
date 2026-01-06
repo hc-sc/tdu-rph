@@ -1,0 +1,7 @@
+/_site/
+/.quarto/
+/.RData*
+/RPH.RProj*
+/pass_manifest_clean.csv
+/.Rhistory*
+/.Rproj*
