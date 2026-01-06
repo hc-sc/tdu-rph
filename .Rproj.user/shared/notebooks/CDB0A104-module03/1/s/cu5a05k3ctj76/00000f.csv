@@ -1,0 +1,6 @@
+"0","# Import the dataset using readxl"
+"0","# Note the readxl::read_excel allows for you to access functions from installed "
+"0","# packages without loading the entire package. "
+"0","pass_manifest <- readxl::read_excel(""participant_data/module3/pass_manifest.xlsx"", "
+"0","                            skip = 10)"
+"0",""

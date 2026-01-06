@@ -1,0 +1,15 @@
+"0","```r
+
+# First, let's get a list of all the variables currently included in the manifest dataset
+
+vars <- names(manifest)
+
+print(vars)
+```"
+"1"," [1] \"First...1\"         \"Last...2\"          \"DOB\"              
+ [4] \"Age\"               \"Gender\"            \"Member Status\"    
+ [7] \"Address\"           \"City\"              \"Province\"         
+[10] \"Country\"           \"First...11\"        \"Last...12\"        
+[13] \"Relationship\"      \"Phone number\"      \"Boarding Date\"    
+[16] \"Boarding Location\"
+"

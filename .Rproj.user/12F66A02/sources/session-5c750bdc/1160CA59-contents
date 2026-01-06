@@ -1,0 +1,31 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  site-url: https://hc-sc.github.io/tdu-rph
+  title: "R for Public Health"
+  navbar:
+    pinned: true
+    background: primary
+    search: true
+    left:
+      - text: "Introduction"
+        href: index.qmd#intro
+      - text: "Module 1"
+        href: module01.qmd
+      - text: "Module 2"
+        href: module02.qmd
+      - text: "Module 3"
+        href: module03.qmd
+
+format:
+  html:
+    theme: sketchy
+    toc: true
+    toc-location: right
+    toc-depth: 4
+    css: temp_styles.css
+  docx: default
+
+

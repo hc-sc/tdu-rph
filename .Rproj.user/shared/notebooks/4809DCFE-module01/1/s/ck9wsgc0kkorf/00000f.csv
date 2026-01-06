@@ -1,0 +1,6 @@
+"0",""
+"0","manifest <- "
+"0","  manifest %>% "
+"0","  mutate(home.prov = home.prov.abb) %>%"
+"0","  select(-home.prov.abb)"
+"0",""

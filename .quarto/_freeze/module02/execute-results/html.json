@@ -1,0 +1,15 @@
+{
+  "hash": "16c135f7f7b7714117bc424db7b2001b",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Module 2\"\nformat: \n  html: default\n  docx: default\n---\n\n\n\n\nWelcome back! \n\n\nThis page will hold the materials required to complete the Sea Shanty activity.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

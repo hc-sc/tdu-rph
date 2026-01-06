@@ -1,0 +1,9 @@
+"0",""
+"0","manifest <- readxl::read_excel(""C:/Users/BHETMAN/OneDrive - HC-SC PHAC-ASPC (1)/Desktop/RPH_Datasets/participant/ship_manifest.xlsx"", "
+"0","                               skip = 10)"
+"1","[38;5;252mNew names:
+[36m•[38;5;252m `First` -> `First...1`
+[36m•[38;5;252m `Last` -> `Last...2`
+[36m•[38;5;252m `First` -> `First...11`
+[36m•[38;5;252m `Last` -> `Last...12`[39m
+"

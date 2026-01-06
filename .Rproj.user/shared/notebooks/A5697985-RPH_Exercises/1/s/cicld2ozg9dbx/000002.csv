@@ -1,0 +1,11 @@
+"0","```r
+
+manifest <- readxl::read_excel(\"C:/Users/BHETMAN/OneDrive - HC-SC PHAC-ASPC (1)/Desktop/RPH_Datasets/participant/ship_manifest.xlsx\", 
+                               skip = 10)
+```"
+"1","New names:
+• `First` -> `First...1`
+• `Last` -> `Last...2`
+• `First` -> `First...11`
+• `Last` -> `Last...12`
+"

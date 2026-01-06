@@ -1,0 +1,6 @@
+"0",""
+"0","symptoms_manifest %>%"
+"0","  group_by(onset.date) %>%"
+"0","  count() %>% "
+"0","  ggplot(aes(x = onset.date, y = n)) + "
+"0","  geom_col()"

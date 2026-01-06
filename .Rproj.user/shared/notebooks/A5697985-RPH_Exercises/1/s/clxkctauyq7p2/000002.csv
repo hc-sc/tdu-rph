@@ -1,0 +1,7 @@
+"0","```r
+# Let's check to make sure it worked as intended: 
+head(manifest$pass.dob)
+
+```"
+"1","[1] \"21445\" \"27047\" \"28507\" \"36314\" \"35219\" \"23589\"
+"
