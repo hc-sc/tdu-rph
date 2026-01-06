@@ -1,8 +1,0 @@
-"0","manifest <- "
-"0","manifest %>% "
-"0","  mutate(board.date = case_when("
-"0","    board.date == ""Feb 9th"" ~ ymd('2025-02-09'),"
-"0","    board.date == ""Feb 10th"" ~ ymd('2025-02-10'),"
-"0","    TRUE ~ NA)"
-"0","  )"
-"0","  "

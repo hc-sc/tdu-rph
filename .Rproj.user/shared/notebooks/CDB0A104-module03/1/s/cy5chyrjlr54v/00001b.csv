@@ -1,5 +1,0 @@
-"0",""
-"0","symptoms_manifest %>% "
-"0","  group_by(Gender) %>%"
-"0","  summarize(Total = n(),"
-"0","            Proportion = n()/sum(Total))"

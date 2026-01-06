@@ -1,5 +1,0 @@
-"0","pass_manifest_trunc <- #truncated, temporary object"
-"0","pass_manifest %>% "
-"0","  # Note that we wrap variables with spaces in a back-tick"
-"0","  select(Pass_ID, Age, Gender, `Member Status`, `Boarding Date`)"
-"0",""

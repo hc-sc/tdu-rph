@@ -1,8 +1,0 @@
-"0",""
-"0","symptoms_manifest %>% "
-"0","  summarize(.by = Gender,"
-"0","    mean_age   = mean(Age, na.rm = TRUE),"
-"0","    median_age = median(Age, na.rm = TRUE),"
-"0","    max_age    = min(Age, na.rm = TRUE),"
-"0","    min_age    = max(Age, na.rm = TRUE)"
-"0","  )"

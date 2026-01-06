@@ -1,9 +1,0 @@
-"0","```r
-
-#install.packages(\"pacman\")
-library(pacman)
-
-p_load(tidyverse)
-
-
-```"
