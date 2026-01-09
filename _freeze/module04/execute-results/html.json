@@ -1,0 +1,15 @@
+{
+  "hash": "b58525ff00e33faee1a2725897f7b009",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Module 4\"\nformat: \n  html: default\n  docx: default\n---\n\n\n\n\nWelcome back!\n\nYou finished the last module on quite a cliffhanger!\n\nIn this module, we're going to dive a little deeper into the mystery illnesses aboard the **S. S. Rainbow Cake**, and learn some nifty ways to report our results!\n\n### Learning objectives\n\nBy the end of Module 4, you will be able to\n\n1.  Calculate common outbreak statistics based on food exposure data\n2.  Create attractive tables using the **flextable** package\n3.  Create a convenient report using markdown language\n\n## Scenario update\n\nAt the end of the last module, we saw that symptoms of **bloody stool** and **fever** appeared to be specific to passengers that had boarded the ship on February 9th, and primarily \"Silver\" cruise member status. After speaking to a few of the crew members, they let you know the following:\n\n1.  A certain proportion of passengers boarded the ship the day prior to departure: the same time that the bulk of the ship's crew were arriving on board. As a result of lessened staff capacity, passengers who pre-boarded had access to reduced à-la-carte dining services only.\n2.  Member status (e.g., Silver, Gold, and Platinum) provides certain benefits to passengers based on their membership status. The higher tiers enable access to certain amenities aboard the ship, including premium gym and spa services, dedicated guest services concierge, enhanced in-room comforts, and exclusive access to premium dining items.\n\nYou decide to talk to the ship's cook about menu items served on February 9th. Maybe something there is responsible for the illnesses observed?\n\n![No.4 Cook. Thomas Rowlandson, 1799. National Maritime Museum, Greenwich, London.](pics/module04_cook.jpg){fig-alt=\"An image of a ships cook\"}\n\n\nYou can't be certain, but something seems a little... off about the cook. Not what you expected. Regardless, however, Sam shares with you the menu from the evening of February 9th.\n\n![The menu from the night of February 9th](pics/module04_menu.jpg){fig-alt=\"An image of a dinner menu\"}\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

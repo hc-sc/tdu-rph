@@ -29,29 +29,6 @@ library(tidyverse)
 
 ```
 
-```{r setup, include = FALSE}
-library(knitr)
-
-options(
-  pillar.width = 80,
-  pillar.subtle = FALSE,
-  pillar.min_chars = 3
-)
-
-opts_chunk$set(
-  collapse = TRUE,
-  echo = TRUE,
-  warning = FALSE, 
-  message = FALSE,
-  width = 80
-)
-
-options(width = 80)
-
-library(pacman)
-library(tidyverse)
-
-```
 
 Welcome back!
 
@@ -76,10 +53,9 @@ At the end of the last module, we saw that symptoms of **bloody stool** and **fe
 
 You decide to talk to the ship's cook about menu items served on February 9th. Maybe something there is responsible for the illnesses observed?
 
----
-Image: Ship's cook, "Salty Sam Stewpot"
----
+!["Salty Sam Stewpot". (No.4 Cook. Thomas Rowlandson, 1799. National Maritime Museum, Greenwich, London.)](pics/module04_cook.jpg){fig-alt="An image of a ships cook"}
 
-You can't be certain, but something seems a little... off about the cook. Regardless, however, Sam shares with you the menu from the evening of February 9th.
+
+You can't be certain, but something seems a little... off about the cook. Not what you expected. Regardless, however, Sam shares with you the menu from the evening of February 9th.
 
 ![The menu from the night of February 9th](pics/module04_menu.jpg){fig-alt="An image of a dinner menu"}
