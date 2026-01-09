@@ -123,6 +123,7 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives">Learning objectives</a></li>
   <li><a href="#scenario-update" id="toc-scenario-update" class="nav-link" data-scroll-target="#scenario-update">Scenario update</a></li>
+  <li><a href="#part-a-exploring-the-food-exposure-dataset" id="toc-part-a-exploring-the-food-exposure-dataset" class="nav-link" data-scroll-target="#part-a-exploring-the-food-exposure-dataset">Part A: Exploring the food exposure dataset</a></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="module04.docx"><i class="bi bi-file-word"></i>MS Word</a></li></ul></div></nav>
     </div>
@@ -167,20 +168,40 @@ ul.task-list li input[type="checkbox"] {
 <li>A certain proportion of passengers boarded the ship the day prior to departure: the same time that the bulk of the ship’s crew were arriving on board. As a result of lessened staff capacity, passengers who pre-boarded had access to reduced à-la-carte dining services only.</li>
 <li>Member status (e.g., Silver, Gold, and Platinum) provides certain benefits to passengers based on their membership status. The higher tiers enable access to certain amenities aboard the ship, including premium gym and spa services, dedicated guest services concierge, enhanced in-room comforts, and exclusive access to premium dining items.</li>
 </ol>
-<p>You decide to talk to the ship’s cook about menu items served on February 9th. Maybe something there is responsible for the illnesses observed?</p>
+<p>You decide to talk to the ship’s cook about menu items served on February 9th. Maybe something there is responsible for the illnesses observed? The staff point you in the direction of the galley of the S. S. Rainbow Cake, where you meet the head chef: <strong>Sam Stewpot</strong> (or ‘Salty Sam’ according to the crew).</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="pics/module04_cook.jpg" class="img-fluid figure-img" alt="An image of a ships cook"></p>
-<figcaption>No.4 Cook. Thomas Rowlandson, 1799. National Maritime Museum, Greenwich, London.</figcaption>
+<figcaption>“Salty Sam Stewpot”. (No.4 Cook. Thomas Rowlandson, 1799. National Maritime Museum, Greenwich, London.)</figcaption>
 </figure>
 </div>
-<p>You can’t be certain, but something seems a little… off about the cook. Not what you expected. Regardless, however, Sam shares with you the menu from the evening of February 9th.</p>
+<p>You can’t be certain, but something seems a little… off about Sam. Not what you expected, at least. Regardless, after speaking about the dining services offered on the evening of February 9th, you ask for information about the menu items offered, and recruit several members of the crew to interview passengers and record which menu items they ordered.</p>
+<p>The first piece of information comes directly from Salty Sam, who proudly tells you that in addition to their culinary expertise, they in fact wrote up the menu themselves, complete with chef’s notes.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="pics/module04_menu.jpg" class="img-fluid figure-img" alt="An image of a dinner menu"></p>
 <figcaption>The menu from the night of February 9th</figcaption>
 </figure>
 </div>
+<div class="callout-info">
+<p>You see that certain menu items are restricted to the higher tier memberships only. Will this change which food items you decide to include in your analysis? Why or why not?</p>
+</div>
+<p>After a short time, you receive the following email from the ship’s steward:</p>
+<p><code>Dear [ship's epidemiologist],</code></p>
+<p><code>Please find attached the results of the interrogation o' the passengers, as per yer request.</code></p>
+<p><code>I'll be notin as well, the cap'n is a reel Kate Winslet fan, and was watchin' a film called Contaygeon last night. He says they had some real nice looking tables and reports that were getting passed around in that film, and would like it if you could pass him something ta make it easy to read and understand whats been going on.</code></p>
+<p><code>Thanks,</code></p>
+<p><code>Patrick the Steward</code></p>
+<hr>
+<p>Another busy day ahead of you! Let’s recap on what we need to do:</p>
+<ol type="1">
+<li>First and foremost - we should check out this dataset provided to us containing food item exposures of the passengers who dined aboard the ship on February 9th. Given our strong clues that the ship experienced a point-source outbreak, we want to be sure that any implicated food items don’t wind up on the menu again!</li>
+<li>The captain has requested an epidemiological update from you, in a nicely formatted report. Up until now, we’ve just been reading off the outputs provided in R, and while this is fine for us as a working-method, we should recognize that it is important to make sure our results and recommendations are as easy to interpret as possible. Therefore, we’ll explore some ways to create custom, easy-to-read tables.</li>
+<li>(If we have time for it). We’ll introduce R markdown documents - which can be used in a variety of ways to create nice, convenient reports that combine your code, outputs, and notes, all in one place!</li>
+</ol>
+</section>
+<section id="part-a-exploring-the-food-exposure-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="part-a-exploring-the-food-exposure-dataset">Part A: Exploring the food exposure dataset</h2>
 
 
 </section>
