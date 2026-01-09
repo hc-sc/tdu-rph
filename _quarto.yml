@@ -19,6 +19,8 @@ website:
         href: module02.html
       - text: "Module 3"
         href: module03.html
+      - text: "Module 4"
+        href: module04.html
 
 format:
   html:
