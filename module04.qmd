@@ -85,3 +85,83 @@ Another busy day ahead of you! Let's recap on what we need to do:
 3.  (If we have time for it). We'll introduce R markdown documents - which can be used in a variety of ways to create nice, convenient reports that combine your code, outputs, and notes, all in one place!
 
 ## Part A: Exploring the food exposure dataset
+
+
+What we have to work with
+
+1. Food exposures for those who boarded Feb 9th 
+2. Symptoms of illness
+
+Tasks:
+
+- Decide on how we want to treat Y/N/P/DK entries. No completely right answer but generally lump Y/P = 1, N = 0, DK = NA 
+
+- Decide on case definition(s) - might be worth doing 2 - one for symptomatic, one for severe symptoms 
+
+- Can also do odds ratios 
+
+- Calculate attack rates 
+- Decide on nice tabular format 
+- implement in flextable using calculations directly in the table
+
+- Rmd documents 
+
+
+## Exploring the food exposure dataset
+
+Let's start by exploring the food exposure data extract that was provided to us. 
+
+
+```{r} 
+
+foodexp <- read_tsv("participant_data/module4/foodexposures_feb9.txt")
+
+```
+
+
+:::callout-note
+
+As you review the food exposures data, what do you notice about the values under each of the exposures? Are they a simple dichotomous value? How do you propose to work with these? 
+
+For reference, the following responses were recorded: 
+
+- **Y** = **Yes**, the passenger recalls eating the food item.
+- **N** = **No**, the passenger recalls specifically NOT eating the food item. 
+- **P** = **Possibly**, the passenger recalls that they may have eaten the food item, either from their own plate or from a spouses or someone at the same table.
+- **DK** = **Doesn't know** or **doesn't recall**, the passenger does not recall whether they consumed the food item or not. 
+
+::: 
+
+You may choose to do differently for your analysis, but for this module, we'll use the following guidelines to recode these values into something we can use: 
+
+- **1** = **Y or P**. Since there's a possibility that the passenger consumed the food item, we'll group them together with those who can confirm that they consumed they item. This approach may be slightly more sensitive than excluding them, but we'll accept that for now. 
+- **0** = **N**. Only passengers who recall that they specifically did not consume the food item will be treated as a confirmed negative, since those with poor recall may have been exposed and not reported it. 
+- **NA** = **DK**. Passengers without adequate recall are dropped from the calculations on that food exposure. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

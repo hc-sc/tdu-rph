@@ -20,6 +20,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -105,6 +140,10 @@ ul.task-list li input[type="checkbox"] {
     <a class="nav-link" href="./module03.html"> 
 <span class="menu-text">Module 3</span></a>
   </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="./module04.html" aria-current="page"> 
+<span class="menu-text">Module 4</span></a>
+  </li>  
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
@@ -124,6 +163,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives">Learning objectives</a></li>
   <li><a href="#scenario-update" id="toc-scenario-update" class="nav-link" data-scroll-target="#scenario-update">Scenario update</a></li>
   <li><a href="#part-a-exploring-the-food-exposure-dataset" id="toc-part-a-exploring-the-food-exposure-dataset" class="nav-link" data-scroll-target="#part-a-exploring-the-food-exposure-dataset">Part A: Exploring the food exposure dataset</a></li>
+  <li><a href="#exploring-the-food-exposure-dataset" id="toc-exploring-the-food-exposure-dataset" class="nav-link" data-scroll-target="#exploring-the-food-exposure-dataset">Exploring the food exposure dataset</a></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="module04.docx"><i class="bi bi-file-word"></i>MS Word</a></li></ul></div></nav>
     </div>
@@ -202,6 +242,55 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="part-a-exploring-the-food-exposure-dataset" class="level2">
 <h2 class="anchored" data-anchor-id="part-a-exploring-the-food-exposure-dataset">Part A: Exploring the food exposure dataset</h2>
+<p>What we have to work with</p>
+<ol type="1">
+<li>Food exposures for those who boarded Feb 9th</li>
+<li>Symptoms of illness</li>
+</ol>
+<p>Tasks:</p>
+<ul>
+<li><p>Decide on how we want to treat Y/N/P/DK entries. No completely right answer but generally lump Y/P = 1, N = 0, DK = NA</p></li>
+<li><p>Decide on case definition(s) - might be worth doing 2 - one for symptomatic, one for severe symptoms</p></li>
+<li><p>Can also do odds ratios</p></li>
+<li><p>Calculate attack rates</p></li>
+<li><p>Decide on nice tabular format</p></li>
+<li><p>implement in flextable using calculations directly in the table</p></li>
+<li><p>Rmd documents</p></li>
+</ul>
+</section>
+<section id="exploring-the-food-exposure-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="exploring-the-food-exposure-dataset">Exploring the food exposure dataset</h2>
+<p>Let’s start by exploring the food exposure data extract that was provided to us.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>foodexp <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="st">"participant_data/module4/foodexposures_feb9.txt"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>As you review the food exposures data, what do you notice about the values under each of the exposures? Are they a simple dichotomous value? How do you propose to work with these?</p>
+<p>For reference, the following responses were recorded:</p>
+<ul>
+<li><strong>Y</strong> = <strong>Yes</strong>, the passenger recalls eating the food item.</li>
+<li><strong>N</strong> = <strong>No</strong>, the passenger recalls specifically NOT eating the food item.</li>
+<li><strong>P</strong> = <strong>Possibly</strong>, the passenger recalls that they may have eaten the food item, either from their own plate or from a spouses or someone at the same table.</li>
+<li><strong>DK</strong> = <strong>Doesn’t know</strong> or <strong>doesn’t recall</strong>, the passenger does not recall whether they consumed the food item or not.</li>
+</ul>
+</div>
+</div>
+<p>You may choose to do differently for your analysis, but for this module, we’ll use the following guidelines to recode these values into something we can use:</p>
+<ul>
+<li><strong>1</strong> = <strong>Y or P</strong>. Since there’s a possibility that the passenger consumed the food item, we’ll group them together with those who can confirm that they consumed they item. This approach may be slightly more sensitive than excluding them, but we’ll accept that for now.</li>
+<li><strong>0</strong> = <strong>N</strong>. Only passengers who recall that they specifically did not consume the food item will be treated as a confirmed negative, since those with poor recall may have been exposed and not reported it.</li>
+<li><strong>NA</strong> = <strong>DK</strong>. Passengers without adequate recall are dropped from the calculations on that food exposure.</li>
+</ul>
 
 
 </section>
