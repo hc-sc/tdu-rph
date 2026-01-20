@@ -52,35 +52,35 @@ At the end of the last module, we saw that symptoms of **bloody stool** and **fe
 
 You decide to talk to the ship's cook about menu items served on February 9th. Maybe something there is responsible for the illnesses observed? The staff point you in the direction of the galley of the S. S. Rainbow Cake, where you meet the head chef: **Sam Stewpot** (or 'Salty Sam' according to the crew).
 
-!["Salty Sam Stewpot". (No.4 Cook. Thomas Rowlandson, 1799. National Maritime Museum, Greenwich, London.)](pics/module04_cook.jpg){fig-alt="An image of a ships cook"}
+!["Salty Sam Stewpot". (No.4 Cook. Thomas Rowlandson, 1799. National Maritime Museum, Greenwich, London.)](pics/module04_cook.jpg){fig-alt="An image of a ships cook from 1799." fig-align="left" width="503"}
 
 You can't be certain, but something seems a little... off about Sam. Not what you expected, at least. Regardless, after speaking about the dining services offered on the evening of February 9th, you ask for information about the menu items offered, and recruit several members of the crew to interview passengers and record which menu items they ordered.
 
 The first piece of information comes directly from Salty Sam, who proudly tells you that in addition to their culinary expertise, they in fact wrote up the menu themselves, complete with chef's notes.
 
-![The menu from the night of February 9th](pics/module04_menu.jpg){fig-alt="An image of a dinner menu"}
+![The menu from the night of February 9th](pics/module04_menu.jpg){fig-alt="An image of a dinner menu" fig-align="left"}
+
+You notice that certain menu items are restricted to the higher tier memberships only. Will this change which food items you decide to include in your analysis? Why or why not?
 
 ::: callout-info
-You see that certain menu items are restricted to the higher tier memberships only. Will this change which food items you decide to include in your analysis? Why or why not?
+### Cruise ship outbreaks
+
+By now, you've surely come to the conclusion that we're dealing with a fairly common occurrence related to cruises: outbreaks of gastrointestinal disease. Bringing together a variety of passengers and crew from from diverse regions aboard a semi-enclosed, often crowded vessel, where passengers are in frequent contact with new exposures is a perfect storm for the spread of disease. Further, the convenience and luxury of cruising makes it a favorite past-time for the elderly and family members who may be immunocompromised.
+
+If you haven't already started guessing about what could be causing illness aboard the **S. S. Rainbow Cake**, have a read through the following resources, and reflect on the menu posted above. Are there any food items that you predict are likely to be the culprit just based on the frequency that they're implicated as sources of outbreaks? What pathogen are you the most suspicious about?
+
+If you have experience with cruise-ship outbreaks, we encourage you to post on the course discussion boards and share your thoughts and opinions with your classmates. Conversely, if you have questions about cruise-ship outbreaks - try asking on the discussion board to leverage the experience within the virtual classroom.
+
+We'll leave some resources here all about cruise-ship outbreaks for you to check out when you have time:
+
+1.  [CDC Yellow Book: Cruise Ship Travel 2026](https://www.cdc.gov/yellow-book/hcp/travel-air-sea/cruise-ship-travel.html "CDC Yellow Book: Cruise Ship Travel 2026")
+2.  [CDC Vessel Sanitation Program (VSP): Outbreaks on Cruise Ships in VSP's Jurisdiction (2025)](https://www.cdc.gov/vessel-sanitation/cruise-ship-outbreaks/index.html "Outbreaks on Cruise Ships in VSP's Jurisdiction (2025)")
+3.  [Epidemiology of Diarrheal Disease Outbreaks on Cruise Ships, 1986 Through 1993](https://jamanetwork.com/journals/jama/article-abstract/396811?utm_source=chatgpt.com "JAMA article on Epidemiology of Diarrheal Disease Outbreaks on Cruise Ships from 1996")
 :::
 
 ## Part A: Exploring and preparing the data
 
 ### Food exposures dataset
-
-<!-- What we have to work with -->
-
-<!-- 1. Food exposures for those who boarded Feb 9th  -->
-
-<!-- 2. Symptoms of illness -->
-
-<!-- Tasks: -->
-
-<!-- - Decide on how we want to treat Y/N/P/DK entries. No completely right answer but generally lump Y/P = 1, N = 0, DK = NA  -->
-
-<!-- - Decide on case definition(s) - might be worth doing 2 - one for symptomatic, one for severe symptoms  -->
-
-<!-- - Calculate attack rates  -->
 
 Let's start by exploring the food exposure data extract that was provided to us.
 
@@ -111,7 +111,7 @@ Since we've already covered this function, take a minute to try to piece togethe
 
 <details>
 
-<summary><strong>Click to see the R code </strong></summary>
+<summary><strong> Click to see the R code we used to recode the food exposures </strong></summary>
 
 ```{r}
 foodexp_recoded <- 
@@ -147,50 +147,44 @@ symptoms <- read_tsv("participant_data/module4/symptoms_feb14.txt")
 
 As you can see, the symptoms dataset has been simplified from the previous module, and already contains a variable for fever. You'll need to use your skills from Module 3 to join this with the food exposures dataset, but first let's make a plan for what we want to do with these.
 
+## Part B: Calculating attack rates
 
-### Calculating attack rates 
+A common practice in foodborne outbreak epidemiology is calculating attack rates for menu items. A food-specific attack rate is a measurement of incidence proportion (or incidence risk) that is specific to a certain food item consumed during an event or otherwise defined time period. It includes the number of persons who **ate the food item of interest and became ill** in the **numerator**, and the **total number of persons who consumed the food item** in the **denominator**.
 
-A common practice in foodborne outbreak epidemiology is calculating attack rates for menu items. A food-specific attack rate is a measurement of incidence proportion (or incidence risk) that is specific to a certain food item consumed during an event or otherwise defined time period. It includes the number of persons who **ate the food item of interest and became ill** in the **numerator**, and the **total number of persons who consumed the food item** in the **denominator**.  
+Before we can calculate attack rates from our food exposures information, we'll need to do two things.
 
+1.  We'll want to join our symptoms and food exposures datasets using one of the joins that we practiced in Module 3. You'll notice in this module that we have datasets that are quite different in terms of the numbers of observations. You'll need to decide what you want to do with the additional passenger data in the food exposures dataset. You may elect to use a join type that either drops observations that do not have a match (i.e., left join, right join, inner join) or use one that keeps all observations (e.g., full join) and filter/perform calculations accordingly.
 
-Before we can calculate attack rates from our food exposures information, we'll need to do two things. 
+2.  We'll also need to figure out who we consider as ill from our symptoms dataset, in other words, we'll want to make a **case definition**. We saw in Module 3 that our symptoms dataset included individuals with dates of illness onset from February 10th up to February 14th, and that some individuals had worse symptoms than others (e.g., bloody stool and fever). For our analysis here, let's start by just including **all passengers aboard the S. S. Rainbow Cake**, with **symptoms of bloody stool OR fever**, **symptom onset dates between February 9th and 14th**, and who **attended the à-la-carte meal service on the evening of February 9th**.
 
-1. We'll want to join our symptoms and food exposures datasets using one of the joins that we practiced in Module 3. You'll notice in this module that we have datasets that are quite different in terms of the numbers of observations. You'll need to decide what you want to do with the additional passenger data in the food exposures dataset. You may elect to use a join type that either drops observations that do not have a match (i.e., left join, right join, inner join) or use one that keeps all observations (e.g., full join) and filter/perform calculations accordingly. 
+Alright, let's start getting into the data then! Since we've spent so much time practicing these operations already - we'd like you to try your hand at the R code by yourself first. If you get stuck, or finish and want to compare to how we did things - click the drop-down to see our code.
 
-2. We'll also need to figure out who we consider as ill from our symptoms dataset, in other words, we'll want to make a **case definition**. We saw in Module 3 that our symptoms dataset included individuals with dates of illness onset from February 10th up to February 14th, and that some individuals had worse symptoms than others (e.g., bloody stool and fever). For our analysis here, let's start by just including **all passengers aboard the S. S. Rainbow Cake**, with **symptoms of bloody stool OR fever**, **symptom onset dates between February 9th and 14th**, and who **attended the à-la-carte meal service on the evening of February 9th**. 
-
-
-
-
-### Part A Code-a-long:
-
-
-Alright, let's start getting into the data then! Since we've spent so much time practicing these operations already - we'd like you to try your hand at the R code by yourself first. If you get stuck, or finish and want to compare to how we did things - click the drop-down to see our code. 
+Think about the two operations that we just listed above, and how, and in what order you would go about doing these. Remember, there's really no wrong answer to how you decide to code things - over time, everyone develops their own personal style for what works best for them. If you're not sure whether you're doing things in a sensible way, or you're worried someone won't be able to follow your code, then just use lots of #comments so its easy to figure out later!
 
 <details>
 
-<summary><strong>Click to see how we joined the tables and created a case definition </strong></summary>
+<summary><strong> Click to see how we joined the tables and created a case definition </strong></summary>
 
-To simplify things even further, we're actually going to start with the symptoms dataset, and create our case definition first, then drop the additional symptom variables that we don't need. Let's create one case definition for the more serious symptomatic passengers (bloody stool OR fever), and then a general case definition for anyone reporting symptoms. Then we'll drop the additional variables, and join with the food exposure dataset. 
+We're actually going to start with the symptoms dataset, and create our case definition first, then drop the additional symptom variables that we don't need before joining with the food exposures dataset. Let's create one case definition for the more serious symptomatic passengers (bloody stool OR fever), and then a general case definition for anyone reporting symptoms. Then we'll drop the additional variables, and join with the food exposure dataset.
 
 ```{r}
 symptoms_def <- 
   symptoms %>% 
-  mutate(serious.case = case_when(bloody.stool == 1 ~ 1, 
-                             fever == 1 ~ 1, 
-                             TRUE ~ 0),
-         general.case = 1) %>% 
+  mutate(serious.case = 
+           case_when(
+             bloody.stool == 1 ~ 1,
+             fever == 1 ~ 1,
+             TRUE ~ 0),
+         general.case = 1) %>%
   select(pass.ID, serious.case, general.case)
 
 ```
 
+Alright, now that we've got a simplified dataset with just the cases identified who meet the general versus serious case definitions, let's join this with the food exposure dataset. Its going to be useful to us to know the how many passengers got sick as well as didn't get sick from different food items on the night of February 9th.. so we'll want to use a join that keeps all observations from the food exposures dataset whether or not they match to the symptomatic passengers.
 
-Alright, now that we've got a simplified dataset with just the cases identified who meet the general versus serious case definitions, let's join this with the food exposure dataset. Its going to be useful to us to know the how many passengers got sick as well as didn't get sick from different food items on the night of February 9th.. so we'll want to use a join that keeps all observations from the food exposures dataset whether or not they match to the symptomatic passengers. 
+Now, simply using a left\_ or right\_ join will work fine, so long as you are careful about the *order* of the datasets that you input. For example, if you were to use a left join and list the symptoms_def dataset first, then the resulting joined table will only contain observations that were found in the symptoms_def dataset. Conversely, if you used the same left join and listed the food exposures datset first, then the result would keep all observations from the food exposure dataset, and just return NA's wherever there wasn't a match.
 
-Now, simply using a left_ or right_ join will work fine, so long as you are careful about the *order* of the datasets that you input. For example, if you were to use a left join and list the symptoms_def dataset first, then the resulting joined table will only contain observations that were found in the symptoms_def dataset. Conversely, if you used the same left join and listed the food exposures datset first, then the result would keep all observations from the food exposure dataset, and just return NA's wherever there wasn't a match. 
-
-To keep our lives simple, we'll apply a full_join, which will keep all observations from both tables regardless of the order. 
-
+To keep our lives simple, we'll apply a full_join, which will keep all observations from both tables regardless of the order.
 
 ```{r}
 
@@ -200,48 +194,162 @@ foodexp_recoded %>%
 
 ```
 
-
 </details>
 
-Great! Now we have a dataset we can use to start calculating attack rates of food items! 
+Great! Now we have a dataset we can use to start calculating attack rates of food items!
 
+So, in simple terms, the food-item specific attack rate is the number of passengers who ate the item and got sick divided by the total number of passengers who ate the item. This is simple enough on paper, but will take a little bit of logic to implement the code - something we've actually already practiced a lot in this course using the case_when() function!
 
+Since we have **two** variables we're working with for each calculation in this instance (i.e., consumed food item, case status) we'll need to include **both** inside our sum() function when counting up the cases. We'll use **Boolean logic** to do this, and apply the **AND** operator (`&`).
+
+::: callout-note
+### George Boole and Boolean Logic
+
+[![George Boole (1815-1864). Portrait by unknown artist.](pics/module04_George_Boole.png){fig-alt="An artists portrait of mathematician George Boole (1815-1864)" fig-align="center" width="480"}](https://en.wikipedia.org/wiki/George_Boole)
+
+Boolean logic (or Boolean Algebra) was developed by an English mathematician named George Boole who lived during the 19th Century. The key idea behind Boolean logic that we use in programming is that statements can be made to evaluate into a dichotomous outcome: **TRUE** or **FALSE**. This allows us to evaluate many complex statements and simplify them into a single YES/NO answer.
+
+In R, the main operators that we use to evaluate Boolean expressions are the following:
+
+-   `&` AND
+-   `|` OR
+-   `!` NOT
+
+On their own, these operators aren't particularly impressive, but we can combine them with the following **comparison operators** to chain some complex statements together.
+
+-   `==` EQUAL (or EQUIVALENT) TO
+-   `!=` NOT EQUAL (or EQUIVALENT) TO
+-   `<` LESS THAN
+-   `>` GREATER THAN
+-   `<=` LESS THAN OR EQUAL TO
+-   `>=` GREATER THAN OR EQUAL TO
+
+For example, a case that is **GREATER THAN OR EQUAL TO** to 33 years of age, **AND** has eaten the potato salad, **AND** has reported fever **OR** bloody stool might look something like this:
+
+`(age >= 33) & (psalad == 1) & (fever == 1 | bstool == 1)`
+
+Feeling like you just haven't quite had enough Boolean logic for one day? Check out the chapter on [Logical Vectors from the R for Data online textbook!](https://r4ds.hadley.nz/logicals.html "Link to R4DS chapter on Logical Vectors")
+:::
+
+Let's use summarise() to try out our Boolean logic within the sum() function using just the first food item, and the **general** case definition. Then we'll test to make sure things are working correctly.
 
 ```{r}
-
 food_symp_joined %>% 
-  summarise()
+  summarise(gsalad_AR1 = sum(gsalad == 1 & general.case == 1, na.rm = TRUE) / sum(gsalad == 1, na.rm = TRUE))
+```
+
+According to our calculations, the green salad had an attack rate of approximately 17% for serious symptom outcomes. Let's take a minute though to stop and double check that the calculations are correct. Sometimes using statements with multiple logic operators can get tricky - so it's always good practice to stop and verify that things are working as intended.
+
+As we learned earlier, the attack rate numerator should be the number of passengers who reported consuming the food item who got sick. So with this in mind let's check how many individuals that equals by using a different approach and seeing if the numbers come out the same.
+
+We'll start by calculating the numerator just using tidyverse filter() functions, and count() the number of rows left over. We'll filter for both serious cases only, then the number of individuals within those that reported green salad exposure.
+
+```{r}
+# numerator
+food_symp_joined %>% 
+  filter(general.case == 1) %>%
+  filter(gsalad == 1) %>% 
+  count()
+
+```
+
+Great, so our numerator should be 21. Now let's check the denominator: the number of total individuals who consumed the reported food item.
+
+```{r}
+# denominator
+food_symp_joined %>% 
+  filter(gsalad == 1) %>% 
+  count()
 
 
 ```
 
+Our denominator should be 121. Now, manually calculate the attack rate of 21/121: fingers crossed we get the same result!
 
+```{r}
+#Green salad attack rate
+21 / 121
 
+```
 
+Phew! Double checking our calculation ended up with the exact same result, thankfully! It looks like our Boolean logic expression is working just fine. Now we can use the same syntax to calculate the attack rate for general illness of all the food items and see if there are any that stand out as being particularly risky.
 
+Starting with the code that we worked through above, calculate the attack rate of all the food menu items for **general illnesses**. Feel free to use either long-form, and write out a new line for each food item, or go back and review earlier in this module, as well as **Module 3** where we practiced with using **across()** within the **summarise()** function, and try to work out how to do the calculations all in one go! Note: when we used **across()** previously, we were calculating based on multiple input variables only, and not outputting multiple variables. You may need to [check the documentation](https://dplyr.tidyverse.org/reference/across.html "Documentation for the across() function.") to read up on how to do this!
 
-## Part B: Flextable
+<details>
+
+<summary><strong> Click to see the R code </strong></summary>
+
+Method 1: long form
+
+```{r}
+food_symp_joined %>% 
+  summarise(gsalad_AR = sum(gsalad == 1 & general.case == 1, na.rm = TRUE) / sum(gsalad == 1, na.rm = TRUE),
+            csalad_AR = sum(csalad == 1 & general.case == 1, na.rm = TRUE) / sum(csalad == 1, na.rm = TRUE),
+            oyster_AR = sum(oyster == 1 & general.case == 1, na.rm = TRUE) / sum(oyster == 1, na.rm = TRUE),
+            shcocktl_AR = sum(shcocktl == 1 & general.case == 1, na.rm = TRUE) / sum(shcocktl == 1, na.rm = TRUE),
+            deggs_AR = sum(deggs == 1 & general.case == 1, na.rm = TRUE) / sum(deggs == 1, na.rm = TRUE),
+            ssteak_AR = sum(ssteak == 1 & general.case == 1, na.rm = TRUE) / sum(ssteak == 1, na.rm = TRUE),
+            fcbreast_AR = sum(fcbreast == 1 & general.case == 1, na.rm = TRUE) / sum(fcbreast == 1, na.rm = TRUE),
+            pchsalmon_AR = sum(pchsalmon == 1 & general.case == 1, na.rm = TRUE) / sum(pchsalmon == 1, na.rm = TRUE),
+            ppasta_AR = sum(ppasta == 1 & general.case == 1, na.rm = TRUE) / sum(ppasta == 1, na.rm = TRUE),
+            choclava_AR = sum(choclava == 1 & general.case == 1, na.rm = TRUE) / sum(choclava == 1, na.rm = TRUE),
+            nycake_AR = sum(nycake == 1 & general.case == 1, na.rm = TRUE) / sum(nycake == 1, na.rm = TRUE),
+            vanicecr_AR = sum(vanicecr == 1 & general.case == 1, na.rm = TRUE) / sum(vanicecr == 1, na.rm = TRUE))
+```
+
+Method 2: using across()
+
+> ```{r}
+> >
+> food_symp_joined %>% 
+>   summarise(
+>     across(
+>       gsalad:vanicecr,
+>       ~ sum(.x == 1 & general.case == 1, na.rm = TRUE) /
+>           sum(.x == 1, na.rm = TRUE),
+>       .names = "{.col}_AR"
+>     )
+>   )
+> >
+> ```
+
+</details>
+
+After reviewing the attack rates of each food item - are there any that stand out as particularly risky to you? Repeat the analysis using the serious illness case definition and compare your results. What are your best epidemiological recommendations at this time? Are there other analyses that you would want to complete to be more confident in your assertions?
+
+## Part C: *Enprettification* of results flextable
 
 After working through your calculations for the food exposures, you receive the following email from the ship's steward:
 
-`Dear [ship's epidemiologist],`
+> Dear \[ship's epidemiologist\],
+>
+> The cap'n sends his regards and hopes you found the results o' the passenger ~~interrogation~~ -- I mean interviewin' .. helpful.
+>
+> I'll be notin as well, the cap'n is a reel Kate Winslet fan, and was watchin' a film all about your profession last night. He says they had some real nice looking reports that were getting passed around in that film, and would like it if you could pass him something ta make it easy to read and understand whats been going on.
+>
+> Thanks,
+>
+> Patrick the Steward
 
-`Please find attached the results of the interrogation, err, I mean interviewin' o' the passengers, as per yer request.`
+As if you didn't have enough things to worry about, the captain has requested an epidemiological update from you, in a nicely formatted report. As much as this is extra work on your plate - the captain and his steward, Patrick, have touched on something really important in public health: if you can't easily translate the information and evidence that you've gathered, then what was the point in collecting it in the first place? The job of an epidemiologist is only one piece of the larger puzzle that goes into serving public health, and we need to make sure that the information and messaging that we provide is as clear as possible to those working in other disciplines - whether that be physicians, administrators, or deck swabbers!
 
-`I'll be notin as well, the cap'n is a reel Kate Winslet fan, and was watchin' a film called Contaygeon last night. He says they had some real nice looking tables and reports that were getting passed around in that film, and would like it if you could pass him something ta make it easy to read and understand whats been going on.`
+Up until now, we've just been reading off the outputs provided in R, and while this is fine for us as a working-method, we should recognize that it is not very accessible for those that haven't had specialized training in these areas. Therefore, we'll explore some ways to create custom, easy-to-read tables for our results!
 
-`Thanks,`
+### Flextable
 
-`Patrick the Steward`
+The flextable package provides a useful framework for working with tables that are intended to be read by human eyes (or eye, in the case of some of the patch-wearing crew members aboard the **S. S. Rainbow Cake**!). While not a *core* tidyverse package, flextable is considered part of the wider tidyverse, which means it works seamlessly with all the functions that we've discussed to date. However, we must load it separately in addition to our usual call to load the tidyverse library.
 
-Another busy day ahead of you! Let's recap on what we need to do:
+```{r}
 
-1.  First and foremost - we should check out this dataset provided to us containing food item exposures of the passengers who dined aboard the ship on February 9th. Given our strong clues that the ship experienced a point-source outbreak, we want to be sure that any implicated food items don't wind up on the menu again!
-2.  The captain has requested an epidemiological update from you, in a nicely formatted report. Up until now, we've just been reading off the outputs provided in R, and while this is fine for us as a working-method, we should recognize that it is important to make sure our results and recommendations are as easy to interpret as possible. Therefore, we'll explore some ways to create custom, easy-to-read tables.
-3.  (If we have time for it). We'll introduce R markdown documents - which can be used in a variety of ways to create nice, convenient reports that combine your code, outputs, and notes, all in one place!
+p_load(flextable)
 
--   Decide on nice tabular format
+```
 
--   implement in flextable using calculations directly in the table
+The flextable() function uses a **data frame** as input, and returns a **flextable** object. This means that simply writing out a statement like:
 
--   Rmd documents
+> flextable(symptoms)
+
+will return a table that, while not perfect, is already a lot easier to incorporate into reporting than the standard R outputs (see below).
+
+![Example default output from flextable](pics/module04_flextable_example.jpeg){fig-alt="An image of a table containing passenger ID and case status"}

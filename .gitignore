@@ -6,9 +6,7 @@
 /.Rhistory*
 /.Rproj*
 /.Rproj.user
-
 /.quarto/
 /*.quarto_ipynb
-
-
 **/*.quarto_ipynb
+/*.Rproj
