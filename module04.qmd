@@ -300,25 +300,25 @@ food_symp_joined %>%
 
 Method 2: using across()
 
-> ```{r}
-> >
-> food_symp_joined %>% 
->   summarise(
->     across(
->       gsalad:vanicecr,
->       ~ sum(.x == 1 & general.case == 1, na.rm = TRUE) /
->           sum(.x == 1, na.rm = TRUE),
->       .names = "{.col}_AR"
->     )
->   )
-> >
-> ```
+```{r}
+
+food_symp_joined %>% 
+  summarise(
+     across(
+       gsalad:vanicecr,
+       ~ sum(.x == 1 & general.case == 1, na.rm = TRUE) /
+           sum(.x == 1, na.rm = TRUE),
+       .names = "{.col}_AR"
+     )
+   )
+
+```
 
 </details>
 
 After reviewing the attack rates of each food item - are there any that stand out as particularly risky to you? Repeat the analysis using the serious illness case definition and compare your results. What are your best epidemiological recommendations at this time? Are there other analyses that you would want to complete to be more confident in your assertions?
 
-## Part C: *Enprettification* of results flextable
+## Part C: Flexing your R expertise
 
 After working through your calculations for the food exposures, you receive the following email from the ship's steward:
 
@@ -336,7 +336,7 @@ As if you didn't have enough things to worry about, the captain has requested an
 
 Up until now, we've just been reading off the outputs provided in R, and while this is fine for us as a working-method, we should recognize that it is not very accessible for those that haven't had specialized training in these areas. Therefore, we'll explore some ways to create custom, easy-to-read tables for our results!
 
-### Flextable
+### Introducing Flextable
 
 The flextable package provides a useful framework for working with tables that are intended to be read by human eyes (or eye, in the case of some of the patch-wearing crew members aboard the **S. S. Rainbow Cake**!). While not a *core* tidyverse package, flextable is considered part of the wider tidyverse, which means it works seamlessly with all the functions that we've discussed to date. However, we must load it separately in addition to our usual call to load the tidyverse library.
 
@@ -350,6 +350,248 @@ The flextable() function uses a **data frame** as input, and returns a **flextab
 
 > flextable(symptoms)
 
-will return a table that, while not perfect, is already a lot easier to incorporate into reporting than the standard R outputs (see below).
+will return a default table that, while not perfect, is already a lot easier to incorporate into reporting than the standard R outputs (see below).
 
-![Example default output from flextable](pics/module04_flextable_example.jpeg){fig-alt="An image of a table containing passenger ID and case status"}
+![Example of the default output from flextable](pics/module04_flextable_example.jpeg){fig-alt="An image of a table containing passenger ID and case status"}
+
+### Building a table of attack rates
+
+We recently just produced an output of the attack rates of different food items, but as you saw, the results weren't very pretty, and were poorly formatted to include in any kind of report or email that would could share with others. Instead of going through the painstaking process of drafting a table in a word processing software and manually copying over the values, let's instead put our efforts into automating a nice flextable that we can then export to use directly in a report.
+
+#### Formatting the data for use in a table
+
+First, we'll start by revisiting the attack rate table that we created earlier.
+
+```{r}
+  food_symp_joined %>% 
+  summarise(
+     across(
+       gsalad:vanicecr,
+       ~ sum(.x == 1 & general.case == 1, na.rm = TRUE) /
+           sum(.x == 1, na.rm = TRUE),
+       .names = "{.col}_AR"
+     )
+   )
+
+```
+
+You'll notice that the table is in wide-format. This isn't great for readability, so lets first pivot it into long format using pivot_longer().
+
+```{r}
+
+food_symp_joined %>% 
+  summarise(
+    across(
+      gsalad:vanicecr,
+      ~ sum(.x == 1 & general.case == 1, na.rm = TRUE) /
+        sum(.x == 1, na.rm = TRUE),
+      .names = "{.col}_AR"
+    )
+  ) %>%
+  pivot_longer(
+    cols = everything(),
+    names_to = "Menu Item",
+    values_to = "Attack Rate"
+  )
+
+```
+
+Great - that's exactly what we wanted! A column of menu items, and a column of their attack rate for illness. Let's save this as an object before moving on to more complex tasks. Since attack rates are usually expressed as a percent, we'll add a line in to multiply that column by 100 too.
+
+```{r}
+
+# Save table as object called ar_table
+ar_table <- food_symp_joined %>% 
+  summarise(
+    across(
+      gsalad:vanicecr,
+      ~ sum(.x == 1 & general.case == 1, na.rm = TRUE) /
+        sum(.x == 1, na.rm = TRUE),
+      .names = "{.col}_AR"
+    )
+  ) %>%
+  pivot_longer(
+    cols = everything(),
+    names_to = "Menu Item",
+    values_to = "Attack Rate"
+  ) %>%
+  mutate(
+    `Attack Rate` = `Attack Rate` * 100
+  )
+  
+
+
+```
+
+Now that we have our attack rate table in a basic format that works, we can start applying changes to make it more attractive and legible. Let's start out by changing the food item names from the codified versions we used back into the menu items to make them more understandable.
+
+```{r}
+
+#Update the table using mutate() and recode() the entries in the `Menu Item` variable.
+
+ar_table <- ar_table %>% 
+  mutate(
+    `Menu Item` = recode(
+      `Menu Item`, #need to specify which variable to recode in first argument
+      gsalad_AR    = "Green Salad",
+      csalad_AR    = "Caesar Salad",
+      oyster_AR    = "Raw Oysters",
+      shcocktl_AR  = "Shrimp Cocktail",
+      deggs_AR     = "Deviled Eggs",
+      ssteak_AR    = "Sirloin Steak",
+      fcbreast_AR  = "Fancy Chicken Breast",
+      pchsalmon_AR = "Poached Salmon",
+      ppasta_AR    = "Pasta Primavera",
+      choclava_AR  = "Chocolate Lava Cake",
+      nycake_AR    = "New York Cheesecake",
+      vanicecr_AR  = "Vanilla Ice Cream"
+    )
+  )
+
+```
+
+Excellent! Now that we have the foundation of our flextable, we can go ahead and save this code to a flextable object.
+
+```{r}
+
+ft_ar <- flextable(ar_table)
+
+```
+
+Now you've got your data saved as a flextable object, which by itself works very well with documents in MS Word, or PDF, and also allows for lots of attractive formatting options!
+
+::: callout-important
+Did you see what we did there? By simply wrapping that whole chunk of code from earlier inside the flextable() function and saving it as an object, we were able to easily create a flextable object. We think its worthwhile to stop for a second, however, and take note of what that small piece of code represented. You had to start with two separate datasets, clean and prepare them for joining, merge them together, manipulate and calculate new metrics, summarise, pivot into a longer format, and relabel - all before wrapping the code in the flextable function.
+
+As you face more complex R operations in the future, you'll find that large complex problems can **always** be broken down into smaller ones. When faced with a coding task that you're unsure how to complete - start with the small things that you DO know how to do, and work up from there. You'd be surprised at how much you can accomplish when you just take things one piece at a time!
+:::
+
+#### Working with a flextable object
+
+Now that we have our basic flextable made up, let's turn to some of our formatting options within the package to make the table a little nicer looking.
+
+We'll use argument `colformat_double` to set the formatting options of the *Attack Rate* column. Let's go ahead and set the number of decimal places to 1 using `digits =`, and attach a percent (%) sign to the values in that column using the `suffix` argument.
+
+Then, we'll embolden the header using `bold()`, and ask flextable to automatically fit the column widths to the data using the `autofit()` function.
+
+```{r}
+
+ft_ar %>% 
+  colformat_double(
+    j = "Attack Rate",
+    digits = 1,
+    suffix = "%"
+  ) %>% 
+  bold(part = "header") %>% 
+  autofit()
+
+```
+
+Excellent!
+
+We now have a very nice looking table that can be easily added to a report! And we've really only scratched the surface of making nice tables in R with flextable. Take a look at some of the examples in the [flextable gallery](https://ardata.fr/en/flextable-gallery/ "Examples of tables made using the flextable package") if you're ever seeking inspiration.
+
+While we only used very basic options in flextable, there are seemingly endless applications and extensions to the package. Take a few minutes to explore some further options for formatting your flextable using the documentation [here](https://ardata-fr.github.io/flextable-book/index.html "Using the flextable package"), as well as leveraging your favorite AI tool for ideas and help.
+
+Finally, if you'd like a cheatsheet as a quick reference for flextable, you can also download one [here](https://ardata-fr.github.io/flextable-book/static/pdf/cheat_sheet_flextable.pdf "Download flextable cheatsheet!").
+
+### Now it's your turn!
+
+Remember back in Part A when we created two different case definitions? We purposefully worked through the example with flextable using only the **general** illness case definition, but did not include the **severe illness** case definition.
+
+Your task now, is to go back, and create a flextable that looks like the one above, but includes a total of three columns:
+
+1.  Menu item
+2.  General illness AR
+3.  Severe illness AR
+
+You will need to go back, add a variable for food-specific attack rates for the severe illness AR, then reuse the code to create a flextable containing both attack rates.
+
+In the end, you should produce something that looks like the following:
+
+```{r echo=FALSE}
+
+food_symp_joined %>% 
+  summarise(
+    across(
+      gsalad:vanicecr,
+      ~ sum(.x == 1 & general.case == 1, na.rm = TRUE) /
+          sum(.x == 1, na.rm = TRUE),
+      .names = "{.col}_AR_general"
+    ),
+    across(
+      gsalad:vanicecr,
+      ~ sum(.x == 1 & serious.case == 1, na.rm = TRUE) /
+          sum(.x == 1, na.rm = TRUE),
+      .names = "{.col}_AR_serious"
+    )
+  ) %>%
+  pivot_longer(
+    everything(),
+    names_to = c("menu_item", "AR_type"),
+    names_pattern = "(.*)_AR_(.*)",
+    values_to = "attack_rate"
+  ) %>%
+  pivot_wider(
+    names_from  = AR_type,
+    values_from = attack_rate
+  ) %>% 
+    mutate(
+    `menu_item` = recode(
+      `menu_item`, #need to specify which variable to recode in first argument
+      gsalad    = "Green Salad",
+      csalad    = "Caesar Salad",
+      oyster    = "Raw Oysters",
+      shcocktl  = "Shrimp Cocktail",
+      deggs     = "Deviled Eggs",
+      ssteak    = "Sirloin Steak",
+      fcbreast  = "Fancy Chicken Breast",
+      pchsalmon = "Poached Salmon",
+      ppasta    = "Pasta Primavera",
+      choclava  = "Chocolate Lava Cake",
+      nycake    = "New York Cheesecake",
+      vanicecr  = "Vanilla Ice Cream"
+    )
+  ) %>% 
+  mutate(
+    general = general*100, 
+    serious = serious*100
+  ) %>% 
+  rename(
+    `Menu Item` = "menu_item", 
+    `AR General` = "general",
+    `AR Serious` = "serious"
+  ) %>% 
+  flextable() %>%
+    colformat_double(
+    j = c("AR General", "AR Serious"),
+    digits = 1,
+    suffix = "%"
+  ) %>% 
+  bold(part = "header") %>% 
+  autofit()
+  
+
+```
+
+## Part D: Putting it all together 
+
+The captain asked for a nice report - and that's what we're going to deliver!
+
+In your `participant_data/module4` folder you should find a file called `SSRainbowCake_EpiSummary.Rmd`.
+
+This is an RMarkdown document template that you can use to draft up a summary of the epidemiological investigation to date for the ship's captain. 
+
+You'll need to go back through your results from the previous modules to find the information to complete the different sections.
+
+Your report should include at least 1 figure (the epidemiologic curve from Module 3) and 1 table (attack rate table from Module 4). Apart from that, feel free to be as creative as you like. 
+
+When you're finished, hit the knit button at the top of your RStudio window to compile your report into a PDF document that you can share with the captain of the **S. S. Rainbow Cake**. 
+
+
+
+
+
+
+
+

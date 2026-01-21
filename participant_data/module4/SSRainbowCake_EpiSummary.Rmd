@@ -1,0 +1,73 @@
+---
+title: "S. S. Rainbow Cake Outbreak Report"
+author: "Your name here"
+date: "`r Sys.Date()`"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Introduction
+
+*D.N.P. Cruise Lines* has recently emerged as a premier, budget-friendly cruise line that operates out of the port of Halifax, Nova Scotia. Shortly after departing Halifax on February 10th, passengers started reporting with symptoms of illness. 
+
+An epidemiological investigation has been on-going with the assistance of the ship's crew. The following report outlines the current status of the investigation and any leads that have been identified to date. 
+
+
+## Case Summary 
+
+Please draft a short summary of cases in this section that includes a breakdown of the following: 
+
+1. Total number of cases who have reported to the ship infirmary
+2. Onset date range of cases 
+3. Case breakdown by sex
+4. Case breakdown by age range 
+
+## Case Symptoms and case definition 
+
+Please describe symptoms being experienced by cases, and provide the case definition for both cases reporting **general illness** and those reporting more **serious illness**. 
+
+Provide a short statement about the concerns surrounding the **serious illness** cases and some examples of infectious disease that may cause them.
+
+Please provide total number of cases who meet each of the two case definitions either in tabular or text format.
+
+
+## Epidemiologic curve
+
+Please embed your epidemiological curve of serious illnesses from Module 3 here, by including the code in the r-chunk below. We have included an extract of the symptoms_manifest dataset in the `participant_data/module4` folder for you to use. 
+
+(Note: Normally, we would make several edits to the curve to have it look more like a proper epi-curve. For the purposes of this exercise though, replicating the code exactly how we did it in Module 3 is sufficient. If you'd like to challenge your self, however, please feel free to modify the curve how you see fit.)
+
+
+```{r, echo=FALSE}
+
+# Note 1: including echo=FALSE in the code chunk settings prevents the code from being printed to the output in the report.
+
+# Note 2: If you want to suppress the output from reading in a data set, you can wrap the read_tsv() function inside of the 
+# suppressMessages() function like so: 
+
+# suppressMessages(symptoms_manifest <- read_tsv("participant_data/module4/symptoms_manifest.tsv"))
+
+```
+
+
+Provide a brief interpretation of the epidemiologic curve. In your interpretation, include why the curve appears to indicate a point-source outbreak, and provide additional details from your summaries including the **boarding dates** and **membership status** of passengers experiencing **serious symptom outcomes**. 
+
+
+## Food investigation summary 
+
+Provide a brief description about the information you have received regarding the meal services provided on February 9th. 
+
+Include the table of attack rates for general and serious illness outcomes for each menu item. 
+
+Indicate which menu items appear to be the most risky for causing illnesses aboard the ship.
+
+
+## Recommendations and next steps
+
+Using your best epidemiological skills, provide any recommendations you can to the captain of the ship, and outline any next-steps that you would undertake at this point in the cruise. 
+
+Indicate any additional questions or concerns that you have about the epidemiologic investigation so far, and highlight any missing information. 
+
