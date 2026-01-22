@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.555">
+<meta name="generator" content="quarto-1.8.26">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>R for Public Health - Module 4</title>
+<title>Module 4 – R for Public Health</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,8 +21,9 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 /* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -63,15 +64,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-9859ad12c646e21909f796ca9dd1bd29.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -108,7 +111,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link rel="stylesheet" href="temp_styles.css">
 </head>
 
-<body class="nav-fixed">
+<body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -120,7 +123,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -147,7 +150,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
-          <div class="quarto-navbar-tools">
+            <div class="quarto-navbar-tools">
 </div>
       </div> <!-- /container-fluid -->
     </nav>
@@ -262,7 +265,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="food-exposures-dataset">Food exposures dataset</h3>
 <p>Let’s start by exploring the food exposure data extract that was provided to us.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>foodexp <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="st">"participant_data/module4/foodexposures_feb9.txt"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>foodexp <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="st">"participant_data/module4/foodexposures_feb9.txt"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -297,7 +300,7 @@ Note
 <strong> Click to see the R code we used to recode the food exposures </strong>
 </summary>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>foodexp_recoded <span class="ot">&lt;-</span> </span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>foodexp_recoded <span class="ot">&lt;-</span> </span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>foodexp <span class="sc">%&gt;%</span> </span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">across</span>(</span>
@@ -310,7 +313,7 @@ Note
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="cn">NA_real_</span></span>
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </details>
 <p>Great! Now that you’ve got this dataset recoded and have spent a minute reviewing the data, you’ll notice that the food exposures data includes all the passengers who dined onboard the ship on February 9th and doesn’t differentiate between ill and healthy passengers.</p>
@@ -320,7 +323,7 @@ Note
 <h3 class="anchored" data-anchor-id="the-symptoms-dataset">The symptoms dataset</h3>
 <p>These data should look quite familiar to you after completing Module 3, however, we’ve removed some variables and provided a simpler version of the dataset for you to work with in Module 4. Read the data into your R instance and review the structure and contents.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>symptoms <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="st">"participant_data/module4/symptoms_feb14.txt"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>symptoms <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="st">"participant_data/module4/symptoms_feb14.txt"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>As you can see, the symptoms dataset has been simplified from the previous module, and already contains a variable for fever. You’ll need to use your skills from Module 3 to join this with the food exposures dataset, but first let’s make a plan for what we want to do with these.</p>
 </section>
@@ -341,7 +344,7 @@ Note
 </summary>
 <p>We’re actually going to start with the symptoms dataset, and create our case definition first, then drop the additional symptom variables that we don’t need before joining with the food exposures dataset. Let’s create one case definition for the more serious symptomatic passengers (bloody stool OR fever), and then a general case definition for anyone reporting symptoms. Then we’ll drop the additional variables, and join with the food exposure dataset.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>symptoms_def <span class="ot">&lt;-</span> </span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>symptoms_def <span class="ot">&lt;-</span> </span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  symptoms <span class="sc">%&gt;%</span> </span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">serious.case =</span> </span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>           <span class="fu">case_when</span>(</span>
@@ -349,16 +352,16 @@ Note
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>             fever <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>             <span class="cn">TRUE</span> <span class="sc">~</span> <span class="dv">0</span>),</span>
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">general.case =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(pass.ID, serious.case, general.case)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(pass.ID, serious.case, general.case)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Alright, now that we’ve got a simplified dataset with just the cases identified who meet the general versus serious case definitions, let’s join this with the food exposure dataset. Its going to be useful to us to know the how many passengers got sick as well as didn’t get sick from different food items on the night of February 9th.. so we’ll want to use a join that keeps all observations from the food exposures dataset whether or not they match to the symptomatic passengers.</p>
 <p>Now, simply using a left_ or right_ join will work fine, so long as you are careful about the <em>order</em> of the datasets that you input. For example, if you were to use a left join and list the symptoms_def dataset first, then the resulting joined table will only contain observations that were found in the symptoms_def dataset. Conversely, if you used the same left join and listed the food exposures datset first, then the result would keep all observations from the food exposure dataset, and just return NA’s wherever there wasn’t a match.</p>
 <p>To keep our lives simple, we’ll apply a full_join, which will keep all observations from both tables regardless of the order.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>food_symp_joined <span class="ot">&lt;-</span> </span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>foodexp_recoded <span class="sc">%&gt;%</span> </span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">full_join</span>(symptoms_def, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"PersonID"</span> <span class="ot">=</span> <span class="st">"pass.ID"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">full_join</span>(symptoms_def, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"PersonID"</span> <span class="ot">=</span> <span class="st">"pass.ID"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </details>
 <p>Great! Now we have a dataset we can use to start calculating attack rates of food items!</p>
@@ -370,7 +373,7 @@ Note
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-George Boole and Boolean Logic
+<span class="screen-reader-only">Note</span>George Boole and Boolean Logic
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -407,18 +410,18 @@ George Boole and Boolean Logic
 </div>
 <p>Let’s use summarise() to try out our Boolean logic within the sum() function using just the first food item, and the <strong>general</strong> case definition. Then we’ll test to make sure things are working correctly.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>food_symp_joined <span class="sc">%&gt;%</span> </span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>food_symp_joined <span class="sc">%&gt;%</span> </span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">gsalad_AR1 =</span> <span class="fu">sum</span>(gsalad <span class="sc">==</span> <span class="dv">1</span> <span class="sc">&amp;</span> general.case <span class="sc">==</span> <span class="dv">1</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">/</span> <span class="fu">sum</span>(gsalad <span class="sc">==</span> <span class="dv">1</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 1 × 1</span></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="do">##   gsalad_AR1</span></span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="do">##        &lt;dbl&gt;</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="do">## 1      0.174</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="do">## 1      0.174</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>According to our calculations, the green salad had an attack rate of approximately 17% for serious symptom outcomes. Let’s take a minute though to stop and double check that the calculations are correct. Sometimes using statements with multiple logic operators can get tricky - so it’s always good practice to stop and verify that things are working as intended.</p>
 <p>As we learned earlier, the attack rate numerator should be the number of passengers who reported consuming the food item who got sick. So with this in mind let’s check how many individuals that equals by using a different approach and seeing if the numbers come out the same.</p>
 <p>We’ll start by calculating the numerator just using tidyverse filter() functions, and count() the number of rows left over. We’ll filter for both serious cases only, then the number of individuals within those that reported green salad exposure.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># numerator</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># numerator</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>food_symp_joined <span class="sc">%&gt;%</span> </span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(general.case <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(gsalad <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
@@ -426,24 +429,24 @@ George Boole and Boolean Logic
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 1 × 1</span></span>
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="do">##       n</span></span>
 <span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="do">##   &lt;int&gt;</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="do">## 1    21</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="do">## 1    21</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Great, so our numerator should be 21. Now let’s check the denominator: the number of total individuals who consumed the reported food item.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># denominator</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># denominator</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>food_symp_joined <span class="sc">%&gt;%</span> </span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(gsalad <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>()</span>
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 1 × 1</span></span>
 <span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="do">##       n</span></span>
 <span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="do">##   &lt;int&gt;</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="do">## 1   121</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="do">## 1   121</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Our denominator should be 121. Now, manually calculate the attack rate of 21/121: fingers crossed we get the same result!</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Green salad attack rate</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Green salad attack rate</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="dv">21</span> <span class="sc">/</span> <span class="dv">121</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0.1735537</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0.1735537</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Phew! Double checking our calculation ended up with the exact same result, thankfully! It looks like our Boolean logic expression is working just fine. Now we can use the same syntax to calculate the attack rate for general illness of all the food items and see if there are any that stand out as being particularly risky.</p>
 <p>Starting with the code that we worked through above, calculate the attack rate of all the food menu items for <strong>general illnesses</strong>. Feel free to use either long-form, and write out a new line for each food item, or go back and review earlier in this module, as well as <strong>Module 3</strong> where we practiced with using <strong>across()</strong> within the <strong>summarise()</strong> function, and try to work out how to do the calculations all in one go! Note: when we used <strong>across()</strong> previously, we were calculating based on multiple input variables only, and not outputting multiple variables. You may need to <a href="https://dplyr.tidyverse.org/reference/across.html" title="Documentation for the across() function.">check the documentation</a> to read up on how to do this!</p>
@@ -453,7 +456,7 @@ George Boole and Boolean Logic
 </summary>
 <p>Method 1: long form</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>food_symp_joined <span class="sc">%&gt;%</span> </span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>food_symp_joined <span class="sc">%&gt;%</span> </span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">gsalad_AR =</span> <span class="fu">sum</span>(gsalad <span class="sc">==</span> <span class="dv">1</span> <span class="sc">&amp;</span> general.case <span class="sc">==</span> <span class="dv">1</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">/</span> <span class="fu">sum</span>(gsalad <span class="sc">==</span> <span class="dv">1</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">csalad_AR =</span> <span class="fu">sum</span>(csalad <span class="sc">==</span> <span class="dv">1</span> <span class="sc">&amp;</span> general.case <span class="sc">==</span> <span class="dv">1</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">/</span> <span class="fu">sum</span>(csalad <span class="sc">==</span> <span class="dv">1</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">oyster_AR =</span> <span class="fu">sum</span>(oyster <span class="sc">==</span> <span class="dv">1</span> <span class="sc">&amp;</span> general.case <span class="sc">==</span> <span class="dv">1</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">/</span> <span class="fu">sum</span>(oyster <span class="sc">==</span> <span class="dv">1</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
@@ -471,11 +474,11 @@ George Boole and Boolean Logic
 <span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="do">##       &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt;</span></span>
 <span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="do">## 1     0.174     0.246     0.375       0.222    0.588     0.127       0.132</span></span>
 <span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a><span class="do">## # ℹ 5 more variables: pchsalmon_AR &lt;dbl&gt;, ppasta_AR &lt;dbl&gt;, choclava_AR &lt;dbl&gt;,</span></span>
-<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a><span class="do">## #   nycake_AR &lt;dbl&gt;, vanicecr_AR &lt;dbl&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a><span class="do">## #   nycake_AR &lt;dbl&gt;, vanicecr_AR &lt;dbl&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Method 2: using across()</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>food_symp_joined <span class="sc">%&gt;%</span> </span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>     <span class="fu">across</span>(</span>
@@ -490,7 +493,7 @@ George Boole and Boolean Logic
 <span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="do">##       &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt;</span></span>
 <span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="do">## 1     0.174     0.246     0.375       0.222    0.588     0.127       0.132</span></span>
 <span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a><span class="do">## # ℹ 5 more variables: pchsalmon_AR &lt;dbl&gt;, ppasta_AR &lt;dbl&gt;, choclava_AR &lt;dbl&gt;,</span></span>
-<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a><span class="do">## #   nycake_AR &lt;dbl&gt;, vanicecr_AR &lt;dbl&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a><span class="do">## #   nycake_AR &lt;dbl&gt;, vanicecr_AR &lt;dbl&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </details>
 <p>After reviewing the attack rates of each food item - are there any that stand out as particularly risky to you? Repeat the analysis using the serious illness case definition and compare your results. What are your best epidemiological recommendations at this time? Are there other analyses that you would want to complete to be more confident in your assertions?</p>
@@ -511,8 +514,8 @@ George Boole and Boolean Logic
 <h3 class="anchored" data-anchor-id="introducing-flextable">Introducing Flextable</h3>
 <p>The flextable package provides a useful framework for working with tables that are intended to be read by human eyes (or eye, in the case of some of the patch-wearing crew members aboard the <strong>S. S. Rainbow Cake</strong>!). While not a <em>core</em> tidyverse package, flextable is considered part of the wider tidyverse, which means it works seamlessly with all the functions that we’ve discussed to date. However, we must load it separately in addition to our usual call to load the tidyverse library.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">p_load</span>(flextable)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">p_load</span>(flextable)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>The flextable() function uses a <strong>data frame</strong> as input, and returns a <strong>flextable</strong> object. This means that simply writing out a statement like:</p>
 <blockquote class="blockquote">
@@ -533,7 +536,7 @@ George Boole and Boolean Logic
 <h4 class="anchored" data-anchor-id="formatting-the-data-for-use-in-a-table">Formatting the data for use in a table</h4>
 <p>First, we’ll start by revisiting the attack rate table that we created earlier.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>  food_symp_joined <span class="sc">%&gt;%</span> </span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>  food_symp_joined <span class="sc">%&gt;%</span> </span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>     <span class="fu">across</span>(</span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>       gsalad<span class="sc">:</span>vanicecr,</span>
@@ -547,11 +550,11 @@ George Boole and Boolean Logic
 <span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="do">##       &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt;</span></span>
 <span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="do">## 1     0.174     0.246     0.375       0.222    0.588     0.127       0.132</span></span>
 <span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="do">## # ℹ 5 more variables: pchsalmon_AR &lt;dbl&gt;, ppasta_AR &lt;dbl&gt;, choclava_AR &lt;dbl&gt;,</span></span>
-<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a><span class="do">## #   nycake_AR &lt;dbl&gt;, vanicecr_AR &lt;dbl&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a><span class="do">## #   nycake_AR &lt;dbl&gt;, vanicecr_AR &lt;dbl&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>You’ll notice that the table is in wide-format. This isn’t great for readability, so lets first pivot it into long format using pivot_longer().</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>food_symp_joined <span class="sc">%&gt;%</span> </span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">across</span>(</span>
@@ -580,11 +583,11 @@ George Boole and Boolean Logic
 <span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a><span class="do">##  9 ppasta_AR            0.154</span></span>
 <span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a><span class="do">## 10 choclava_AR          0.155</span></span>
 <span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a><span class="do">## 11 nycake_AR            0.199</span></span>
-<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a><span class="do">## 12 vanicecr_AR          0.243</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a><span class="do">## 12 vanicecr_AR          0.243</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Great - that’s exactly what we wanted! A column of menu items, and a column of their attack rate for illness. Let’s save this as an object before moving on to more complex tasks. Since attack rates are usually expressed as a percent, we’ll add a line in to multiply that column by 100 too.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Save table as object called ar_table</span></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>ar_table <span class="ot">&lt;-</span> food_symp_joined <span class="sc">%&gt;%</span> </span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
@@ -603,11 +606,11 @@ George Boole and Boolean Logic
 <span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
 <span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">Attack Rate</span><span class="st">`</span> <span class="ot">=</span> <span class="st">`</span><span class="at">Attack Rate</span><span class="st">`</span> <span class="sc">*</span> <span class="dv">100</span></span>
 <span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>  </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Now that we have our attack rate table in a basic format that works, we can start applying changes to make it more attractive and legible. Let’s start out by changing the food item names from the codified versions we used back into the menu items to make them more understandable.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co">#Update the table using mutate() and recode() the entries in the `Menu Item` variable.</span></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>ar_table <span class="ot">&lt;-</span> ar_table <span class="sc">%&gt;%</span> </span>
@@ -627,12 +630,12 @@ George Boole and Boolean Logic
 <span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>      <span class="at">nycake_AR    =</span> <span class="st">"New York Cheesecake"</span>,</span>
 <span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>      <span class="at">vanicecr_AR  =</span> <span class="st">"Vanilla Ice Cream"</span></span>
 <span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Excellent! Now that we have the foundation of our flextable, we can go ahead and save this code to a flextable object.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>ft_ar <span class="ot">&lt;-</span> <span class="fu">flextable</span>(ar_table)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>ft_ar <span class="ot">&lt;-</span> <span class="fu">flextable</span>(ar_table)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Now you’ve got your data saved as a flextable object, which by itself works very well with documents in MS Word, or PDF, and also allows for lots of attractive formatting options!</p>
 <div class="callout callout-style-default callout-important callout-titled">
@@ -656,7 +659,7 @@ Important
 <p>We’ll use argument <code>colformat_double</code> to set the formatting options of the <em>Attack Rate</em> column. Let’s go ahead and set the number of decimal places to 1 using <code>digits =</code>, and attach a percent (%) sign to the values in that column using the <code>suffix</code> argument.</p>
 <p>Then, we’ll embolden the header using <code>bold()</code>, and ask flextable to automatically fit the column widths to the data using the <code>autofit()</code> function.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>ft_ar <span class="sc">%&gt;%</span> </span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">colformat_double</span>(</span>
 <span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">j =</span> <span class="st">"Attack Rate"</span>,</span>
@@ -664,9 +667,9 @@ Important
 <span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">suffix =</span> <span class="st">"%"</span></span>
 <span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
 <span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bold</span>(<span class="at">part =</span> <span class="st">"header"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">autofit</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">autofit</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div class="tabwid"><style>.cl-bef260fa{}.cl-beeb137c{font-family:'Arial';font-size:11pt;font-weight:bold;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-beeb139a{font-family:'Arial';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-beee09a6{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-beee09b0{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-beee256c{width:1.839in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-beee2576{width:1.126in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-beee2577{width:1.839in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-beee2580{width:1.126in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-beee2581{width:1.839in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-beee258a{width:1.126in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-beee258b{width:1.839in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-beee2594{width:1.126in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-beee259e{width:1.839in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-beee259f{width:1.126in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-beee25a0{width:1.839in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-beee25a8{width:1.126in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-beee25a9{width:1.839in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-beee25aa{width:1.126in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing="true" class="cl-bef260fa"><thead><tr style="overflow-wrap:break-word;"><th class="cl-beee256c"><p class="cl-beee09a6"><span class="cl-beeb137c">Menu Item</span></p></th><th class="cl-beee2576"><p class="cl-beee09b0"><span class="cl-beeb137c">Attack Rate</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-beee2577"><p class="cl-beee09a6"><span class="cl-beeb139a">Green Salad</span></p></td><td class="cl-beee2580"><p class="cl-beee09b0"><span class="cl-beeb139a">17.4%</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-beee2577"><p class="cl-beee09a6"><span class="cl-beeb139a">Caesar Salad</span></p></td><td class="cl-beee2580"><p class="cl-beee09b0"><span class="cl-beeb139a">24.6%</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-beee2581"><p class="cl-beee09a6"><span class="cl-beeb139a">Raw Oysters</span></p></td><td class="cl-beee258a"><p class="cl-beee09b0"><span class="cl-beeb139a">37.5%</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-beee258b"><p class="cl-beee09a6"><span class="cl-beeb139a">Shrimp Cocktail</span></p></td><td class="cl-beee2594"><p class="cl-beee09b0"><span class="cl-beeb139a">22.2%</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-beee259e"><p class="cl-beee09a6"><span class="cl-beeb139a">Deviled Eggs</span></p></td><td class="cl-beee259f"><p class="cl-beee09b0"><span class="cl-beeb139a">58.8%</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-beee2577"><p class="cl-beee09a6"><span class="cl-beeb139a">Sirloin Steak</span></p></td><td class="cl-beee2580"><p class="cl-beee09b0"><span class="cl-beeb139a">12.7%</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-beee25a0"><p class="cl-beee09a6"><span class="cl-beeb139a">Fancy Chicken Breast</span></p></td><td class="cl-beee25a8"><p class="cl-beee09b0"><span class="cl-beeb139a">13.2%</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-beee2577"><p class="cl-beee09a6"><span class="cl-beeb139a">Poached Salmon</span></p></td><td class="cl-beee2580"><p class="cl-beee09b0"><span class="cl-beeb139a">10.4%</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-beee2577"><p class="cl-beee09a6"><span class="cl-beeb139a">Pasta Primavera</span></p></td><td class="cl-beee2580"><p class="cl-beee09b0"><span class="cl-beeb139a">15.4%</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-beee2577"><p class="cl-beee09a6"><span class="cl-beeb139a">Chocolate Lava Cake</span></p></td><td class="cl-beee2580"><p class="cl-beee09b0"><span class="cl-beeb139a">15.5%</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-beee2577"><p class="cl-beee09a6"><span class="cl-beeb139a">New York Cheesecake</span></p></td><td class="cl-beee2580"><p class="cl-beee09b0"><span class="cl-beeb139a">19.9%</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-beee25a9"><p class="cl-beee09a6"><span class="cl-beeb139a">Vanilla Ice Cream</span></p></td><td class="cl-beee25aa"><p class="cl-beee09b0"><span class="cl-beeb139a">24.3%</span></p></td></tr></tbody></table></div>
+<div class="tabwid"><style>.cl-204af8d4{}.cl-203ba0b4{font-family:'Arial';font-size:11pt;font-weight:bold;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-203ba0d2{font-family:'Arial';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-2041d4de{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-2041d4e8{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-2042132c{width:1.839in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-20421340{width:1.126in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-2042134a{width:1.839in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-20421354{width:1.126in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-2042135e{width:1.839in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-2042135f{width:1.126in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-20421368{width:1.839in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-20421369{width:1.126in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-2042137c{width:1.839in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-2042137d{width:1.126in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-2042137e{width:1.839in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-20421386{width:1.126in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-20421387{width:1.839in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-20421390{width:1.126in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing="true" class="cl-204af8d4"><thead><tr style="overflow-wrap:break-word;"><th class="cl-2042132c"><p class="cl-2041d4de"><span class="cl-203ba0b4">Menu Item</span></p></th><th class="cl-20421340"><p class="cl-2041d4e8"><span class="cl-203ba0b4">Attack Rate</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-2042134a"><p class="cl-2041d4de"><span class="cl-203ba0d2">Green Salad</span></p></td><td class="cl-20421354"><p class="cl-2041d4e8"><span class="cl-203ba0d2">17.4%</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-2042134a"><p class="cl-2041d4de"><span class="cl-203ba0d2">Caesar Salad</span></p></td><td class="cl-20421354"><p class="cl-2041d4e8"><span class="cl-203ba0d2">24.6%</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-2042135e"><p class="cl-2041d4de"><span class="cl-203ba0d2">Raw Oysters</span></p></td><td class="cl-2042135f"><p class="cl-2041d4e8"><span class="cl-203ba0d2">37.5%</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-20421368"><p class="cl-2041d4de"><span class="cl-203ba0d2">Shrimp Cocktail</span></p></td><td class="cl-20421369"><p class="cl-2041d4e8"><span class="cl-203ba0d2">22.2%</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-2042137c"><p class="cl-2041d4de"><span class="cl-203ba0d2">Deviled Eggs</span></p></td><td class="cl-2042137d"><p class="cl-2041d4e8"><span class="cl-203ba0d2">58.8%</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-2042134a"><p class="cl-2041d4de"><span class="cl-203ba0d2">Sirloin Steak</span></p></td><td class="cl-20421354"><p class="cl-2041d4e8"><span class="cl-203ba0d2">12.7%</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-2042137e"><p class="cl-2041d4de"><span class="cl-203ba0d2">Fancy Chicken Breast</span></p></td><td class="cl-20421386"><p class="cl-2041d4e8"><span class="cl-203ba0d2">13.2%</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-2042134a"><p class="cl-2041d4de"><span class="cl-203ba0d2">Poached Salmon</span></p></td><td class="cl-20421354"><p class="cl-2041d4e8"><span class="cl-203ba0d2">10.4%</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-2042134a"><p class="cl-2041d4de"><span class="cl-203ba0d2">Pasta Primavera</span></p></td><td class="cl-20421354"><p class="cl-2041d4e8"><span class="cl-203ba0d2">15.4%</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-2042134a"><p class="cl-2041d4de"><span class="cl-203ba0d2">Chocolate Lava Cake</span></p></td><td class="cl-20421354"><p class="cl-2041d4e8"><span class="cl-203ba0d2">15.5%</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-2042134a"><p class="cl-2041d4de"><span class="cl-203ba0d2">New York Cheesecake</span></p></td><td class="cl-20421354"><p class="cl-2041d4e8"><span class="cl-203ba0d2">19.9%</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-20421387"><p class="cl-2041d4de"><span class="cl-203ba0d2">Vanilla Ice Cream</span></p></td><td class="cl-20421390"><p class="cl-2041d4e8"><span class="cl-203ba0d2">24.3%</span></p></td></tr></tbody></table></div>
 </div>
 </div>
 <p>Excellent!</p>
@@ -688,7 +691,7 @@ Important
 <p>In the end, you should produce something that looks like the following:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div class="tabwid"><style>.cl-bf14cc44{}.cl-bf0d801a{font-family:'Arial';font-size:11pt;font-weight:bold;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-bf0d8024{font-family:'Arial';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-bf1049e4{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-bf1049f8{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-bf106424{width:1.839in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bf10642e{width:1.117in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bf10642f{width:1.109in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bf106430{width:1.839in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bf106438{width:1.117in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bf106439{width:1.109in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bf10643a{width:1.839in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bf106442{width:1.117in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bf106443{width:1.109in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bf10644c{width:1.839in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bf10644d{width:1.117in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bf10644e{width:1.109in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bf106456{width:1.839in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bf106457{width:1.117in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bf106458{width:1.109in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bf106460{width:1.839in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bf10646a{width:1.117in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bf10646b{width:1.109in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bf10646c{width:1.839in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bf10646d{width:1.117in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bf10646e{width:1.109in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing="true" class="cl-bf14cc44"><thead><tr style="overflow-wrap:break-word;"><th class="cl-bf106424"><p class="cl-bf1049e4"><span class="cl-bf0d801a">Menu Item</span></p></th><th class="cl-bf10642e"><p class="cl-bf1049f8"><span class="cl-bf0d801a">AR General</span></p></th><th class="cl-bf10642f"><p class="cl-bf1049f8"><span class="cl-bf0d801a">AR Serious</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-bf106430"><p class="cl-bf1049e4"><span class="cl-bf0d8024">Green Salad</span></p></td><td class="cl-bf106438"><p class="cl-bf1049f8"><span class="cl-bf0d8024">17.4%</span></p></td><td class="cl-bf106439"><p class="cl-bf1049f8"><span class="cl-bf0d8024">12.4%</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-bf106430"><p class="cl-bf1049e4"><span class="cl-bf0d8024">Caesar Salad</span></p></td><td class="cl-bf106438"><p class="cl-bf1049f8"><span class="cl-bf0d8024">24.6%</span></p></td><td class="cl-bf106439"><p class="cl-bf1049f8"><span class="cl-bf0d8024">14.8%</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-bf10643a"><p class="cl-bf1049e4"><span class="cl-bf0d8024">Raw Oysters</span></p></td><td class="cl-bf106442"><p class="cl-bf1049f8"><span class="cl-bf0d8024">37.5%</span></p></td><td class="cl-bf106443"><p class="cl-bf1049f8"><span class="cl-bf0d8024">22.5%</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-bf10644c"><p class="cl-bf1049e4"><span class="cl-bf0d8024">Shrimp Cocktail</span></p></td><td class="cl-bf10644d"><p class="cl-bf1049f8"><span class="cl-bf0d8024">22.2%</span></p></td><td class="cl-bf10644e"><p class="cl-bf1049f8"><span class="cl-bf0d8024">15.9%</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-bf106456"><p class="cl-bf1049e4"><span class="cl-bf0d8024">Deviled Eggs</span></p></td><td class="cl-bf106457"><p class="cl-bf1049f8"><span class="cl-bf0d8024">58.8%</span></p></td><td class="cl-bf106458"><p class="cl-bf1049f8"><span class="cl-bf0d8024">55.9%</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-bf106430"><p class="cl-bf1049e4"><span class="cl-bf0d8024">Sirloin Steak</span></p></td><td class="cl-bf106438"><p class="cl-bf1049f8"><span class="cl-bf0d8024">12.7%</span></p></td><td class="cl-bf106439"><p class="cl-bf1049f8"><span class="cl-bf0d8024">8.3%</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-bf106460"><p class="cl-bf1049e4"><span class="cl-bf0d8024">Fancy Chicken Breast</span></p></td><td class="cl-bf10646a"><p class="cl-bf1049f8"><span class="cl-bf0d8024">13.2%</span></p></td><td class="cl-bf10646b"><p class="cl-bf1049f8"><span class="cl-bf0d8024">10.3%</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-bf106430"><p class="cl-bf1049e4"><span class="cl-bf0d8024">Poached Salmon</span></p></td><td class="cl-bf106438"><p class="cl-bf1049f8"><span class="cl-bf0d8024">10.4%</span></p></td><td class="cl-bf106439"><p class="cl-bf1049f8"><span class="cl-bf0d8024">6.1%</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-bf106430"><p class="cl-bf1049e4"><span class="cl-bf0d8024">Pasta Primavera</span></p></td><td class="cl-bf106438"><p class="cl-bf1049f8"><span class="cl-bf0d8024">15.4%</span></p></td><td class="cl-bf106439"><p class="cl-bf1049f8"><span class="cl-bf0d8024">10.6%</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-bf106430"><p class="cl-bf1049e4"><span class="cl-bf0d8024">Chocolate Lava Cake</span></p></td><td class="cl-bf106438"><p class="cl-bf1049f8"><span class="cl-bf0d8024">15.5%</span></p></td><td class="cl-bf106439"><p class="cl-bf1049f8"><span class="cl-bf0d8024">10.1%</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-bf106430"><p class="cl-bf1049e4"><span class="cl-bf0d8024">New York Cheesecake</span></p></td><td class="cl-bf106438"><p class="cl-bf1049f8"><span class="cl-bf0d8024">19.9%</span></p></td><td class="cl-bf106439"><p class="cl-bf1049f8"><span class="cl-bf0d8024">14.7%</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-bf10646c"><p class="cl-bf1049e4"><span class="cl-bf0d8024">Vanilla Ice Cream</span></p></td><td class="cl-bf10646d"><p class="cl-bf1049f8"><span class="cl-bf0d8024">24.3%</span></p></td><td class="cl-bf10646e"><p class="cl-bf1049f8"><span class="cl-bf0d8024">17.1%</span></p></td></tr></tbody></table></div>
+<div class="tabwid"><style>.cl-2087ea50{}.cl-207958f0{font-family:'Arial';font-size:11pt;font-weight:bold;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-207958fa{font-family:'Arial';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-207df9d2{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-207df9dc{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-207e21be{width:1.839in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-207e21d2{width:1.117in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-207e21d3{width:1.109in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-207e21dc{width:1.839in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-207e21dd{width:1.117in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-207e21e6{width:1.109in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-207e21f0{width:1.839in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-207e21fa{width:1.117in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-207e21fb{width:1.109in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-207e2204{width:1.839in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-207e2205{width:1.117in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-207e220e{width:1.109in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-207e220f{width:1.839in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-207e2218{width:1.117in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-207e2219{width:1.109in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-207e2222{width:1.839in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-207e222c{width:1.117in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-207e222d{width:1.109in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-207e2236{width:1.839in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-207e2237{width:1.117in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-207e2240{width:1.109in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing="true" class="cl-2087ea50"><thead><tr style="overflow-wrap:break-word;"><th class="cl-207e21be"><p class="cl-207df9d2"><span class="cl-207958f0">Menu Item</span></p></th><th class="cl-207e21d2"><p class="cl-207df9dc"><span class="cl-207958f0">AR General</span></p></th><th class="cl-207e21d3"><p class="cl-207df9dc"><span class="cl-207958f0">AR Serious</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-207e21dc"><p class="cl-207df9d2"><span class="cl-207958fa">Green Salad</span></p></td><td class="cl-207e21dd"><p class="cl-207df9dc"><span class="cl-207958fa">17.4%</span></p></td><td class="cl-207e21e6"><p class="cl-207df9dc"><span class="cl-207958fa">12.4%</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-207e21dc"><p class="cl-207df9d2"><span class="cl-207958fa">Caesar Salad</span></p></td><td class="cl-207e21dd"><p class="cl-207df9dc"><span class="cl-207958fa">24.6%</span></p></td><td class="cl-207e21e6"><p class="cl-207df9dc"><span class="cl-207958fa">14.8%</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-207e21f0"><p class="cl-207df9d2"><span class="cl-207958fa">Raw Oysters</span></p></td><td class="cl-207e21fa"><p class="cl-207df9dc"><span class="cl-207958fa">37.5%</span></p></td><td class="cl-207e21fb"><p class="cl-207df9dc"><span class="cl-207958fa">22.5%</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-207e2204"><p class="cl-207df9d2"><span class="cl-207958fa">Shrimp Cocktail</span></p></td><td class="cl-207e2205"><p class="cl-207df9dc"><span class="cl-207958fa">22.2%</span></p></td><td class="cl-207e220e"><p class="cl-207df9dc"><span class="cl-207958fa">15.9%</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-207e220f"><p class="cl-207df9d2"><span class="cl-207958fa">Deviled Eggs</span></p></td><td class="cl-207e2218"><p class="cl-207df9dc"><span class="cl-207958fa">58.8%</span></p></td><td class="cl-207e2219"><p class="cl-207df9dc"><span class="cl-207958fa">55.9%</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-207e21dc"><p class="cl-207df9d2"><span class="cl-207958fa">Sirloin Steak</span></p></td><td class="cl-207e21dd"><p class="cl-207df9dc"><span class="cl-207958fa">12.7%</span></p></td><td class="cl-207e21e6"><p class="cl-207df9dc"><span class="cl-207958fa">8.3%</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-207e2222"><p class="cl-207df9d2"><span class="cl-207958fa">Fancy Chicken Breast</span></p></td><td class="cl-207e222c"><p class="cl-207df9dc"><span class="cl-207958fa">13.2%</span></p></td><td class="cl-207e222d"><p class="cl-207df9dc"><span class="cl-207958fa">10.3%</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-207e21dc"><p class="cl-207df9d2"><span class="cl-207958fa">Poached Salmon</span></p></td><td class="cl-207e21dd"><p class="cl-207df9dc"><span class="cl-207958fa">10.4%</span></p></td><td class="cl-207e21e6"><p class="cl-207df9dc"><span class="cl-207958fa">6.1%</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-207e21dc"><p class="cl-207df9d2"><span class="cl-207958fa">Pasta Primavera</span></p></td><td class="cl-207e21dd"><p class="cl-207df9dc"><span class="cl-207958fa">15.4%</span></p></td><td class="cl-207e21e6"><p class="cl-207df9dc"><span class="cl-207958fa">10.6%</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-207e21dc"><p class="cl-207df9d2"><span class="cl-207958fa">Chocolate Lava Cake</span></p></td><td class="cl-207e21dd"><p class="cl-207df9dc"><span class="cl-207958fa">15.5%</span></p></td><td class="cl-207e21e6"><p class="cl-207df9dc"><span class="cl-207958fa">10.1%</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-207e21dc"><p class="cl-207df9d2"><span class="cl-207958fa">New York Cheesecake</span></p></td><td class="cl-207e21dd"><p class="cl-207df9dc"><span class="cl-207958fa">19.9%</span></p></td><td class="cl-207e21e6"><p class="cl-207df9dc"><span class="cl-207958fa">14.7%</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-207e2236"><p class="cl-207df9d2"><span class="cl-207958fa">Vanilla Ice Cream</span></p></td><td class="cl-207e2237"><p class="cl-207df9dc"><span class="cl-207958fa">24.3%</span></p></td><td class="cl-207e2240"><p class="cl-207df9dc"><span class="cl-207958fa">17.1%</span></p></td></tr></tbody></table></div>
 </div>
 </div>
 </section>
@@ -696,49 +699,69 @@ Important
 <section id="part-d-putting-it-all-together" class="level2">
 <h2 class="anchored" data-anchor-id="part-d-putting-it-all-together">Part D: Putting it all together</h2>
 <p>The captain asked for a nice report - and that’s what we’re going to deliver!</p>
+<p>In your <code>participant_data/module4</code> folder you should find a file called <code>SSRainbowCake_EpiSummary.Rmd</code>.</p>
+<p>This is an RMarkdown document template that you can use to draft up a summary of the epidemiological investigation to date for the ship’s captain.</p>
+<p>You’ll need to go back through your results from the previous modules to find the information to complete the different sections.</p>
+<p>Your report should include at least 1 figure (the epidemiologic curve from Module 3) and 1 table (attack rate table from Module 4). Apart from that, feel free to be as creative as you like.</p>
+<p>When you’re finished, hit the knit button at the top of your RStudio window to compile your report into a PDF document that you can share with the captain of the <strong>S. S. Rainbow Cake</strong>.</p>
 
 
 </section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
-    }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
-    }
-  }
-  toggleBodyColorPrimary();  
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
       }
+      return false;
     }
-    return false;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
       for (const childEl of codeEl.children) {
         if (isCodeAnnotation(childEl)) {
           childEl.remove();
@@ -746,184 +769,184 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
       return codeEl.innerText;
     }
-  });
-  clipboard.on('success', function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copied!");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
-    setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
-      }
-      button.setAttribute("title", currentTitle);
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  });
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/hc-sc\.github\.io\/tdu-rph\/");
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-      }
-    }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-    const config = {
-      allowHTML: true,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start',
-    };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
     });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
-        }
-      }
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
     }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/hc-sc\.github\.io\/tdu-rph\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
           }
         }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
         }
-        return container.innerHTML
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
       } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
         if (window.Quarto?.typesetMath) {
           window.Quarto.typesetMath(note);
         }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      // TODO in 1.5, we should make sure this works without a callout special case
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
       }
     }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
           }
         } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
           .then(res => res.text())
           .then(html => {
             const parser = new DOMParser();
             const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
+            const note = htmlDoc.querySelector('main.content');
             if (note !== null) {
-              const html = processXRef(id, note);
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
               instance.setContent(html);
             } 
           }).finally(() => {
@@ -931,185 +954,161 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
-    });
-  }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            div.style.left = 0;
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
-        }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
-      }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
-    }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
-          }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+      }, function(instance) {
       });
     }
-  }
-});
-</script>
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
 </div> <!-- /content -->
 
 
