@@ -11,8 +11,6 @@ website:
     background: primary
     search: true
     left:
-      - text: "Introduction"
-        href: index.html#intro
       - text: "Module 1"
         href: module01.html
       - text: "Module 2"
