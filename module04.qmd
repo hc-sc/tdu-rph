@@ -62,8 +62,9 @@ The first piece of information comes directly from Salty Sam, who proudly tells 
 
 You notice that certain menu items are restricted to the higher tier memberships only. Will this change which food items you decide to include in your analysis? Why or why not?
 
-::: callout-info
-### Cruise ship outbreaks
+::: callout-note
+
+#### Cruise ship outbreaks
 
 By now, you've surely come to the conclusion that we're dealing with a fairly common occurrence related to cruises: outbreaks of gastrointestinal disease. Bringing together a variety of passengers and crew from from diverse regions aboard a semi-enclosed, often crowded vessel, where passengers are in frequent contact with new exposures is a perfect storm for the spread of disease. Further, the convenience and luxury of cruising makes it a favorite past-time for the elderly and family members who may be immunocompromised.
 
@@ -76,6 +77,8 @@ We'll leave some resources here all about cruise-ship outbreaks for you to check
 1.  [CDC Yellow Book: Cruise Ship Travel 2026](https://www.cdc.gov/yellow-book/hcp/travel-air-sea/cruise-ship-travel.html "CDC Yellow Book: Cruise Ship Travel 2026")
 2.  [CDC Vessel Sanitation Program (VSP): Outbreaks on Cruise Ships in VSP's Jurisdiction (2025)](https://www.cdc.gov/vessel-sanitation/cruise-ship-outbreaks/index.html "Outbreaks on Cruise Ships in VSP's Jurisdiction (2025)")
 3.  [Epidemiology of Diarrheal Disease Outbreaks on Cruise Ships, 1986 Through 1993](https://jamanetwork.com/journals/jama/article-abstract/396811?utm_source=chatgpt.com "JAMA article on Epidemiology of Diarrheal Disease Outbreaks on Cruise Ships from 1996")
+
+
 :::
 
 ## Part A: Exploring and preparing the data
@@ -574,24 +577,16 @@ food_symp_joined %>%
 
 ```
 
-## Part D: Putting it all together 
+## Part D: Putting it all together
 
 The captain asked for a nice report - and that's what we're going to deliver!
 
 In your `participant_data/module4` folder you should find a file called `SSRainbowCake_EpiSummary.Rmd`.
 
-This is an RMarkdown document template that you can use to draft up a summary of the epidemiological investigation to date for the ship's captain. 
+This is an RMarkdown document template that you can use to draft up a summary of the epidemiological investigation to date for the ship's captain.
 
 You'll need to go back through your results from the previous modules to find the information to complete the different sections.
 
-Your report should include at least 1 figure (the epidemiologic curve from Module 3) and 1 table (attack rate table from Module 4). Apart from that, feel free to be as creative as you like. 
+Your report should include at least 1 figure (the epidemiologic curve from Module 3) and 1 table (attack rate table from Module 4). Apart from that, feel free to be as creative as you like.
 
-When you're finished, hit the knit button at the top of your RStudio window to compile your report into a PDF document that you can share with the captain of the **S. S. Rainbow Cake**. 
-
-
-
-
-
-
-
-
+When you're finished, hit the knit button at the top of your RStudio window to compile your report into a PDF document that you can share with the captain of the **S. S. Rainbow Cake**.

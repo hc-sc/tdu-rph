@@ -25,12 +25,11 @@ options(width = 80)
 
 ## Overview of the course
 
-1.  Review and prepare the ship's manifest provided to you by the steward.
-2.  Sea shanty
-3.  Illness linelist and manifest. Combine to identify additional details.
-4.  Food exposure linelist - create tables and attack rates / OR
-5.  Epi curve - is the outbreak over?
-6.  Faceting / epi curve + crew manifest
+Welcome to R for Public Health (RPH), the Training and Development Unit's newest offering for 2026.
+
+This site, and the main repository on Github (tdu-rph) will be the primary locations for you to access course materials and interact with the course case study.
+
+Through three days of interactive, synchronous learning and independent study, we will explore the use of R for several foundational public health activities. Each day will blend virtual in-class instruction and independent coding time. Though we have tried our best to create a case study that can be followed along independently, instructors will remain available in the virtual classroom during all scheduled independent coding sessions to provide help and technical support if needed.
 
 ## Preamble: Setting-up your workspace
 
@@ -74,8 +73,3 @@ library(pacman)
 
 p_load(tidyverse)
 ```
-
-
-
-
-
