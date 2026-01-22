@@ -9,4 +9,4 @@
 /.quarto/
 /*.quarto_ipynb
 **/*.quarto_ipynb
-/*.Rproj
+/tdu-rph.Rproj*
