@@ -27,23 +27,53 @@ options(width = 80)
 
 Welcome to R for Public Health (RPH), the Training and Development Unit's newest offering for 2026.
 
-This site, and the main repository on Github (tdu-rph) will be the primary locations for you to access course materials and interact with the course case study.
+This site, and the main repository on Github ([tdu-rph](https://github.com/hc-sc/tdu-rph/ "link to Github repository")) will be the primary locations for you to interact with the case study, and access course materials, respectively.
 
-Through three days of interactive, synchronous learning and independent study, we will explore the use of R for several foundational public health activities. Each day will blend virtual in-class instruction and independent coding time. Though we have tried our best to create a case study that can be followed along independently, instructors will remain available in the virtual classroom during all scheduled independent coding sessions to provide help and technical support if needed.
+Through three days of interactive, synchronous learning and independent study, we will explore the use of R for several foundational public health activities.
+
+Each day will blend virtual in-class instruction and independent coding time. Though we have tried our best to create a case study that can be followed along independently, instructors will remain available in the virtual classroom during all scheduled independent coding sessions to provide help and technical support if needed.
+
+If you run into issues outside of the scheduled classroom time, please do not hesitate to reach out to us at [ceptraining-formationcmu\@phac-aspc.gc.ca](mailto:ceptraining-formationcmu@phac-aspc.gc.ca "Email us!").
 
 ## Preamble: Setting-up your workspace
 
-1.  Create a folder on your computer (preferably somewhere like C:/RPH/)
-2.  Download and save the course folders from the Github website: module5, module6, module7, module8, module9, module10
-3.  Inside each of these, you should see the following:
+Our hope in delivering these courses focused on R is that you become comfortable enough to determine your own preferences for how you like to set up and execute your own workflow. With that being said, however, we'll provide some tips here to help get you started if you're not quite sure yet how you would like to interact with our course materials.
 
--   data/
--   scripts/
--   output/
+### Recommended Setup
 
-4.  Verify your setup looks similar to the screenshot below:
+We recommend that, if possible, you first create a working directory for the course somewhere on your computer that you have write-access to, but that isn't within the scope of programs like OneDrive. We have found in the past that these automatic version-control programs can cause conflicts with R packages and with running your code. In our experience, it is usually best to create a directory somewhere on your `C:/` drive (e.g., `C:/tdu-rph/`). This will prevent any issues with conflicting versions created between RStudio/R and Windows.
 
-> SCREENSHOT OF WORKSPACE
+Once you've established a working folder, download the entire participant_data folder from the Github repository and place it inside your working folder (e.g., `C:/tdu-rph/participant_data`). This should simplify working from the case study as much as possible, as we've generally written the examples in a way that pulls from this folder (e.g., `participant_data/module1/example.file.1.txt` ).
+
+Now, open RStudio, and navigate to:
+
+> File \> New Project...
+
+A window will open asking whether you want to start the project in a new or existing directory. Click on *Existing Directory* and select your folder for RPH.
+
+![Select 'Existing Directory' from the project setup wizard and navigate to where you set up your folder. ](pics/intro_projectsetup.jpg){fig-alt="An image of the project setup wizard in RStudio" width="400"}
+
+Once you've done this, select *Create Project* and an **R project file** will be created inside your working directory, and R will open a fresh session using this project.
+
+### RStudio Projects
+
+We'll talk more about RStudio projects in the classroom, but essentially they are a file that control behaviours for your R session, and save these behaviours over each working session.
+
+By default, your R Project will:
+
+1.  Restore your environment (.RData) into your workspace at startup;
+2.  Save your workspace to .RData on exit; and
+3.  Save your R working history (.Rhistory).
+
+You'll notice these files (.RData and .Rhistory) will be created in your R project folder.
+
+However, perhaps the most useful thing about working within an RStudio project is that your **default working directory will be set to the location on your computer where the .RProj file is located.** Since we saved it in the same directory as your participant_data folder - then any of our relative file commands in the various modules should work without needing to adjust any of the code.
+
+Default behaviours for both your specific project and global user interface can be adjusted by navigating to:
+
+> Tools \> Project Options...
+
+For more information and a description of various options - see the [RStudio User Guide section on RStudio Projects](https://docs.posit.co/ide/user/ide/guide/code/projects.html#project-options "RStudio Projects").
 
 Great! Now you should be ready to proceed with the next step of the course.
 
@@ -68,8 +98,21 @@ With this in mind, all we need to do is first install the *pacman* package using
 In your R script, type out and execute the following code:
 
 ```{r Install and load Pacman}
-#install.packages("pacman")
-library(pacman)
+#Only run install.packages the first time for pacman
+#install.packages("pacman") 
 
+library(pacman)
 p_load(tidyverse)
 ```
+
+Henceforth, (I think I used that word correctly?), you can now install and/or load previously loaded packaged by simply using the `p_load()` function.
+
+We've tried to limit the packages needed as much as possible for RPH, but you will need to install the ones listed here. For the modules in this course, you'll need to `p_load()` the following packages:
+
+1.  pacman (`install.packages("pacman")`)
+2.  tidyverse (`pacman::p_load(tidyverse)`)
+3.  tinytex (`pacman::p_load(tinytex)`, then once it is installed, run `tinytex::install_tinytex()`)
+
+The tinytex package will need two steps to install. You'll first need to install tinytex, then use the install_tinytex() command. This will install a minimal version of LateX on your computer, and allow you to render documents as PDF in Module 4. If you're confused - don't be afraid to ask about it in the virtual classroom.
+
+(Note that using `pacman::` and `tinytex::` just avoids any issues of not having the package currently loaded in your environment.)

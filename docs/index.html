@@ -154,7 +154,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#overview-of-the-course" id="toc-overview-of-the-course" class="nav-link active" data-scroll-target="#overview-of-the-course">Overview of the course</a></li>
-  <li><a href="#preamble-setting-up-your-workspace" id="toc-preamble-setting-up-your-workspace" class="nav-link" data-scroll-target="#preamble-setting-up-your-workspace">Preamble: Setting-up your workspace</a></li>
+  <li><a href="#preamble-setting-up-your-workspace" id="toc-preamble-setting-up-your-workspace" class="nav-link" data-scroll-target="#preamble-setting-up-your-workspace">Preamble: Setting-up your workspace</a>
+  <ul>
+  <li><a href="#recommended-setup" id="toc-recommended-setup" class="nav-link" data-scroll-target="#recommended-setup">Recommended Setup</a></li>
+  <li><a href="#rstudio-projects" id="toc-rstudio-projects" class="nav-link" data-scroll-target="#rstudio-projects">RStudio Projects</a></li>
+  </ul></li>
   <li><a href="#installing-required-packages" id="toc-installing-required-packages" class="nav-link" data-scroll-target="#installing-required-packages">Installing required packages</a></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="index.docx"><i class="bi bi-file-word"></i>MS Word</a></li></ul></div></nav>
@@ -183,34 +187,50 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="overview-of-the-course" class="level2">
 <h2 class="anchored" data-anchor-id="overview-of-the-course">Overview of the course</h2>
-<ol type="1">
-<li>Review and prepare the ship’s manifest provided to you by the steward.</li>
-<li>Sea shanty</li>
-<li>Illness linelist and manifest. Combine to identify additional details.</li>
-<li>Food exposure linelist - create tables and attack rates / OR</li>
-<li>Epi curve - is the outbreak over?</li>
-<li>Faceting / epi curve + crew manifest</li>
-</ol>
+<p>Welcome to R for Public Health (RPH), the Training and Development Unit’s newest offering for 2026.</p>
+<p>This site, and the main repository on Github (<a href="https://github.com/hc-sc/tdu-rph/" title="link to Github repository">tdu-rph</a>) will be the primary locations for you to interact with the case study, and access course materials, respectively.</p>
+<p>Through three days of interactive, synchronous learning and independent study, we will explore the use of R for several foundational public health activities.</p>
+<p>Each day will blend virtual in-class instruction and independent coding time. Though we have tried our best to create a case study that can be followed along independently, instructors will remain available in the virtual classroom during all scheduled independent coding sessions to provide help and technical support if needed.</p>
+<p>If you run into issues outside of the scheduled classroom time, please do not hesitate to reach out to us at <a href="mailto:ceptraining-formationcmu@phac-aspc.gc.ca">ceptraining-formationcmu@phac-aspc.gc.ca</a>.</p>
 </section>
 <section id="preamble-setting-up-your-workspace" class="level2">
 <h2 class="anchored" data-anchor-id="preamble-setting-up-your-workspace">Preamble: Setting-up your workspace</h2>
-<ol type="1">
-<li>Create a folder on your computer (preferably somewhere like C:/RPH/)</li>
-<li>Download and save the course folders from the Github website: module5, module6, module7, module8, module9, module10</li>
-<li>Inside each of these, you should see the following:</li>
-</ol>
-<ul>
-<li>data/</li>
-<li>scripts/</li>
-<li>output/</li>
-</ul>
-<ol start="4" type="1">
-<li>Verify your setup looks similar to the screenshot below:</li>
-</ol>
+<p>Our hope in delivering these courses focused on R is that you become comfortable enough to determine your own preferences for how you like to set up and execute your own workflow. With that being said, however, we’ll provide some tips here to help get you started if you’re not quite sure yet how you would like to interact with our course materials.</p>
+<section id="recommended-setup" class="level3">
+<h3 class="anchored" data-anchor-id="recommended-setup">Recommended Setup</h3>
+<p>We recommend that, if possible, you first create a working directory for the course somewhere on your computer that you have write-access to, but that isn’t within the scope of programs like OneDrive. We have found in the past that these automatic version-control programs can cause conflicts with R packages and with running your code. In our experience, it is usually best to create a directory somewhere on your <code>C:/</code> drive (e.g., <code>C:/tdu-rph/</code>). This will prevent any issues with conflicting versions created between RStudio/R and Windows.</p>
+<p>Once you’ve established a working folder, download the entire participant_data folder from the Github repository and place it inside your working folder (e.g., <code>C:/tdu-rph/participant_data</code>). This should simplify working from the case study as much as possible, as we’ve generally written the examples in a way that pulls from this folder (e.g., <code>participant_data/module1/example.file.1.txt</code> ).</p>
+<p>Now, open RStudio, and navigate to:</p>
 <blockquote class="blockquote">
-<p>SCREENSHOT OF WORKSPACE</p>
+<p>File &gt; New Project…</p>
 </blockquote>
+<p>A window will open asking whether you want to start the project in a new or existing directory. Click on <em>Existing Directory</em> and select your folder for RPH.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="pics/intro_projectsetup.jpg" class="img-fluid figure-img" alt="An image of the project setup wizard in RStudio" width="400"></p>
+<figcaption>Select ‘Existing Directory’ from the project setup wizard and navigate to where you set up your folder.</figcaption>
+</figure>
+</div>
+<p>Once you’ve done this, select <em>Create Project</em> and an <strong>R project file</strong> will be created inside your working directory, and R will open a fresh session using this project.</p>
+</section>
+<section id="rstudio-projects" class="level3">
+<h3 class="anchored" data-anchor-id="rstudio-projects">RStudio Projects</h3>
+<p>We’ll talk more about RStudio projects in the classroom, but essentially they are a file that control behaviours for your R session, and save these behaviours over each working session.</p>
+<p>By default, your R Project will:</p>
+<ol type="1">
+<li>Restore your environment (.RData) into your workspace at startup;</li>
+<li>Save your workspace to .RData on exit; and</li>
+<li>Save your R working history (.Rhistory).</li>
+</ol>
+<p>You’ll notice these files (.RData and .Rhistory) will be created in your R project folder.</p>
+<p>However, perhaps the most useful thing about working within an RStudio project is that your <strong>default working directory will be set to the location on your computer where the .RProj file is located.</strong> Since we saved it in the same directory as your participant_data folder - then any of our relative file commands in the various modules should work without needing to adjust any of the code.</p>
+<p>Default behaviours for both your specific project and global user interface can be adjusted by navigating to:</p>
+<blockquote class="blockquote">
+<p>Tools &gt; Project Options…</p>
+</blockquote>
+<p>For more information and a description of various options - see the <a href="https://docs.posit.co/ide/user/ide/guide/code/projects.html#project-options" title="RStudio Projects">RStudio User Guide section on RStudio Projects</a>.</p>
 <p>Great! Now you should be ready to proceed with the next step of the course.</p>
+</section>
 </section>
 <section id="installing-required-packages" class="level2">
 <h2 class="anchored" data-anchor-id="installing-required-packages">Installing required packages</h2>
@@ -228,11 +248,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>With this in mind, all we need to do is first install the <em>pacman</em> package using the old boring way, then let the p_load function take care of the rest for us!</p>
 <p>In your R script, type out and execute the following code:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("pacman")</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pacman)</span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Only run install.packages the first time for pacman</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("pacman") </span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">p_load</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pacman)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">p_load</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>Henceforth, (I think I used that word correctly?), you can now install and/or load previously loaded packaged by simply using the <code>p_load()</code> function.</p>
+<p>We’ve tried to limit the packages needed as much as possible for RPH, but you will need to install the ones listed here. For the modules in this course, you’ll need to <code>p_load()</code> the following packages:</p>
+<ol type="1">
+<li>pacman (<code>install.packages("pacman")</code>)</li>
+<li>tidyverse (<code>pacman::p_load(tidyverse)</code>)</li>
+<li>tinytex (<code>pacman::p_load(tinytex)</code>, then once it is installed, run <code>tinytex::install_tinytex()</code>)</li>
+</ol>
+<p>The tinytex package will need two steps to install. You’ll first need to install tinytex, then use the install_tinytex() command. This will install a minimal version of LateX on your computer, and allow you to render documents as PDF in Module 4. If you’re confused - don’t be afraid to ask about it in the virtual classroom.</p>
+<p>(Note that using <code>pacman::</code> and <code>tinytex::</code> just avoids any issues of not having the package currently loaded in your environment.)</p>
 
 
 </section>
