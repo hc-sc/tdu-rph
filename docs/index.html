@@ -154,12 +154,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#overview-of-the-course" id="toc-overview-of-the-course" class="nav-link active" data-scroll-target="#overview-of-the-course">Overview of the course</a></li>
+  <li><a href="#copyright-statement" id="toc-copyright-statement" class="nav-link" data-scroll-target="#copyright-statement">Copyright statement</a></li>
+  <li><a href="#requirements" id="toc-requirements" class="nav-link" data-scroll-target="#requirements">Requirements</a></li>
   <li><a href="#preamble-setting-up-your-workspace" id="toc-preamble-setting-up-your-workspace" class="nav-link" data-scroll-target="#preamble-setting-up-your-workspace">Preamble: Setting-up your workspace</a>
   <ul>
   <li><a href="#recommended-setup" id="toc-recommended-setup" class="nav-link" data-scroll-target="#recommended-setup">Recommended Setup</a></li>
   <li><a href="#rstudio-projects" id="toc-rstudio-projects" class="nav-link" data-scroll-target="#rstudio-projects">RStudio Projects</a></li>
   </ul></li>
   <li><a href="#installing-required-packages" id="toc-installing-required-packages" class="nav-link" data-scroll-target="#installing-required-packages">Installing required packages</a></li>
+  <li><a href="#working-with-the-course-material" id="toc-working-with-the-course-material" class="nav-link" data-scroll-target="#working-with-the-course-material">Working with the course material</a>
+  <ul>
+  <li><a href="#access-to-case-study-materials-and-downloads" id="toc-access-to-case-study-materials-and-downloads" class="nav-link" data-scroll-target="#access-to-case-study-materials-and-downloads">Access to case study materials and downloads</a></li>
+  </ul></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="index.docx"><i class="bi bi-file-word"></i>MS Word</a></li></ul></div></nav>
     </div>
@@ -188,14 +194,38 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="overview-of-the-course" class="level2">
 <h2 class="anchored" data-anchor-id="overview-of-the-course">Overview of the course</h2>
 <p>Welcome to R for Public Health (RPH), the Training and Development Unit’s newest offering for 2026.</p>
-<p>This site, and the main repository on Github (<a href="https://github.com/hc-sc/tdu-rph/" title="link to Github repository">tdu-rph</a>) will be the primary locations for you to interact with the case study, and access course materials, respectively.</p>
+<p>This site, and the main repository on Github (<a href="https://github.com/hc-sc/tdu-rph/" title="link to Github repository">tdu-rph</a>) will be the primary locations for you to interact with the case study, and access course materials, respectively. You will have already been provided the links for accessing the Course Moodle as well, where you will have access to the course discussion board.</p>
 <p>Through three days of interactive, synchronous learning and independent study, we will explore the use of R for several foundational public health activities.</p>
 <p>Each day will blend virtual in-class instruction and independent coding time. Though we have tried our best to create a case study that can be followed along independently, instructors will remain available in the virtual classroom during all scheduled independent coding sessions to provide help and technical support if needed.</p>
 <p>If you run into issues outside of the scheduled classroom time, please do not hesitate to reach out to us at <a href="mailto:ceptraining-formationcmu@phac-aspc.gc.ca">ceptraining-formationcmu@phac-aspc.gc.ca</a>.</p>
 </section>
+<section id="copyright-statement" class="level2">
+<h2 class="anchored" data-anchor-id="copyright-statement">Copyright statement</h2>
+<p>Developed by the Training and Development Unit; Regulatory, Operations, and Emergency Management Branch, Public Health Agency of Canada.</p>
+<p>Version: February 2026</p>
+<p><strong>Copyright:</strong></p>
+<div class="quarto-figure quarto-figure-left">
+<figure class="figure">
+<p><img src="pics/creativecommons.png" class="img-fluid quarto-figure quarto-figure-left figure-img" alt="Image with symbols for creative commons license."></p>
+</figure>
+</div>
+<p><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" title="CC Attribution NonCommercial-ShareAlike 4.0 International">This work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License. To view a copy of this license, visit Creative Commons – Attribution-NonCommercial-ShareAlike 4.0 International – CC BY-NC-SA-4.0.</a></p>
+<p><strong>Notes:</strong></p>
+<p>As per this license, you may not use this material for commercial purposes such as university courses or or other paid events, workshops, or conferences.</p>
+<p>Our materials may be repurposed for other training (for example, targeted training in your organization) with attribution to the Training and Development Unit at the Public Health Agency of Canada as the original source. If you modify, add to or translate the material, please note it briefly when you attribute the Training and Development Unit as the original source.</p>
+<p>If you share, re-use or re-purpose our training materials, please inform us via email at ceptraining-formationcmu@phac-aspc.gc.ca so that we can track the reach of our training materials.</p>
+</section>
+<section id="requirements" class="level2">
+<h2 class="anchored" data-anchor-id="requirements">Requirements</h2>
+<p>In order to complete this course, you will require the following:</p>
+<ol type="1">
+<li>R version 4.4.3.0 or newer</li>
+<li>RStudio version 2024.12.1 or newer</li>
+</ol>
+</section>
 <section id="preamble-setting-up-your-workspace" class="level2">
 <h2 class="anchored" data-anchor-id="preamble-setting-up-your-workspace">Preamble: Setting-up your workspace</h2>
-<p>Our hope in delivering these courses focused on R is that you become comfortable enough to determine your own preferences for how you like to set up and execute your own workflow. With that being said, however, we’ll provide some tips here to help get you started if you’re not quite sure yet how you would like to interact with our course materials.</p>
+<p>Our hope in delivering these courses focused on R is that after learning the basics, you become comfortable enough to determine your own preferences for how you like to set up and execute your own workflow. With that being said, however, we’ll provide some tips here to help get you started if you’re not quite sure yet how you would like to interact with our course materials.</p>
 <section id="recommended-setup" class="level3">
 <h3 class="anchored" data-anchor-id="recommended-setup">Recommended Setup</h3>
 <p>We recommend that, if possible, you first create a working directory for the course somewhere on your computer that you have write-access to, but that isn’t within the scope of programs like OneDrive. We have found in the past that these automatic version-control programs can cause conflicts with R packages and with running your code. In our experience, it is usually best to create a directory somewhere on your <code>C:/</code> drive (e.g., <code>C:/tdu-rph/</code>). This will prevent any issues with conflicting versions created between RStudio/R and Windows.</p>
@@ -207,7 +237,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>A window will open asking whether you want to start the project in a new or existing directory. Click on <em>Existing Directory</em> and select your folder for RPH.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="pics/intro_projectsetup.jpg" class="img-fluid figure-img" alt="An image of the project setup wizard in RStudio" width="400"></p>
+<p><img src="pics/intro_projectsetup.jpg" class="img-fluid figure-img" alt="An image of the project setup wizard in RStudio" width="800"></p>
 <figcaption>Select ‘Existing Directory’ from the project setup wizard and navigate to where you set up your folder.</figcaption>
 </figure>
 </div>
@@ -222,8 +252,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Save your workspace to .RData on exit; and</li>
 <li>Save your R working history (.Rhistory).</li>
 </ol>
-<p>You’ll notice these files (.RData and .Rhistory) will be created in your R project folder.</p>
-<p>However, perhaps the most useful thing about working within an RStudio project is that your <strong>default working directory will be set to the location on your computer where the .RProj file is located.</strong> Since we saved it in the same directory as your participant_data folder - then any of our relative file commands in the various modules should work without needing to adjust any of the code.</p>
+<p>You’ll notice these files (.RData and .Rhistory) will be created in your R working folder when you create an R project.</p>
+<p>Perhaps the most useful thing about working within an RStudio project is that your <strong>default working directory will be set to the location on your computer where the .RProj file is located.</strong> Since we saved it in the same directory as your participant_data folder - then any of our relative file commands in the various modules should work without needing to adjust any of the code.</p>
 <p>Default behaviours for both your specific project and global user interface can be adjusted by navigating to:</p>
 <blockquote class="blockquote">
 <p>Tools &gt; Project Options…</p>
@@ -263,8 +293,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ol>
 <p>The tinytex package will need two steps to install. You’ll first need to install tinytex, then use the install_tinytex() command. This will install a minimal version of LateX on your computer, and allow you to render documents as PDF in Module 4. If you’re confused - don’t be afraid to ask about it in the virtual classroom.</p>
 <p>(Note that using <code>pacman::</code> and <code>tinytex::</code> just avoids any issues of not having the package currently loaded in your environment.)</p>
+</section>
+<section id="working-with-the-course-material" class="level2">
+<h2 class="anchored" data-anchor-id="working-with-the-course-material">Working with the course material</h2>
+<p>The RPH course has been written to permit approximately 50% of your time in discussion, lecturettes and group activities in the virtual classroom, with the remaining 50% working independently through the case study.</p>
+<p>We’ve done our best to embed as many explanations and resources as possible directly into the case study to make it interesting and easy-to-follow. That being said, you’ll notice as we move into later modules that instructions may start to come with less detail in the latter materials when they require code that has already been explained. This has been done with intent, to encourage you to attempt more of the R coding on your own. Instructions may therefore be provided with one of three levels of demonstration/support:</p>
+<ol type="1">
+<li>(<em>First demonstration</em>) We provide the code directly in the examples for you to rewrite or copy/paste into your own R script. There may be some small changes required (e.g., object naming) but generally we’re directly showing you what to do.</li>
+<li>(<em>Second+ demonstration</em>) We ask you to strategize and execute an operation that you’ve already seen, and provide the code in a hidden drop-down. This is intended to allow you to try the code out yourself first, then compare how your coding approach may have differed from ours.</li>
+<li>(<em>Third + demonstration / Challenge</em>) You may find toward the end of the course that there are a couple of instructions where we don’t actually provide you with the explicit code you’ll need to complete the instruction. This is intended as a challenge to have you reflect on the examples and instruction already provided, and use these to build the code on your own. Don’t worry - your instructors will be able to help you if you do get stuck!</li>
+</ol>
+<section id="access-to-case-study-materials-and-downloads" class="level3">
+<h3 class="anchored" data-anchor-id="access-to-case-study-materials-and-downloads">Access to case study materials and downloads</h3>
+<p>The case study itself exists on this website. You can navigate between Modules 1 - 4 using the tabs at the top of the screen. The navigation bar on the right-hand side of the page displays the headers throughout the current page.</p>
+<p>At the bottom of the navigation bar is a link to download the materials in MS Word format. If you find yourself wanting to take notes directly in the case study material, or would like to retain these materials for future use - then please use this link to download them directly. We will not otherwise be providing handouts of the course case study.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
