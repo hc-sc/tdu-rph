@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.555">
+<meta name="generator" content="quarto-1.8.26">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>R for Public Health - Module 1</title>
+<title>Module 1 – R for Public Health</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,8 +21,9 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 /* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -63,15 +64,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-9859ad12c646e21909f796ca9dd1bd29.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -104,7 +107,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link rel="stylesheet" href="temp_styles.css">
 </head>
 
-<body class="nav-fixed">
+<body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -116,7 +119,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -139,7 +142,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
-          <div class="quarto-navbar-tools">
+            <div class="quarto-navbar-tools">
 </div>
       </div> <!-- /container-fluid -->
     </nav>
@@ -157,8 +160,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link" data-scroll-target="#learning-objectives">Learning objectives</a></li>
   </ul></li>
+  <li><a href="#scenario" id="toc-scenario" class="nav-link" data-scroll-target="#scenario">Scenario</a></li>
+  <li><a href="#project-setup" id="toc-project-setup" class="nav-link" data-scroll-target="#project-setup">Project setup</a></li>
   <li><a href="#loading-our-first-dataset" id="toc-loading-our-first-dataset" class="nav-link" data-scroll-target="#loading-our-first-dataset">Loading our first dataset</a></li>
-  <li><a href="#tidy-data-and-r" id="toc-tidy-data-and-r" class="nav-link" data-scroll-target="#tidy-data-and-r">Tidy data and R</a></li>
+  <li><a href="#becoming-versed-in-tidy-data" id="toc-becoming-versed-in-tidy-data" class="nav-link" data-scroll-target="#becoming-versed-in-tidy-data">Becoming versed in ‘Tidy’ data</a></li>
   <li><a href="#identifying-data-cleaning-needs" id="toc-identifying-data-cleaning-needs" class="nav-link" data-scroll-target="#identifying-data-cleaning-needs">Identifying data cleaning needs</a></li>
   <li><a href="#data-cleaning-steps" id="toc-data-cleaning-steps" class="nav-link" data-scroll-target="#data-cleaning-steps">Data cleaning steps</a>
   <ul>
@@ -212,53 +217,54 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="learning-objectives">Learning objectives</h3>
 <p>By the end of Module 1, you will be able to</p>
 <ol type="1">
-<li>Build tidyverse workflows using the <strong>%&gt;%</strong> operator</li>
-<li>Discuss best-practices for tidy (clean) datasets</li>
-<li>Apply tidyverse functions to a complex dataset</li>
+<li>Build tidyverse workflows using the <strong>%&gt;%</strong> operator.</li>
+<li>Discuss best-practices for maintaining tidy (clean) datasets.</li>
+<li>Apply tidyverse functions to a complex dataset.</li>
 </ol>
 <p>Now that you’ve dipped your toes into the seas of R coding, the ship’s steward has sent you the passenger manifest to work on next. As a savvy epidemiologist, however, you know that you’ll need to review and clean the data before setting sail on any analyses.</p>
 <p>For this module, you’ll be required to identify parts of the manifest that need correction before using it for any coding analyses, and fix these issues using tools available to us as part of the Tidyverse collection of data-manipulation packages.</p>
 </section>
 </section>
-<section id="loading-our-first-dataset" class="level2">
-<h2 class="anchored" data-anchor-id="loading-our-first-dataset">Loading our first dataset</h2>
-<p>Let’s try loading our first dataset.</p>
-<p>For this, we’ll be using a <em>function</em> from the <em>Tidyverse</em> package. In order to do this, we’ll need to make sure that we’ve first loaded the <em>Tidyverse</em> into our working session.</p>
-<p>Type the following into your R script.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">p_load</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Great - now we have all of the different functions from Tidyverse available to use! For this course, we’ll only be using a very small number of the total available functions, but if you want to check out all that the Tidyverse has to offer, you can review the <a href="https://tidyverse.org/packages" title="Tidyverse Packages">included packages here</a>.</p>
-<p>Let’s take a look inside the folders for <strong>Module 1</strong> - there should be three:</p>
+<section id="scenario" class="level2">
+<h2 class="anchored" data-anchor-id="scenario">Scenario</h2>
+<p>You have recently charted a new course in your career by accepting a post as a public health investigator aboard the cruise ship <strong>S. S. Rainbow Cake</strong>. This is a dream opportunity that combines your passion for epidemiology with your taste for adventure on the open sea. Details about the company are a bit murky, but your avid curiosity and ambition has won out and you signed the contract to join the crew. You have had barely any time as part of the crew to find your sea-legs before getting thrown into work already! Over the past few days of preparations, several members of the crew complained of feeling ill.&nbsp;Using some basic R skills, you have taken an initial look at some data provided by the ship’s nurse to investigate.</p>
+<p>Now, however, passenger’s have boarded the ship, the winds are in your favor, and the ship has set sail (figuratively, not literally. Obviously cruise ships intended to carry large numbers of passengers don’t have sails, right? Not like some kind of old timey pirate ship or anything silly like that). The ship’s steward, Patrick, has sent you the passenger manifest to work on next. The crew has had difficulty in the past retrieving information quickly from the manifest - likely due to not having your advanced data management skills and expertise! At least now, with you aboard, they realize the benefits that having a clean and organized dataset offers!</p>
+<p>For this module, you’ll need to identify and correct the parts of the manifest that need correction before it can be used for any sort of analytical work.</p>
+</section>
+<section id="project-setup" class="level2">
+<h2 class="anchored" data-anchor-id="project-setup">Project setup</h2>
+<p>If you haven’t already, read through the landing page for <a href="https://hc-sc.github.io/tdu-rph" title="R for Public Health">the course website</a>, in particular the sections on <a href="https://hc-sc.github.io/tdu-rph/#preamble-setting-up-your-workspace" title="How to set up your workspace for R for Public Health">setting up your workspace</a>.</p>
+<p>You’ll want to make sure that you have accomplished the following before continuing on with the course:</p>
 <ol type="1">
-<li>data/</li>
-<li>scripts/</li>
-<li>output/</li>
+<li>Create a workspace somewhere safe on your computer where you have adequate write access (e.g., <code>C:/tdu-rph/</code>)</li>
+<li>Downloaded the participant_data folder from the <a href="https://downgit.github.io/#/home?url=https://github.com/hc-sc/tdu-rph/tree/main/participant_data" title="Download the participant_data folder">course Github repository</a> to your working directory.</li>
+<li>Create an RStudio Project at this path.</li>
 </ol>
-<p>Inside the data/ folder you’ll find the dataset for module 1, which is saved as an excel workbook. We’ll want to convert this to an easier format to deal with later, but first let’s try loading the file into R and having a quick look at what we’re working with here!</p>
-<p>In order to read the excel file directly into your computers memory without any format changes, we’ll use the <strong>readxl</strong> package, which, lucky for us, works great with tidyverse. However, the package is <strong>not</strong> included in tidyverse, so we’ll need to install and load it into memory separately.</p>
-<p>Try installing and loading <strong>readxl</strong>, then using the function <em>read_excel()</em> to load the file “ship_manifest.xlsx”</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>readxl<span class="sc">::</span><span class="fu">read_excel</span>(<span class="st">"participant_data/module1/ship_manifest.xlsx"</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 604 × 16</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="do">##    Definitely not pirate…¹ ...2  ...3  ...4  ...5  ...6  ...7  ...8  ...9  ...10</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="do">##    &lt;chr&gt;                   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="do">##  1 Ship:                   "S. … &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; </span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="do">##  2 Captain:                "Cpt… &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; </span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="do">##  3 Chief Steward:          "Peg… &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; </span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="do">##  4 Ship Capacity:          "814" &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; </span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="do">##  5 Cruise Dates:           "10t… &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; </span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="do">##  6 Cruise Route:           "Hal… &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; </span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="do">##  7 &lt;NA&gt;                     &lt;NA&gt; &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; </span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="do">##  8 &lt;NA&gt;                     &lt;NA&gt; &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; </span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="do">##  9 Passenger Information    &lt;NA&gt; &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  Pass… &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; </span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="do">## 10 First                   "Las… DOB   Age   Gend… Memb… Addr… City  Prov… Coun…</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="do">## # ℹ 594 more rows</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="do">## # ℹ abbreviated name: ¹​`Definitely not pirates cruise ship company ™`</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="do">## # ℹ 6 more variables: ...11 &lt;chr&gt;, ...12 &lt;chr&gt;, ...13 &lt;chr&gt;, ...14 &lt;chr&gt;,</span></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="do">## #   ...15 &lt;chr&gt;, ...16 &lt;chr&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Okay, something appears to not be working as expected here. Let’s open the file in Excel and see what’s going on…</p>
+<p>Once you’ve done all this - you’ll notice that the participant_data/ folder contains three folders, each with their own subfolders:</p>
+<ul>
+<li><strong>module1/</strong>
+<ul>
+<li>data/</li>
+<li>output/</li>
+<li>scripts/</li>
+</ul></li>
+<li><strong>module3/</strong>
+<ul>
+<li>data/</li>
+<li>output/</li>
+<li>scripts/</li>
+</ul></li>
+<li><strong>module4/</strong>
+<ul>
+<li>data/</li>
+<li>output/</li>
+<li>scripts/</li>
+</ul></li>
+</ul>
+<p>Datasets required for each module are kept in each of the <code>data/</code> folders. You can decide to use the output and scripts folders however you like, but we recommend keeping your scripts and outputs here to keep things tidy and organized.</p>
+<p>Once you’re ready and have your workspace organized, create a new RScript by going to the top of your RStudio window and heading to: &gt; File &gt; New File … &gt; RScript</p>
+<p>Once opened, you’ll note that this file doesn’t have a name, so head to &gt; File &gt; Save As…</p>
+<p>and save your script with a useful file name (e.g., <code>Module1.R</code>) in your working directory folders (<code>e.g., /module1/scripts/Module1.R</code>).</p>
 <div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -269,7 +275,76 @@ Warning
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<div class="quarto-figure quarto-figure-center">
+<p><strong>Remember to add some comments to the top of your script to identify the author name, date created, date modified, and purpose of the script!</strong></p>
+</div>
+</div>
+</section>
+<section id="loading-our-first-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="loading-our-first-dataset">Loading our first dataset</h2>
+<p>Let’s try loading our first dataset.</p>
+<p>For this, we’ll be using a <em>function</em> from the <em>Tidyverse</em> package. In order to do this, we’ll need to make sure that we’ve first loaded the <em>Tidyverse</em> into our working session.</p>
+<p>Type the following into your R script.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">p_load</span>(tidyverse)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Great - now we have all of the different functions from Tidyverse available to use! For this course, we’ll only be using a very small number of the total available functions, but if you want to check out all that the Tidyverse has to offer, you can review the <a href="https://tidyverse.org/packages" title="Tidyverse Packages">included packages here</a>.</p>
+<p>Let’s take a look inside the <strong>participant_data</strong> folder for <strong>Module 1</strong> - there should be three (mostly empty) folders for you to work with:</p>
+<ol type="1">
+<li>data/</li>
+<li>scripts/</li>
+<li>output/</li>
+</ol>
+<p>Inside the <code>data/</code> folder you’ll find the dataset for module 1, which is saved as an excel workbook. We’ll want to convert this to an easier format to deal with later, but first let’s try loading the file into R and having a quick look at what we’re working with here!</p>
+<p>In order to import the Excel file directly into your computer memory without any format changes, we’ll use the <strong>readxl</strong> package, which, lucky for us, was installed when you installed the tidyverse. However, the package is <strong>not</strong> included among the core tidyverse packages, so we’ll still need to load the package and its functions into our R workspace separately.</p>
+<p>Try loading <strong>readxl</strong> with <code>p_load()</code>, then using the function <em>read_excel()</em> to import the file “ship_manifest.xlsx”</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">p_load</span>(readxl)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">read_excel</span>(<span class="st">"participant_data/module1/data/ship_manifest.xlsx"</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 604 × 16</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="do">##    Definitely not pirate…¹ ...2  ...3  ...4  ...5  ...6  ...7  ...8  ...9  ...10</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="do">##    &lt;chr&gt;                   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="do">##  1 Ship:                   "S. … &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; </span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="do">##  2 Captain:                "Cpt… &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; </span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="do">##  3 Chief Steward:          "Peg… &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; </span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="do">##  4 Ship Capacity:          "814" &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; </span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="do">##  5 Cruise Dates:           "10t… &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; </span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="do">##  6 Cruise Route:           "Hal… &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; </span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="do">##  7 &lt;NA&gt;                     &lt;NA&gt; &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; </span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="do">##  8 &lt;NA&gt;                     &lt;NA&gt; &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; </span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="do">##  9 Passenger Information    &lt;NA&gt; &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  Pass… &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; </span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="do">## 10 First                   "Las… DOB   Age   Gend… Memb… Addr… City  Prov… Coun…</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="do">## # ℹ 594 more rows</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="do">## # ℹ abbreviated name: ¹​`Definitely not pirates cruise ship company ™`</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="do">## # ℹ 6 more variables: ...11 &lt;chr&gt;, ...12 &lt;chr&gt;, ...13 &lt;chr&gt;, ...14 &lt;chr&gt;,</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="do">## #   ...15 &lt;chr&gt;, ...16 &lt;chr&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Note: if you’ve opted to set up your work flow using the <strong>here</strong> package, then your commands might look something like this instead:</p>
+<p><code>read_excel("participant_data", "module1", "data", "ship_manifest.xlsx")</code></p>
+<p>Both approaches are equally valid, but we’ll let you decide which one you like better!</p>
+</div>
+</div>
+<p>Okay, something appears to not be working as expected here. Let’s open the file in Excel and see what’s going on…</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Something is funny with the passenger manifest header
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div id="pic_passmanifest" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="pics/passengermanifesttop.jpg" class="img-fluid figure-img" alt="An image of a data table showing a large header section"></p>
 <figcaption>The header section of the passenger manifest</figcaption>
@@ -278,15 +353,15 @@ Warning
 </div>
 </div>
 <p>Yikes!</p>
-<p>When will these fictional-nautical-based-tourism-that-definitely-aren’t-pirates-companies ever learn to make their data collection forms friendly with machine-readable tools?</p>
+<p>When will these fictional, <em>nautical-based-tourism-that-definitely-aren’t-pirates</em> companies ever learn to make their data collection forms friendly with machine-readable tools?</p>
 <p>Okay but all kidding aside - get used to it! Navigating strange formatting issues is a highly-useful skill that will come in handy many times in your public health career!</p>
 </section>
-<section id="tidy-data-and-r" class="level2">
-<h2 class="anchored" data-anchor-id="tidy-data-and-r">Tidy data and R</h2>
-<p>When we interpret tables in R, the software is expecting consistent columns, each containing a unique variable, with the top row of all the columns containing a name for each variable. If we look a little more closely, we can actually see that this is the case for the useful data in the form, however, we first need to tell R to remove, or skip, the rows of the form that do not contain useful information.</p>
-<p>Fortunately, this is pretty easy to do with our <strong>read_excel()</strong> function. Review the function help using the following line of code.</p>
+<section id="becoming-versed-in-tidy-data" class="level2">
+<h2 class="anchored" data-anchor-id="becoming-versed-in-tidy-data">Becoming versed in ‘Tidy’ data</h2>
+<p>When we interpret tables in R, the software expects consistent columns, each containing a unique variable, with the top row of all the columns containing a name for each variable. If we look a little more closely we see that this is actually the case for the useful data in this form, however, we first need to tell R to remove, or skip, the rows of the form that do not contain useful information.</p>
+<p>Fortunately, this is pretty easy to do with the <strong>read_excel()</strong> function. Review the function help using the following line of code.</p>
 <blockquote class="blockquote">
-<p>help(read_excel)</p>
+<p><code>help(read_excel)</code></p>
 </blockquote>
 <p>This should pop up the help file in the bottom right pane in RStudio, where you’ll see the following under the function usage:</p>
 <blockquote class="blockquote">
@@ -308,16 +383,16 @@ progress = readxl_progress(),<br>
 <p>The argument that we’re interested in is <strong>skip = 0</strong>. If we include this argument in our <strong>read_excel()</strong> function, then R will automatically skip the number of rows indicated. Let’s try running the code again, but this time, skipping over the first 10 rows of the worksheet.</p>
 <p>We’ll also save the file to an object called ‘manifest’ so we can easily modify and use it later on.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>manifest <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_excel</span>(<span class="st">"participant_data/module1/ship_manifest.xlsx"</span>, </span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>                               <span class="at">skip =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>manifest <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_excel</span>(<span class="st">"participant_data/module1/data/ship_manifest.xlsx"</span>, </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>                               <span class="at">skip =</span> <span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="identifying-data-cleaning-needs" class="level2">
 <h2 class="anchored" data-anchor-id="identifying-data-cleaning-needs">Identifying data cleaning needs</h2>
 <p>Let’s take a moment now to review the <strong>manifest</strong> object and learn a little about it. There are several functions that can help you become familiar with data objects. Because we’re mainly focused here on using as many <strong>Tidyverse</strong> functions as possible, let’s check out the function <em>glimpse()</em>. This function operates very similarly to the base R <strong>structure</strong> function <em>str()</em>, however, provides the output in a more neatly organized way. Try it out on the <strong>manifest</strong> object you imported earlier.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(manifest)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(manifest)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Rows: 594</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Columns: 16</span></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="do">## $ First...1           &lt;chr&gt; "Nicole", "Nicole", "Scott", "Julie", "Kaitlyn", "…</span></span>
@@ -335,9 +410,9 @@ progress = readxl_progress(),<br>
 <span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="do">## $ Relationship        &lt;chr&gt; "Relative", "Relative", "Relative", "Other", "Othe…</span></span>
 <span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="do">## $ `Phone number`      &lt;chr&gt; "(483) 503-0564", "(356) 159-5148", "(356) 159-514…</span></span>
 <span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="do">## $ `Boarding Date`     &lt;chr&gt; "Feb 9th", "Feb 9th", "Feb 9th", "Feb 9th", "Feb 9…</span></span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="do">## $ `Boarding Location` &lt;chr&gt; "Halifax, NS", "Halifax, NS", "Halifax, NS", "Hali…</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="do">## $ `Boarding Location` &lt;chr&gt; "Halifax, NS", "Halifax, NS", "Halifax, NS", "Hali…</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Take a few minutes to further explore the data however you see fit, and jot down any characteristics about the dataset that you think might pose a problem later on. When you’re done that, review the code provided below and note how your data-cleaning process compared to ours.</p>
+<p>Take a few minutes to further explore the data however you see fit, (e.g., you could try browsing the dataset with <code>view()</code>, sorting the data with <code>arrange()</code>, printing the <code>head()</code> and <code>tail()</code> of the dataset, or just opening it up in Excel!) and jot down any characteristics about the dataset that you think might pose a problem later on. When you’re done that, review the code provided below and note how your data-cleaning process compared to ours.</p>
 <p><strong>A few tips to keep in mind when looking for potential data issues:</strong></p>
 <ol type="1">
 <li><p>Are variables named consistently and without spaces or special characters?</p></li>
@@ -370,15 +445,15 @@ progress = readxl_progress(),<br>
 </tr>
 <tr class="even">
 <td>N/A</td>
-<td>Not applicable. This is sometimes written purposively, and other times is an automatic replacement for blank cells.</td>
+<td>Not applicable. This is sometimes written purposively, and other times it is an automatic replacement for blank cells.</td>
 </tr>
 <tr class="odd">
 <td><em>Missing</em></td>
-<td>The word ‘missing.’ This is often input manually by someone who wants signify that the data were not collected, and that an empty cell is not the result of a data entry error.</td>
+<td>The word ‘missing.’ This is often input manually by someone who wants to signify that the data were not collected, and that an empty cell is not the result of a data entry error.</td>
 </tr>
 <tr class="even">
 <td>(blank)</td>
-<td>Blank cell. Impossible to know whether a cell was left intentionally blank, or whether it is the result of data entry errors.</td>
+<td>Blank cell. It is impossible to know whether a cell was left intentionally blank, or whether it is the result of data entry errors.</td>
 </tr>
 </tbody>
 </table></li>
@@ -387,18 +462,18 @@ progress = readxl_progress(),<br>
 <li><p>Are there extraneous variables in the data? If yes, what do you propose doing with these?</p></li>
 </ol>
 <hr>
-<p>When you’re ready - let’s move on and see how your findings compared to ours! Below is a list of issues that we found with the passenger manifest table.</p>
+<p>When you’re ready - let’s move on and see how your findings compare to ours! Below is a list of issues that we found with the passenger manifest table.</p>
 <details>
 <summary>
 <strong>Click to show the list</strong>
 </summary>
 <ul>
-<li><p>Once the header information was removed to make the file human-readable, we lost the information about whether variables were capturing <strong>passenger information</strong>, or <strong>emergency contact information</strong>. As a result, we now have duplicated variable names! This will not do! We’ll need to remove or change the variables names to ensure that each one is unique and informative. While we’re at it - we should make sure that none of our variables contain special characters or spaces in them too.</p></li>
-<li><p>In the <strong>DOB</strong> variable, there appears to be multiple different formats. We’ll need to fix this as this is a very important variable if we want to know the passenger’s age.</p></li>
-<li><p>Speaking of age.. it looks like someone was trying to use an Excel formula to calculate it - but pretty quickly ran into a snag due to some incorrect formatting in the DOB column, resulting in a lot of “#N/A” inputs. We’ll want to replace the current <strong>Age</strong> variable with a corrected version.</p></li>
-<li><p><strong>Province</strong> of residence appears to have quite a number of different formats going on, between fully-spelled-out versions of province names and abbreviated versions. We’ll need to capture the unique set of these, and ensure that we take a consistent approach.</p></li>
-<li><p>Emergency contact information appears to have undergone some input issues as well. Even though the variables are supposed to include <strong>first</strong> and <strong>last</strong> names, it appears that titles and professional designations somehow made it in, and is causing some issues. Also - there are quite a few missing entries, so we’ll need to make some decisions on what to do with these data.</p></li>
-<li><p><strong>Boarding Date</strong> for some reason has the date written out in a non-date format. We should probably fix this as well.</p></li>
+<li><p>Fix variable names. Once the header information was removed to make the file human-readable, we lost the information about whether variables were capturing <strong>passenger information</strong>, or <strong>emergency contact information</strong>. As a result, we now have duplicated variable names! This will not do! We’ll need to remove or change the variables names to ensure that each one is unique and informative. While we’re at it - we should make sure that none of our variables contain special characters or spaces in them too.</p></li>
+<li><p>Multiple date of birth (DOB) formats. In the <strong>DOB</strong> variable, there appears to be multiple different formats. We’ll need to fix this as this is a very important variable if we want to know the passenger’s age.</p></li>
+<li><p>Missing ages. Speaking of age.. it looks like someone was trying to use an Excel formula to calculate it - but pretty quickly ran into a snag due to some incorrect formatting in the DOB column, resulting in a lot of “#N/A” inputs. We’ll want to replace the current <strong>Age</strong> variable with a corrected version.</p></li>
+<li><p>Inconsistent formatting for Province. <strong>Province</strong> of residence appears to have quite a number of different formats going on, between fully-spelled-out versions of province names and abbreviated versions. We’ll need to capture the unique set of these, and ensure that we take a consistent approach.</p></li>
+<li><p>Inconsistent and missing Emergency Contact Information. Emergency contact information appears to have undergone some input issues as well. Even though the variables are supposed to include <strong>first</strong> and <strong>last</strong> names, it appears that titles and professional designations somehow made it in, and is causing some issues. Also - there are quite a few missing entries, so we’ll need to make some decisions on what to do with these data.</p></li>
+<li><p>Poor Boarding Date formatting. <strong>Boarding Date</strong> for some reason has the date written out in a non-date format. We should probably fix this as well.</p></li>
 </ul>
 </details>
 </section>
@@ -408,7 +483,7 @@ progress = readxl_progress(),<br>
 <section id="step-1-rename-variables" class="level3">
 <h3 class="anchored" data-anchor-id="step-1-rename-variables">Step 1: Rename variables</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># First, let's get a list of all the variables currently included in the manifest dataset</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>vars <span class="ot">&lt;-</span> <span class="fu">names</span>(manifest)</span>
@@ -419,15 +494,15 @@ progress = readxl_progress(),<br>
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="do">##  [7] "Address"           "City"              "Province"         </span></span>
 <span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="do">## [10] "Country"           "First...11"        "Last...12"        </span></span>
 <span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="do">## [13] "Relationship"      "Phone number"      "Boarding Date"    </span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="do">## [16] "Boarding Location"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="do">## [16] "Boarding Location"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>There appears to be two problems happening here:</p>
 <ol type="1">
 <li>First…1 and Last…2 versus First…11 and Last…12 - we’ll need to fix these so that they make more sense and are easier to work with.</li>
-<li>Several variables include spaces in their naming, so we’ll fix that too.</li>
+<li>Several variables include spaces in their naming, so we’ll fix that too. Spaces in variable names introduce complexity to our coding, as we need to wrap them in back-ticks like so: `variable name with spaces` - this can make our code harder to read, and also introduces more opportunities for us to forget a character and run into errors. It is therefore much easier to just use variable names that do not include spaces or special characters.</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Create a new variable that includes the corrected names of variables for the passenger manifest:</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Create a new variable that includes the corrected names of variables for the passenger manifest:</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>fixed_vars <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"pass.fname"</span>, </span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>                <span class="st">"pass.lname"</span>, </span>
@@ -458,20 +533,38 @@ progress = readxl_progress(),<br>
 <span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a><span class="do">##  [9] "home.prov"                  "home.country"              </span></span>
 <span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a><span class="do">## [11] "emerg.contact.fname"        "emerg.contact.lname"       </span></span>
 <span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a><span class="do">## [13] "emerg.contact.relationship" "emerg.contact.phone"       </span></span>
-<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a><span class="do">## [15] "board.date"                 "board.location"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a><span class="do">## [15] "board.date"                 "board.location"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Excellent, we can cross the first item off of our list: fixing variable names. Next, let’s look at the date of birth variable.</p>
 </section>
 <section id="step-2-fix-date-of-birth" class="level3">
 <h3 class="anchored" data-anchor-id="step-2-fix-date-of-birth">Step 2: Fix date of birth</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co">#Let's have a look at the data in the dob variable: </span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(manifest <span class="sc">%&gt;%</span> <span class="fu">select</span>(pass.dob))</span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="do">## Rows: 594</span></span>
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="do">## Columns: 1</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="do">## $ pass.dob &lt;chr&gt; "21445", "27047", "28507", "36314", "35219", "23589", "23224"…</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="do">## $ pass.dob &lt;chr&gt; "21445", "27047", "28507", "36314", "35219", "23589", "23224"…</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This might be the first time that you’re seeing the <code>%&gt;%</code> operator, also termed the ‘Magrittr pipe’ because it is considered a pipe operator, and was first introduced to R via the <em>Magrittr</em> package.</p>
+<p>This operator allows us to chain together operations when using the tidyverse, and helps to keep our code clean and easy-to-read. Wherever you see the <code>%&gt;%</code> you can read it in your head as ‘then’ do something.</p>
+<p>For the code chunk above, we are therefore telling R to: “start with the <code>manifest</code> dataset, <strong>then</strong> select the variable <code>pass.dob</code>”</p>
+<p>The other nice thing about the %&gt;% operator is that it automatically uses the output from the previous step as the input to the subsequent step, so you don’t have to keep filling in the .data argument for all the function calls.</p>
+<p>A somewhat older, but still useful explanation of pipes can be found in the <a href="https://r4ds.had.co.nz/pipes.html" title="Tidyverse Pipes">R for Data Science handbook</a>. A newer implementation of the pipe operator is also available now as part of base R, and looks like this: <code>|&gt;</code>. A shorter comparison of the two operators has been written up by Hadley Wickham on the <a href="https://tidyverse.org/blog/2023/04/base-vs-magrittr-pipe/" title="Base R versus Magrittr Pipes">Tidyverse Blog site</a>.</p>
+<p>Note: we’ll be sticking with the magrittr pipe (<code>%&gt;%</code>) for this course, but feel free to try writing some of your code using both and seeing which one you like better!</p>
+</div>
 </div>
 <p>Wait a second.. oh no. Excel again..</p>
 <p>So it turns out, that by reading these data in directly from Excel, we have retained some Excel-scurvy! Dates in excel are formatted in a very unique way: it simply counts the number of days passed starting with “1” on January 1, 1900.</p>
@@ -481,7 +574,7 @@ progress = readxl_progress(),<br>
 <li>As alluded to in the above suggestion, we should first focus on making all the data in the variable consistent, then do some operation on all them at once. We can do this easily enough in R, and using a scripting language helps us keep track of everything we did, compared to Excel where we can get distracted and forget to record our steps. Win win.</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Let's start by printing the entire DOB variable and checking which entries need fixing: </span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>birthdates <span class="ot">&lt;-</span> manifest<span class="sc">$</span>pass.dob</span>
@@ -634,7 +727,7 @@ progress = readxl_progress(),<br>
 <span id="cb8-151"><a href="#cb8-151" aria-hidden="true" tabindex="-1"></a><span class="do">## [581] "26374"          "32308"          "30848"          "28901"         </span></span>
 <span id="cb8-152"><a href="#cb8-152" aria-hidden="true" tabindex="-1"></a><span class="do">## [585] "26943"          "32382"          "32637"          "41131"         </span></span>
 <span id="cb8-153"><a href="#cb8-153" aria-hidden="true" tabindex="-1"></a><span class="do">## [589] "29576"          "28390"          "40138"          "31410"         </span></span>
-<span id="cb8-154"><a href="#cb8-154" aria-hidden="true" tabindex="-1"></a><span class="do">## [593] "25090"          "16308"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-154"><a href="#cb8-154" aria-hidden="true" tabindex="-1"></a><span class="do">## [593] "25090"          "16308"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>If we look through the data, there’s actually only 5 entries with issues:</p>
 <ul>
@@ -644,10 +737,10 @@ progress = readxl_progress(),<br>
 <li><p>Entry 155 - Jan 13, 1959 (let’s assume the order of month and day were mixed)</p></li>
 <li><p>Entry 568 - Jul 18, 1968</p></li>
 </ul>
-<p>These are all easy to fix if we stick with indices that we learned about in R-basics.. but we’ll need to convert these dates into Excel format first, then revert everything into a more sensical format once everything is numeric.</p>
-<p>We’ll want to convert the intended date to a class that we can deal with numerically, then extract the number of days between that date and the beginning of 1900-01-01 to get the date as an excel format. Lubridate makes this pretty easy for us with the ymd() function!</p>
+<p>These are all easy to fix if we stick with indices that we learned about in R Basics.. but we’ll need to convert these dates into Excel format first, then revert everything into a more sensical format once everything is numeric.</p>
+<p>We’ll want to convert the intended date to a class that we can deal with numerically, then extract the number of days between that date and the beginning of 1900-01-01 to get the date as an Excel format. Lubridate makes this pretty easy for us with the ymd() function!</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># library(lubridate)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># p_load(lubridate)</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>birthdates[<span class="dv">14</span>] <span class="ot">&lt;-</span> <span class="fu">ymd</span>(<span class="st">"1992-08-21"</span>) <span class="sc">-</span> <span class="fu">ymd</span>(<span class="st">"1899-12-30"</span>)</span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>birthdates[<span class="dv">97</span>] <span class="ot">&lt;-</span> <span class="fu">ymd</span>(<span class="st">"1982-08-30"</span>) <span class="sc">-</span> <span class="fu">ymd</span>(<span class="st">"1899-12-30"</span>)</span>
@@ -721,18 +814,18 @@ progress = readxl_progress(),<br>
 <span id="cb9-72"><a href="#cb9-72" aria-hidden="true" tabindex="-1"></a><span class="do">## [559] "21039" "19967" "31104" "32600" "28545" "29118" "13246" "31359" "29862"</span></span>
 <span id="cb9-73"><a href="#cb9-73" aria-hidden="true" tabindex="-1"></a><span class="do">## [568] "25037" "19127" "18770" "22661" "23178" "23552" "25965" "26291" "21520"</span></span>
 <span id="cb9-74"><a href="#cb9-74" aria-hidden="true" tabindex="-1"></a><span class="do">## [577] "36070" "35382" "26373" "25991" "26374" "32308" "30848" "28901" "26943"</span></span>
-<span id="cb9-75"><a href="#cb9-75" aria-hidden="true" tabindex="-1"></a><span class="do">## [586] "32382" "32637" "41131" "29576" "28390" "40138" "31410" "25090" "16308"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-75"><a href="#cb9-75" aria-hidden="true" tabindex="-1"></a><span class="do">## [586] "32382" "32637" "41131" "29576" "28390" "40138" "31410" "25090" "16308"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Now that we’ve created a new variable with the correct Excel formats, let’s convert it into the correct date format, and save the whole variable back to the manifest.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Use as_date() from lubridate, and set the Excel origin</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># We'll need to change our birthdates back to numeric first, as well. </span></span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>birthdates <span class="ot">&lt;-</span> <span class="fu">as_date</span>(<span class="fu">as.numeric</span>(birthdates), <span class="at">origin=</span> <span class="st">"1899-12-30"</span>)</span>
 <span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>manifest<span class="sc">$</span>pass.dob <span class="ot">&lt;-</span> birthdates</span>
 <span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Doublecheck to make sure that the DOB column now looks good: </span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Double check to make sure that the DOB column now looks good: </span></span>
 <span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(manifest)</span>
 <span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="do">## Rows: 594</span></span>
 <span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Columns: 16</span></span>
@@ -751,7 +844,7 @@ progress = readxl_progress(),<br>
 <span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a><span class="do">## $ emerg.contact.relationship &lt;chr&gt; "Relative", "Relative", "Relative", "Other"…</span></span>
 <span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a><span class="do">## $ emerg.contact.phone        &lt;chr&gt; "(483) 503-0564", "(356) 159-5148", "(356) …</span></span>
 <span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a><span class="do">## $ board.date                 &lt;chr&gt; "Feb 9th", "Feb 9th", "Feb 9th", "Feb 9th",…</span></span>
-<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a><span class="do">## $ board.location             &lt;chr&gt; "Halifax, NS", "Halifax, NS", "Halifax, NS"…</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a><span class="do">## $ board.location             &lt;chr&gt; "Halifax, NS", "Halifax, NS", "Halifax, NS"…</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Now you can see that the pass.dob variable contains all dates in an actual date format. Hurrah!</p>
 </section>
@@ -785,7 +878,7 @@ progress = readxl_progress(),<br>
 </blockquote>
 <p>Try coding these all into one statement on your own, then check against our code below!</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>manifest <span class="ot">&lt;-</span> </span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  manifest <span class="sc">%&gt;%</span> </span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
@@ -794,7 +887,7 @@ progress = readxl_progress(),<br>
 <span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">interval</span>(pass.dob, <span class="fu">ymd</span>(<span class="st">"2025-02-10"</span>)),</span>
 <span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>        <span class="st">"years"</span>)</span>
 <span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>      )</span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -802,7 +895,7 @@ progress = readxl_progress(),<br>
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Did you know
+<span class="screen-reader-only">Note</span>Did you know
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -823,7 +916,7 @@ Did you know
 <p>The first thing we’ll want to do is check the variable and extract a list of all the different ways that provinces have been coded. If we were to do this with all the observations in our dataset, though, we’d end up with a very long list that included a lot of redundant entries. Instead - let’s create a non-redundant list first, using another handy tidyverse function: <strong>distinct()</strong>.</p>
 <p>To do this, we’ll invoke our manifest dataframe, select the “home.prov” variable, then call the distinct() function. E.g.,</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>manifest <span class="sc">%&gt;%</span> </span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>manifest <span class="sc">%&gt;%</span> </span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="st">"home.prov"</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>()</span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 19 × 1</span></span>
@@ -847,7 +940,7 @@ Did you know
 <span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a><span class="do">## 16 New Brunswick            </span></span>
 <span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a><span class="do">## 17 Sask                     </span></span>
 <span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a><span class="do">## 18 NFLD                     </span></span>
-<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a><span class="do">## 19 Newfoundland and Labrador</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a><span class="do">## 19 Newfoundland and Labrador</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Based on the above output, we have 19 different versions of province names included, but we definitely do not have 19 different provinces in Canada! You’ll notice as well that Quebec sometimes has an accent, and sometimes does not. Let’s propose to simplify things, and in our final dataset, just use 2-letter abbreviations for provinces.</p>
 <p>This does mean that we’ll need to identify all the variations present for each province, then replace them with the abbreviated version. To make sure that we can review and verify, we’ll create a new variable with these replacements first, then overwrite our old variable once we’ve checked and verified that things are done correctly.</p>
@@ -863,7 +956,7 @@ Did you know
 <p>TRUE ~ value to return if above conditions are FALSE)</p>
 </blockquote>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>manifest <span class="ot">&lt;-</span> </span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>manifest <span class="ot">&lt;-</span> </span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>manifest <span class="sc">%&gt;%</span> </span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">home.prov.abb =</span> <span class="fu">case_when</span>(</span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    home.prov <span class="sc">==</span> <span class="st">'BC'</span> <span class="sc">~</span> <span class="st">'BC'</span>,</span>
@@ -888,11 +981,11 @@ Did you know
 <span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>    home.prov <span class="sc">==</span> <span class="st">'NFLD'</span> <span class="sc">~</span> <span class="st">'NL'</span>,</span>
 <span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>    home.prov <span class="sc">==</span> <span class="st">'Newfoundland and Labrador'</span> <span class="sc">~</span> <span class="st">'NL'</span>,</span>
 <span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>    <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"missing"</span></span>
-<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>    ))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>    ))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Now, to check whether or not we missed any provinces in the list, let’s filter our new variable, looking for instances of the ‘missing’ entry that we specified as our catch-all.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>manifest <span class="sc">%&gt;%</span> </span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(home.prov.abb <span class="sc">==</span> <span class="st">'missing'</span>)</span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 0 × 17</span></span>
@@ -901,16 +994,16 @@ Did you know
 <span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="do">## #   home.city &lt;chr&gt;, home.prov &lt;chr&gt;, home.country &lt;chr&gt;,</span></span>
 <span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="do">## #   emerg.contact.fname &lt;chr&gt;, emerg.contact.lname &lt;chr&gt;,</span></span>
 <span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="do">## #   emerg.contact.relationship &lt;chr&gt;, emerg.contact.phone &lt;chr&gt;,</span></span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="do">## #   board.date &lt;chr&gt;, board.location &lt;chr&gt;, home.prov.abb &lt;chr&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="do">## #   board.date &lt;chr&gt;, board.location &lt;chr&gt;, home.prov.abb &lt;chr&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Since our filter returned zero rows of the home.prov.abb variable that were ‘missing’ (and nothing returned NA), we can rest knowing that our variable is complete. Now we’ll replace the home.prov variable with the one that we created, and remove the temporary variable from the dataset.</p>
 <p>Note: in this example, we’ll use the select() function with a negative operator to specify which variables to drop.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>manifest <span class="ot">&lt;-</span> </span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  manifest <span class="sc">%&gt;%</span> </span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">home.prov =</span> home.prov.abb) <span class="sc">%&gt;%</span></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>home.prov.abb)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>home.prov.abb)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 </section>
@@ -939,7 +1032,7 @@ Did you know
 <p><a href="https://regexlearn.com/cheatsheet" title="Regular expressions cheatsheet">Regex</a> is a deep and powerful toolset that we encourage you to check out, should you be interested in it, however, we will not be covering it any further in this course.</p>
 <p>Let’s try writing out the code for prefixes and suffixes. We’ll call our manifest dataframe, use mutate() to let R know we’re affecting change on a variable, in this case emerg.contact.fname and emerg.contact.lastname, then specify our string replacements using str_replace_all().</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>manifest <span class="ot">&lt;-</span> </span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>manifest <span class="ot">&lt;-</span> </span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>manifest <span class="sc">%&gt;%</span></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">emerg.contact.fname =</span></span>
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>           <span class="fu">str_replace_all</span>(</span>
@@ -952,7 +1045,7 @@ Did you know
 <span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>             <span class="at">string =</span> emerg.contact.lname,</span>
 <span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>             <span class="at">pattern =</span> <span class="st">"(DDS|Jr</span><span class="sc">\\</span><span class="st">.)"</span>,</span>
 <span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>             <span class="at">replacement =</span> <span class="st">""</span>)</span>
-<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>         )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>         )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Great work! We’re almost done with this step, all that is left to do now, is to fix the squished names present in the emerg.contact.lname variable. Let’s discuss two approaches.</p>
 <ol type="1">
@@ -961,7 +1054,7 @@ Did you know
 </ol>
 <p>With this in mind, lets specify the first-names we want to replace in the emerg.contact.fname variable based on the emerg.contact.lname variable, then fix the last names once that’s done.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>manifest <span class="ot">&lt;-</span> </span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>manifest <span class="ot">&lt;-</span> </span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>manifest <span class="sc">%&gt;%</span> </span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">emerg.contact.fname =</span> </span>
 <span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>           <span class="fu">case_when</span>(emerg.contact.lname <span class="sc">==</span> <span class="st">"DavidSmith"</span> <span class="sc">~</span> <span class="st">"David"</span>,</span>
@@ -977,7 +1070,7 @@ Did you know
 <span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>                     emerg.contact.lname <span class="sc">==</span> <span class="st">"DouglasEvans"</span> <span class="sc">~</span> <span class="st">"Evans"</span>,</span>
 <span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>                     emerg.contact.lname <span class="sc">==</span> <span class="st">"JacobScott"</span> <span class="sc">~</span> <span class="st">"Scott"</span>,</span>
 <span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>                     emerg.contact.lname <span class="sc">==</span> <span class="st">"ToniAvila"</span> <span class="sc">~</span> <span class="st">"Avila"</span>,</span>
-<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>                     <span class="cn">TRUE</span> <span class="sc">~</span> emerg.contact.lname))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>                     <span class="cn">TRUE</span> <span class="sc">~</span> emerg.contact.lname))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 </section>
@@ -986,21 +1079,21 @@ Did you know
 <p>The last thing to do to get our dataset into tip-top shape is to fix the <strong>boarding date</strong> variable. Since there’s only two variations in this one (e.g., Feb 9th and Feb 10th) this should be an easy fix using our case_when() function. Keep in mind, however, that we may want to be able to use this variable in calculations later, so we should also restore it to a date format using Lubridate’s <strong>ymd()</strong> function.</p>
 <p>Let’s wrap these together into one operation:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>manifest <span class="ot">&lt;-</span> </span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>manifest <span class="ot">&lt;-</span> </span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>manifest <span class="sc">%&gt;%</span> </span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">board.date =</span> <span class="fu">case_when</span>(</span>
 <span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    board.date <span class="sc">==</span> <span class="st">"Feb 9th"</span> <span class="sc">~</span> <span class="fu">ymd</span>(<span class="st">'2025-02-09'</span>),</span>
 <span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    board.date <span class="sc">==</span> <span class="st">"Feb 10th"</span> <span class="sc">~</span> <span class="fu">ymd</span>(<span class="st">'2025-02-10'</span>),</span>
 <span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    <span class="cn">TRUE</span> <span class="sc">~</span> <span class="cn">NA</span>)</span>
 <span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>  </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="saving-your-dataset-to-disk" class="level3">
 <h3 class="anchored" data-anchor-id="saving-your-dataset-to-disk">Saving your dataset to disk</h3>
-<p>Have a look through your dataset with the <strong>view()</strong> function, and make sure that everything looks correct. When you’re ready to save the final dataset to a file on your computer, use the <strong>write_csv()</strong> function like so:</p>
+<p>Have a look through your dataset with the <strong>view()</strong> function, and make sure that everything looks correct. When you’re ready to save the final dataset to a file on your computer, use the <strong>write_tsv()</strong> function like so:</p>
 <blockquote class="blockquote">
-<p>write_csv(dataset, “name_to_save_as.csv”)</p>
+<p>write_tsv(dataset, “pathway_and_name_to_save_as.tsv”)</p>
 </blockquote>
 </section>
 </section>
@@ -1068,7 +1161,6 @@ Did you know
 }
 </style>
 <div class="quiz">
-
 <!-- Q1 -->
 <p>
 <strong>1. What does <code>mutate()</code> do?</strong>
@@ -1155,47 +1247,63 @@ function check(questionName, correctValue) {
 </script>
 
 
-</section>
+</section></main></div>
 
-</main> <!-- /main -->
+
+ <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
-    }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
-    }
-  }
-  toggleBodyColorPrimary();  
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
       }
+      return false;
     }
-    return false;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
       for (const childEl of codeEl.children) {
         if (isCodeAnnotation(childEl)) {
           childEl.remove();
@@ -1203,184 +1311,184 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
       return codeEl.innerText;
     }
-  });
-  clipboard.on('success', function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copied!");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
-    setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
-      }
-      button.setAttribute("title", currentTitle);
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  });
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/hc-sc\.github\.io\/tdu-rph\/");
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-      }
-    }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-    const config = {
-      allowHTML: true,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start',
-    };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
     });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
-        }
-      }
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
     }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/hc-sc\.github\.io\/tdu-rph\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
           }
         }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
         }
-        return container.innerHTML
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
       } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
         if (window.Quarto?.typesetMath) {
           window.Quarto.typesetMath(note);
         }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      // TODO in 1.5, we should make sure this works without a callout special case
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
       }
     }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
           }
         } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
           .then(res => res.text())
           .then(html => {
             const parser = new DOMParser();
             const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
+            const note = htmlDoc.querySelector('main.content');
             if (note !== null) {
-              const html = processXRef(id, note);
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
               instance.setContent(html);
             } 
           }).finally(() => {
@@ -1388,186 +1496,162 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
-    });
-  }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            div.style.left = 0;
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
-        }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
-      }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
-    }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
-          }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+      }, function(instance) {
       });
     }
-  }
-});
-</script>
-</div> <!-- /content -->
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+ <!-- /content -->
 
 
 

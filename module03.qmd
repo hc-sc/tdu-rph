@@ -63,36 +63,36 @@ First, however, you'll need to review what data you've been provided with, and f
 
 In your **Module3** datsets folder you should see the following files, that correspond to data extracts related to passengers with abdominal pain complaints:
 
-> **abdo_Feb10.tsv**
+> **abdo_Feb10.txt**
 >
-> **abdo_Feb11.tsv**
+> **abdo_Feb11.txt**
 >
-> **abdo_Feb12.tsv**
+> **abdo_Feb12.txt**
 >
-> **abdo_Feb13.tsv**
+> **abdo_Feb13.txt**
 >
-> **abdo_Feb14.tsv**
+> **abdo_Feb14.txt**
 
 Each of the **abdo\_** files are formatted the same way and contain data collected on a single date. These files were extracted from the infirmary's database, and contain several rows of metadata at the top of the file that you'll want to filter out. They also all contain the following variables:
 
 | Variable             | Definition                                                                      |
-|----------------------|--------------------------------------------------|
-| Pass_ID              | Unique identifier given to ship passengers                                      |
+|-----------------------|-------------------------------------------------|
+| Patient_ID           | Unique identifier given to ship passengers                                      |
 | Recorded temperature | Oral temperature taken during medical visit (degrees celsius)                   |
-| Recorded height      | Passenger height measurements taken during medical visit (cm)                   |
-| Recorded weight      | Passenger weight measurement taken during medical visit (kg)                    |
+| Recorded height (cm) | Passenger height measurements taken during medical visit (cm)                   |
+| Recorded weight (kg) | Passenger weight measurement taken during medical visit (kg)                    |
 | CEDIS                | CEDIS Chief complaint code, input by nurse at check-in (see additional handout) |
 
 : Data dictionary for data extracts from the ship infirmary
 
 ### Passenger manifest
 
-The ship's nurse has also provided you with a copy of their passenger manifest - which thankfully has the Pass_ID included, as well as the demographic information you'll need to summarize the epidemiology of passengers experiencing symptoms of illness.
+The ship's nurse has also provided you with a copy of their passenger manifest - this Excel file thankfully has the Passenger ID included, which maps to the Patient ID in the nurse dataset. As well, the manifest has the demographic information you'll need to summarize the epidemiology of passengers experiencing symptoms of illness.
 
-Also - lucky us, it seems as though the ship's infirmary does a **much** better job of maintaining the passenger manifest as well! So we shouldn't have to worry about cleaning it a second time. There are, however, more variables than we really need for answering our questions about who is getting sick - so we'll want to focus just on the variables pertinent to our analysis. Lets focus on keeping the following:
+Also - lucky us, it seems as though the ship's infirmary does a **much** better job of maintaining the passenger manifest as well! So we shouldn't have to worry about cleaning it a second time. There are, however, more variables than we really need for answering our questions about who is getting sick - so we'll want to focus just on the variables pertinent to our analysis. Lets focus on keeping the following data:
 
 | Variable      | Definition                                                                               |
-|---------------------|---------------------------------------------------|
+|----------------------|--------------------------------------------------|
 | Pass_ID       | The unique identifier given to each passenger by the crew of the S. S. Rainbow Cake.     |
 | Age           | Age of the passenger at the time of the cruise departure.                                |
 | Gender        | Reported gender of the passenger.                                                        |
@@ -103,15 +103,15 @@ Also - lucky us, it seems as though the ship's infirmary does a **much** better 
 
 ### Data collation plan
 
-Now that we have an idea about what our datasets will look like, we should sketch out a strategy for how our data sets can be joined together. Starting with our **abdo** datasets: these are all in the same format, but separated out for each day. We'll want to **append** these datasets together, and **create a new variable** to indicate what the date was that the symptoms were reported.
+Now that we have an idea about what our datasets will look like, we should sketch out a strategy for how our data sets can be joined together. Starting with our **abdo** data: these are all in the same format, but the data have been separated out for each day. We'll want to **append** these datasets together, and **create a new variable** to indicate what the date was that the symptoms were reported.
 
 For our append operation, we'll be using the following function:
 
 > `bind_rows(dataset1, dataset2, etc..., .id = "id")`
 
-Simply, bind_rows will combine our data by stacking the rows on top of each other. Its important to ensure that all the column names are consistent, otherwise we'll get a messy bunch of rows with mostly NA's in them.
+Simply, bind_rows will combine our data by stacking the rows on top of each other. It is important to ensure that all the column names are consistent, otherwise we'll get a messy bunch of rows with mostly NA's in them.
 
-The argument .id="id" will produce a new column that contains a character string of the filename. This will then let us identify which observations were recorded on each day, and we can then **mutate()** a new column based on this to represent the onset date.
+The argument .id="id" will produce a new column that contains a character string of the filename. This will help us identify which observations were recorded on each day, and we can then **mutate()** a new variable based on this column to represent the onset date.
 
 ![Using bind_row() to append the abdo datasets into one.](pics/module3_dataflow01.jpg){fig-alt="A simple data-flow diagram showing five data sets combining into one."}
 
@@ -125,7 +125,7 @@ Make sure that you think about what table join is the most appropriate for the e
 
 ### Code-along for Part A
 
-If you're feeling confident, then we encourage you to try establishing the code yourself for this exercise. However, we've provided the code that we used below. Remember, there's always multiple ways to accomplish the same thing, so don't worry if your code doesn't always match what we've done!
+If you're feeling confident, we encourage you to try and establish the code yourself for this exercise. However, based on your comfort level and where you are in your R learning journey, please feel free to use the code that we've provided Remember, there's multiple ways to accomplish the same thing, so if you write your own code and get the same results without your code matching what we've done, it's nothing to worry about!
 
 #### Importing and appending the Abdo datasets
 
@@ -141,11 +141,11 @@ abdo_names <- c("pass.ID", "pass.temp", "pass.height", "pass.weight", "CEDIS")
 
 
 # load abdo datasets using read_tsv from the readr tidyverse package: 
-abdo_feb10 <- read_tsv("participant_data/module3/abdo_Feb10.txt", col_names = abdo_names, skip = 4)
-abdo_feb11 <- read_tsv("participant_data/module3/abdo_Feb11.txt", col_names = abdo_names, skip = 4)
-abdo_feb12 <- read_tsv("participant_data/module3/abdo_Feb12.txt", col_names = abdo_names, skip = 4)
-abdo_feb13 <- read_tsv("participant_data/module3/abdo_Feb13.txt", col_names = abdo_names, skip = 4)
-abdo_feb14 <- read_tsv("participant_data/module3/abdo_Feb14.txt", col_names = abdo_names, skip = 4)
+abdo_feb10 <- read_tsv("participant_data/module3/data/abdo_Feb10.txt", col_names = abdo_names, skip = 4)
+abdo_feb11 <- read_tsv("participant_data/module3/data/abdo_Feb11.txt", col_names = abdo_names, skip = 4)
+abdo_feb12 <- read_tsv("participant_data/module3/data/abdo_Feb12.txt", col_names = abdo_names, skip = 4)
+abdo_feb13 <- read_tsv("participant_data/module3/data/abdo_Feb13.txt", col_names = abdo_names, skip = 4)
+abdo_feb14 <- read_tsv("participant_data/module3/data/abdo_Feb14.txt", col_names = abdo_names, skip = 4)
 
 ```
 
@@ -154,7 +154,7 @@ Great! Notice that we used skip = 4 to remove the header row, since we've stipul
 Next, let's append these datasets together using the **bind_rows()** function.
 
 ```{r}
-
+# append daily data using bind_rows()
 abdo_combined <- bind_rows(abdo_feb10,
                            abdo_feb11,
                            abdo_feb12,
@@ -167,6 +167,8 @@ abdo_combined <- bind_rows(abdo_feb10,
 Now that we have our combined abdo dataset, we can go ahead and mutate a new column based off our 'id' variable that was created when we used bind_rows. For this, we'll revisit the case_when and ymd functions as well from Module 1.
 
 ```{r}
+
+# create a new onset date variable using mutate, and store modified dataset in new object
 abdo_combined_onset <- 
 abdo_combined %>% 
   mutate(onset.date = case_when(
@@ -181,7 +183,7 @@ abdo_combined %>%
 Now we can drop the "id" variable from our abdo_combined_onset dataset, and proceed to joining this dataset with our passenger manifest.
 
 ```{r}
-
+# remove (or unselect) the id variable
 abdo_combined_onset <- 
   abdo_combined_onset %>% select(-id)
 
@@ -190,7 +192,7 @@ abdo_combined_onset <-
 Before moving onto the passenger manifest, however, let's clean up our workspace and remove the temporary objects that we created up till now.
 
 ```{r}
-
+# clean up our working environment by removing temporary objects
 rm(abdo_combined, abdo_feb10, abdo_feb11, abdo_feb12, abdo_feb13, abdo_feb14, abdo_names)
 
 ```
@@ -209,14 +211,16 @@ First, open this file in Excel and give it a look-through. It should look very f
 # Import the dataset using readxl
 # Note the readxl::read_excel allows for you to access functions from installed 
 # packages without loading the entire package. 
-pass_manifest <- readxl::read_excel("participant_data/module3/pass_manifest.xlsx", 
+pass_manifest <- readxl::read_excel("participant_data/module3/data/pass_manifest.xlsx", 
                             skip = 10)
 
 ```
 
-Now, recall earlier that we determined that we didn't need to keep all of the data from the passenger manifest, so let's use the select() function to choose only the variables that we want to keep.
+Recall from earlier that we determined we didn't need to keep all of the data from the passenger manifest, so let's use the select() function to choose only the variables that we want to keep.
 
 ```{r}
+# select only the variables that we want to keep
+
 pass_manifest_trunc <- #truncated, temporary object
 pass_manifest %>% 
   # Note that we wrap variables with spaces in a back-tick
@@ -230,7 +234,7 @@ We should have everything we need now to join these two datasets together!
 
 Now that we're at the stage where we will actually join these datasets together, we need to carefully consider which join type we'll want to use. Remember that there are both mutating joins - which change the data, but don't drop observations, and filtering joins, which DO drop observations.
 
-To help you decide which join you want - think through the following questions:
+Think through the following questions to help you decide which join type you want to use. If you need a reminder of different types of joins available, try reviewing this [reference article](https://dplyr.tidyverse.org/reference/mutate-joins.html "Mutating joins reference article")!
 
 1.  What question are you ultimately trying to answer?
 2.  Do you *need* all the data from both datasets?
@@ -711,14 +715,11 @@ symptoms_manifest %>%
 
 While there are many improvements that could be made to this chart, it does confirm our suspicions about the shape of the distribution of cases, this is definitely looking like the ship has experienced a point-source outbreak!
 
-
-
 ### Further exploring the dataset
 
 Luckily, at this stage, the outbreak appears to be in decline, and may even be over. However, as epidemiologists, we know that if we don't identify the source of the illnesses, then they could occur again. Using our data-swashbuckling abilities - we have uncovered a number of very strong clues in this scenario so far.
 
 Take a couple of minutes to summarize, from an epidemiological perspective, what you have learned about the cases and illnesses aboard the **S. S. Rainbow Cake** so far. This may help to hone your focus on where to investigate next!
-
 
 <details>
 
@@ -726,23 +727,18 @@ Take a couple of minutes to summarize, from an epidemiological perspective, what
 
 Here's some of the main considerations so far:
 
-- There is a very strong point-source outbreak signal. We should be thinking about exposures that may have occurred at a single setting (e.g., meals, events).
-- While all of our cases reported abdominal pain / discomfort, there are some that have reported much more serious symptoms. We may want to investigate these further. 
-- There does not appear to be any strong signals based on age and sex of cases. 
-- We are on a cruise ship and historically, gastrointestinal outbreaks cause by contaminated food are a common occurrence. 
+-   There is a very strong point-source outbreak signal. We should be thinking about exposures that may have occurred at a single setting (e.g., meals, events).
+-   While all of our cases reported abdominal pain / discomfort, there are some that have reported much more serious symptoms. We may want to investigate these further.
+-   There does not appear to be any strong signals based on age and sex of cases.
+-   We are on a cruise ship and historically, gastrointestinal outbreaks cause by contaminated food are a common occurrence.
 
 </details>
-
-
 
 #### Differences in symptoms by onset date
 
 Let's go back to our symptoms and see if there are any differences in the symptoms by onset date. This time, we'll summarize all of different symptoms by date using a clever little function called `across()`.
 
-
-The `across()` function works within either a mutate() or summarize() call, and allows you to repeat the same operation on a range of variables, rather than having to type them in over and over again. Here, we'll use it to sum up the number of cases that reported each symptom for each each day in our dataset.   
-
-
+The `across()` function works within either a mutate() or summarize() call, and allows you to repeat the same operation on a range of variables, rather than having to type them in over and over again. Here, we'll use it to sum up the number of cases that reported each symptom for each each day in our dataset.
 
 ```{r}
 
@@ -759,22 +755,17 @@ symptoms_manifest %>%
 ```
 
 ::: callout-note
-
-Do you notice any differences between the numbers of passengers reporting symptoms? Why might vomiting, diarrhea, and headache be reported less often than the more severe symptoms of bloody stool and fever. What types of gastrointestinal diseases might cause bloody stool and fever?  
-
+Do you notice any differences between the numbers of passengers reporting symptoms? Why might vomiting, diarrhea, and headache be reported less often than the more severe symptoms of bloody stool and fever. What types of gastrointestinal diseases might cause bloody stool and fever?
 :::
-
 
 #### Differences in symptoms by other variables
 
-If you recall, there are still two variables in our dataset that we haven't taken a look at yet: 
+If you recall, there are still two variables in our dataset that we haven't taken a look at yet:
 
-1. Member Status 
-2. Boarding Date 
-
+1.  Member Status
+2.  Boarding Date
 
 Let's leave no stones unturned, and see if we can identify any differences between the passenger's symptoms and either their cruise-member-status or the day that they boarded the ship. Since bloody stool and fever are definitely the greater cause for concern, we'll focus on those symptoms only.
-
 
 ```{r}
 
@@ -789,7 +780,6 @@ symptoms_manifest %>%
 
 
 ```
-
 
 ```{r}
 
@@ -806,20 +796,16 @@ symptoms_manifest %>%
 ```
 
 ::: callout-note
+Whoa! Did you just crack the outbreak code here!? There definitely looks to be something going on related to the **date that passengers boarded the ship**, as well as potentially their **cruise-member-status**.
 
-Whoa! Did you just crack the outbreak code here!? There definitely looks to be something going on related to the **date that passengers boarded the ship**, as well as potentially their **cruise-member-status**. 
-
-Excellent epi-investigative skills! 
-
+Excellent epi-investigative skills!
 :::
 
 ## Summary and quiz
 
-
-
 ### Summary
 
-Wow! You really covered a lot in this module - give yourself a well-earned pat on the back! 
+Wow! You really covered a lot in this module - give yourself a well-earned pat on the back!
 
 You managed to do all of the following, using only tidyverse functions:
 
@@ -827,7 +813,7 @@ You managed to do all of the following, using only tidyverse functions:
 2.  Joining multiple datasets using table-joins
 3.  Manipulating the shapes of datasets using pivot functions
 4.  Separating complex strings and creating new variables
-5.  Summarizing data using summary() 
+5.  Summarizing data using summary()
 6.  Creating a basic epidemiological curve
 7.  Applying the across() function to summarize with multiple variables at once
 
@@ -884,19 +870,17 @@ Let's do a quick review of the **Tidyverse functions** we used in this module:
 }
 </style>
 ```
-
 <div class="quiz">
 
 <!-- Q1 -->
 
-<p><strong>1. You are given five daily <code>abdo_</code> datasets with identical columns. Which function is most appropriate for combining them into a single dataset by stacking rows?</strong></p>
+<p><strong>1. You are given five daily <code>abdo\_</code> datasets with identical columns. Which function is most appropriate for combining them into a single dataset by stacking rows?</strong></p>
 
-<label class="choice"><input type="radio" name="q1" value="A">left_join(), because it preserves all rows</label>
-<label class="choice"><input type="radio" name="q1" value="B">bind_rows(), because the datasets have the same structure</label>
-<label class="choice"><input type="radio" name="q1" value="C">pivot_longer(), because it reshapes multiple datasets</label>
-<button onclick="check('q1','B')">Submit</button>
+<label class="choice"><input type="radio" name="q1" value="A">left_join(), because it preserves all rows</label> <label class="choice"><input type="radio" name="q1" value="B">bind_rows(), because the datasets have the same structure</label> <label class="choice"><input type="radio" name="q1" value="C">pivot_longer(), because it reshapes multiple datasets</label> <button onclick="check('q1','B')">Submit</button>
 
-<p id="q1-feedback" class="feedback"></p>
+<p id="q1-feedback" class="feedback">
+
+</p>
 
 <hr>
 
@@ -904,12 +888,11 @@ Let's do a quick review of the **Tidyverse functions** we used in this module:
 
 <p><strong>2. In <code>bind_rows(..., .id = "id")</code>, what does the <code>.id</code> argument capture?</strong></p>
 
-<label class="choice"><input type="radio" name="q2" value="A">A unique row number for each observation</label>
-<label class="choice"><input type="radio" name="q2" value="B">The source dataset each row came from</label>
-<label class="choice"><input type="radio" name="q2" value="C">The primary key used for later joins</label>
-<button onclick="check('q2','B')">Submit</button>
+<label class="choice"><input type="radio" name="q2" value="A">A unique row number for each observation</label> <label class="choice"><input type="radio" name="q2" value="B">The source dataset each row came from</label> <label class="choice"><input type="radio" name="q2" value="C">The primary key used for later joins</label> <button onclick="check('q2','B')">Submit</button>
 
-<p id="q2-feedback" class="feedback"></p>
+<p id="q2-feedback" class="feedback">
+
+</p>
 
 <hr>
 
@@ -917,12 +900,11 @@ Let's do a quick review of the **Tidyverse functions** we used in this module:
 
 <p><strong>3. Why was <code>skip = 4</code> used when importing the abdo datasets with <code>read_tsv()</code>?</strong></p>
 
-<label class="choice"><input type="radio" name="q3" value="A">To remove the first four rows containing metadata rather than data</label>
-<label class="choice"><input type="radio" name="q3" value="B">To skip missing values at the top of the file</label>
-<label class="choice"><input type="radio" name="q3" value="C">To improve import speed for large files</label>
-<button onclick="check('q3','A')">Submit</button>
+<label class="choice"><input type="radio" name="q3" value="A">To remove the first four rows containing metadata rather than data</label> <label class="choice"><input type="radio" name="q3" value="B">To skip missing values at the top of the file</label> <label class="choice"><input type="radio" name="q3" value="C">To improve import speed for large files</label> <button onclick="check('q3','A')">Submit</button>
 
-<p id="q3-feedback" class="feedback"></p>
+<p id="q3-feedback" class="feedback">
+
+</p>
 
 <hr>
 
@@ -930,12 +912,11 @@ Let's do a quick review of the **Tidyverse functions** we used in this module:
 
 <p><strong>4. Why was <code>case_when()</code> used instead of <code>if_else()</code> when creating new variables?</strong></p>
 
-<label class="choice"><input type="radio" name="q4" value="A"><code>case_when()</code> allows multiple conditional rules to be applied in order</label>
-<label class="choice"><input type="radio" name="q4" value="B"><code>case_when()</code> is faster for numeric variables</label>
-<label class="choice"><input type="radio" name="q4" value="C"><code>if_else()</code> cannot be used inside <code>mutate()</code></label>
-<button onclick="check('q4','A')">Submit</button>
+<label class="choice"><input type="radio" name="q4" value="A"><code>case_when()</code> allows multiple conditional rules to be applied in order</label> <label class="choice"><input type="radio" name="q4" value="B"><code>case_when()</code> is faster for numeric variables</label> <label class="choice"><input type="radio" name="q4" value="C"><code>if_else()</code> cannot be used inside <code>mutate()</code></label> <button onclick="check('q4','A')">Submit</button>
 
-<p id="q4-feedback" class="feedback"></p>
+<p id="q4-feedback" class="feedback">
+
+</p>
 
 <hr>
 
@@ -943,12 +924,11 @@ Let's do a quick review of the **Tidyverse functions** we used in this module:
 
 <p><strong>5. Why is it good practice to remove the temporary <code>id</code> variable before joining datasets?</strong></p>
 
-<label class="choice"><input type="radio" name="q5" value="A">It reduces file size and improves performance</label>
-<label class="choice"><input type="radio" name="q5" value="B">It prevents accidental use of the variable in joins or analyses</label>
-<label class="choice"><input type="radio" name="q5" value="C">Joins will fail if extra columns are present</label>
-<button onclick="check('q5','B')">Submit</button>
+<label class="choice"><input type="radio" name="q5" value="A">It reduces file size and improves performance</label> <label class="choice"><input type="radio" name="q5" value="B">It prevents accidental use of the variable in joins or analyses</label> <label class="choice"><input type="radio" name="q5" value="C">Joins will fail if extra columns are present</label> <button onclick="check('q5','B')">Submit</button>
 
-<p id="q5-feedback" class="feedback"></p>
+<p id="q5-feedback" class="feedback">
+
+</p>
 
 <hr>
 
@@ -956,12 +936,11 @@ Let's do a quick review of the **Tidyverse functions** we used in this module:
 
 <p><strong>6. Why was <code>left_join()</code> used to join the abdo data to the passenger manifest?</strong></p>
 
-<label class="choice"><input type="radio" name="q6" value="A">To keep all passengers, even if no abdo record exists</label>
-<label class="choice"><input type="radio" name="q6" value="B">To keep only passengers with abdo symptoms</label>
-<label class="choice"><input type="radio" name="q6" value="C">Because left_join() automatically removes duplicates</label>
-<button onclick="check('q6','A')">Submit</button>
+<label class="choice"><input type="radio" name="q6" value="A">To keep all passengers, even if no abdo record exists</label> <label class="choice"><input type="radio" name="q6" value="B">To keep only passengers with abdo symptoms</label> <label class="choice"><input type="radio" name="q6" value="C">Because left_join() automatically removes duplicates</label> <button onclick="check('q6','A')">Submit</button>
 
-<p id="q6-feedback" class="feedback"></p>
+<p id="q6-feedback" class="feedback">
+
+</p>
 
 <hr>
 
@@ -969,12 +948,11 @@ Let's do a quick review of the **Tidyverse functions** we used in this module:
 
 <p><strong>7. What problem does <code>by = c("pass.ID" = "Pass_ID")</code> solve in a join?</strong></p>
 
-<label class="choice"><input type="radio" name="q7" value="A">It converts character IDs to numeric</label>
-<label class="choice"><input type="radio" name="q7" value="B">It allows joining on variables with different names</label>
-<label class="choice"><input type="radio" name="q7" value="C">It ensures only unique IDs are matched</label>
-<button onclick="check('q7','B')">Submit</button>
+<label class="choice"><input type="radio" name="q7" value="A">It converts character IDs to numeric</label> <label class="choice"><input type="radio" name="q7" value="B">It allows joining on variables with different names</label> <label class="choice"><input type="radio" name="q7" value="C">It ensures only unique IDs are matched</label> <button onclick="check('q7','B')">Submit</button>
 
-<p id="q7-feedback" class="feedback"></p>
+<p id="q7-feedback" class="feedback">
+
+</p>
 
 <hr>
 
@@ -982,12 +960,11 @@ Let's do a quick review of the **Tidyverse functions** we used in this module:
 
 <p><strong>8. What does <code>separate_rows(CEDIS, sep = ";")</code> do?</strong></p>
 
-<label class="choice"><input type="radio" name="q8" value="A">Splits a single row into multiple rows based on CEDIS codes</label>
-<label class="choice"><input type="radio" name="q8" value="B">Creates new columns for each CEDIS code</label>
-<label class="choice"><input type="radio" name="q8" value="C">Removes duplicate CEDIS values</label>
-<button onclick="check('q8','A')">Submit</button>
+<label class="choice"><input type="radio" name="q8" value="A">Splits a single row into multiple rows based on CEDIS codes</label> <label class="choice"><input type="radio" name="q8" value="B">Creates new columns for each CEDIS code</label> <label class="choice"><input type="radio" name="q8" value="C">Removes duplicate CEDIS values</label> <button onclick="check('q8','A')">Submit</button>
 
-<p id="q8-feedback" class="feedback"></p>
+<p id="q8-feedback" class="feedback">
+
+</p>
 
 <hr>
 
@@ -995,12 +972,11 @@ Let's do a quick review of the **Tidyverse functions** we used in this module:
 
 <p><strong>9. Why is <code>separate_rows()</code> typically applied before <code>pivot_wider()</code> in this workflow?</strong></p>
 
-<label class="choice"><input type="radio" name="q9" value="A">To ensure one value per row before creating indicator columns</label>
-<label class="choice"><input type="radio" name="q9" value="B">To reduce the number of columns created</label>
-<label class="choice"><input type="radio" name="q9" value="C">To convert character variables into factors</label>
-<button onclick="check('q9','A')">Submit</button>
+<label class="choice"><input type="radio" name="q9" value="A">To ensure one value per row before creating indicator columns</label> <label class="choice"><input type="radio" name="q9" value="B">To reduce the number of columns created</label> <label class="choice"><input type="radio" name="q9" value="C">To convert character variables into factors</label> <button onclick="check('q9','A')">Submit</button>
 
-<p id="q9-feedback" class="feedback"></p>
+<p id="q9-feedback" class="feedback">
+
+</p>
 
 <hr>
 
@@ -1008,12 +984,11 @@ Let's do a quick review of the **Tidyverse functions** we used in this module:
 
 <p><strong>10. What assumption does <code>pivot_wider()</code> make about the data when creating new columns?</strong></p>
 
-<label class="choice"><input type="radio" name="q10" value="A">Each ID–value combination is unique</label>
-<label class="choice"><input type="radio" name="q10" value="B">All values are numeric</label>
-<label class="choice"><input type="radio" name="q10" value="C">There are no missing values</label>
-<button onclick="check('q10','A')">Submit</button>
+<label class="choice"><input type="radio" name="q10" value="A">Each ID–value combination is unique</label> <label class="choice"><input type="radio" name="q10" value="B">All values are numeric</label> <label class="choice"><input type="radio" name="q10" value="C">There are no missing values</label> <button onclick="check('q10','A')">Submit</button>
 
-<p id="q10-feedback" class="feedback"></p>
+<p id="q10-feedback" class="feedback">
+
+</p>
 
 <hr>
 
@@ -1021,12 +996,11 @@ Let's do a quick review of the **Tidyverse functions** we used in this module:
 
 <p><strong>11. If multiple rows exist for the same ID and symptom, which <code>pivot_wider()</code> argument can be used to resolve this?</strong></p>
 
-<label class="choice"><input type="radio" name="q11" value="A"><code>values_fn</code></label>
-<label class="choice"><input type="radio" name="q11" value="B"><code>names_sep</code></label>
-<label class="choice"><input type="radio" name="q11" value="C"><code>id_expand</code></label>
-<button onclick="check('q11','A')">Submit</button>
+<label class="choice"><input type="radio" name="q11" value="A"><code>values_fn</code></label> <label class="choice"><input type="radio" name="q11" value="B"><code>names_sep</code></label> <label class="choice"><input type="radio" name="q11" value="C"><code>id_expand</code></label> <button onclick="check('q11','A')">Submit</button>
 
-<p id="q11-feedback" class="feedback"></p>
+<p id="q11-feedback" class="feedback">
+
+</p>
 
 <hr>
 
@@ -1034,12 +1008,11 @@ Let's do a quick review of the **Tidyverse functions** we used in this module:
 
 <p><strong>12. What is the primary purpose of using <code>values_fill</code> in <code>pivot_wider()</code>?</strong></p>
 
-<label class="choice"><input type="radio" name="q12" value="A">To replace missing combinations with a default value</label>
-<label class="choice"><input type="radio" name="q12" value="B">To remove rows with missing data</label>
-<label class="choice"><input type="radio" name="q12" value="C">To convert logical values to numeric</label>
-<button onclick="check('q12','A')">Submit</button>
+<label class="choice"><input type="radio" name="q12" value="A">To replace missing combinations with a default value</label> <label class="choice"><input type="radio" name="q12" value="B">To remove rows with missing data</label> <label class="choice"><input type="radio" name="q12" value="C">To convert logical values to numeric</label> <button onclick="check('q12','A')">Submit</button>
 
-<p id="q12-feedback" class="feedback"></p>
+<p id="q12-feedback" class="feedback">
+
+</p>
 
 <hr>
 
@@ -1047,12 +1020,11 @@ Let's do a quick review of the **Tidyverse functions** we used in this module:
 
 <p><strong>13. Why is it often useful to create symptom variables as 0/1 indicators?</strong></p>
 
-<label class="choice"><input type="radio" name="q13" value="A">They support straightforward summarization and modeling</label>
-<label class="choice"><input type="radio" name="q13" value="B">They reduce memory usage in all cases</label>
-<label class="choice"><input type="radio" name="q13" value="C">They prevent duplicate rows from occurring</label>
-<button onclick="check('q13','A')">Submit</button>
+<label class="choice"><input type="radio" name="q13" value="A">They support straightforward summarization and modeling</label> <label class="choice"><input type="radio" name="q13" value="B">They reduce memory usage in all cases</label> <label class="choice"><input type="radio" name="q13" value="C">They prevent duplicate rows from occurring</label> <button onclick="check('q13','A')">Submit</button>
 
-<p id="q13-feedback" class="feedback"></p>
+<p id="q13-feedback" class="feedback">
+
+</p>
 
 <hr>
 
@@ -1060,12 +1032,11 @@ Let's do a quick review of the **Tidyverse functions** we used in this module:
 
 <p><strong>14. What advantage does using <code>across()</code> inside <code>summarize()</code> provide?</strong></p>
 
-<label class="choice"><input type="radio" name="q14" value="A">It allows the same summary operation to be applied to many variables at once</label>
-<label class="choice"><input type="radio" name="q14" value="B">It automatically reshapes the dataset</label>
-<label class="choice"><input type="radio" name="q14" value="C">It replaces the need for grouping variables</label>
-<button onclick="check('q14','A')">Submit</button>
+<label class="choice"><input type="radio" name="q14" value="A">It allows the same summary operation to be applied to many variables at once</label> <label class="choice"><input type="radio" name="q14" value="B">It automatically reshapes the dataset</label> <label class="choice"><input type="radio" name="q14" value="C">It replaces the need for grouping variables</label> <button onclick="check('q14','A')">Submit</button>
 
-<p id="q14-feedback" class="feedback"></p>
+<p id="q14-feedback" class="feedback">
+
+</p>
 
 <hr>
 
@@ -1073,16 +1044,13 @@ Let's do a quick review of the **Tidyverse functions** we used in this module:
 
 <p><strong>15. Why is inspecting the data with functions like <code>glimpse()</code> important before and after joins?</strong></p>
 
-<label class="choice"><input type="radio" name="q15" value="A">To verify structure, variable types, and unexpected changes</label>
-<label class="choice"><input type="radio" name="q15" value="B">To permanently modify the dataset</label>
-<label class="choice"><input type="radio" name="q15" value="C">To optimize joins for performance</label>
-<button onclick="check('q15','A')">Submit</button>
+<label class="choice"><input type="radio" name="q15" value="A">To verify structure, variable types, and unexpected changes</label> <label class="choice"><input type="radio" name="q15" value="B">To permanently modify the dataset</label> <label class="choice"><input type="radio" name="q15" value="C">To optimize joins for performance</label> <button onclick="check('q15','A')">Submit</button>
 
-<p id="q15-feedback" class="feedback"></p>
+<p id="q15-feedback" class="feedback">
+
+</p>
 
 </div>
-
-
 
 ```{=html}
 <script>
@@ -1106,5 +1074,3 @@ function check(questionName, correctValue) {
 }
 </script>
 ```
-
-

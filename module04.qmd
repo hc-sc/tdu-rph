@@ -88,7 +88,7 @@ We'll leave some resources here all about cruise-ship outbreaks for you to check
 Let's start by exploring the food exposure data extract that was provided to us.
 
 ```{r}
-foodexp <- read_tsv("participant_data/module4/foodexposures_feb9.txt")
+foodexp <- read_tsv("participant_data/module4/data/foodexposures_feb9.txt")
 ```
 
 ::: callout-note
@@ -145,7 +145,7 @@ We'll want to develop a case definition using the reported symptoms so that we c
 These data should look quite familiar to you after completing Module 3, however, we've removed some variables and provided a simpler version of the dataset for you to work with in Module 4. Read the data into your R instance and review the structure and contents.
 
 ```{r}
-symptoms <- read_tsv("participant_data/module4/symptoms_feb14.txt")
+symptoms <- read_tsv("participant_data/module4/data/symptoms_feb14.txt")
 ```
 
 As you can see, the symptoms dataset has been simplified from the previous module, and already contains a variable for fever. You'll need to use your skills from Module 3 to join this with the food exposures dataset, but first let's make a plan for what we want to do with these.

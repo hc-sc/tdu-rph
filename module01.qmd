@@ -39,30 +39,62 @@ Welcome to the first module of ArrrrrrPH! These modules are designed to provide 
 
 Everything that you need to complete the case study for the course should be included in these modules, but they do assume a beginner-to-intermediate working competency in R. If you have any issues getting the code to work - do not hesitate to reach out to one of your course facilitators for help.
 
-
 ### Learning objectives
 
 By the end of Module 1, you will be able to
 
-1.  Build tidyverse workflows using the **%\>%** operator
-2.  Discuss best-practices for tidy (clean) datasets
-3.  Apply tidyverse functions to a complex dataset
+1.  Build tidyverse workflows using the **%\>%** operator.
+2.  Discuss best-practices for maintaining tidy (clean) datasets.
+3.  Apply tidyverse functions to a complex dataset.
 
 Now that you've dipped your toes into the seas of R coding, the ship's steward has sent you the passenger manifest to work on next. As a savvy epidemiologist, however, you know that you'll need to review and clean the data before setting sail on any analyses.
 
 For this module, you'll be required to identify parts of the manifest that need correction before using it for any coding analyses, and fix these issues using tools available to us as part of the Tidyverse collection of data-manipulation packages.
 
-
 ## Scenario
 
-You have recently charted a new course in your career by accepting a post as a public health investigator aboard the cruise ship **S. S. Rainbow Cake**. This is a dream opportunity that combines your passion for epidemiology with your taste for adventure on the open sea. Details about the company are a bit murky, but your avid curiosity and ambition has won out and you signed the contract to join the crew. 
-You have had barely any time as part of the crew to find your sea-legs before getting thrown into work already! Over the past few days of preparations, several members of the crew complained of feeling ill. Using some basic R skills, you have taken an initial look at some data provided by the ship's nurse to investigate. 
+You have recently charted a new course in your career by accepting a post as a public health investigator aboard the cruise ship **S. S. Rainbow Cake**. This is a dream opportunity that combines your passion for epidemiology with your taste for adventure on the open sea. Details about the company are a bit murky, but your avid curiosity and ambition has won out and you signed the contract to join the crew. You have had barely any time as part of the crew to find your sea-legs before getting thrown into work already! Over the past few days of preparations, several members of the crew complained of feeling ill. Using some basic R skills, you have taken an initial look at some data provided by the ship's nurse to investigate.
 
-Now, however, passenger's have boarded the ship, the winds are in your favor, and the ship has set sail (figuratively, not literally. Obviously cruise ships intended to carry large numbers of passengers don't have sails, right? Not like some kind of old timey pirate ship or anything silly like that). The ship's steward, Patrick, has sent you the passenger manifest to work on next. The crew has had difficulty in the past retrieving information quickly from the manifest - likely due to not having your advanced data management skills and expertise! At least now, with you aboard, they realize the benefits that having a clean and organized dataset offers! 
+Now, however, passenger's have boarded the ship, the winds are in your favor, and the ship has set sail (figuratively, not literally. Obviously cruise ships intended to carry large numbers of passengers don't have sails, right? Not like some kind of old timey pirate ship or anything silly like that). The ship's steward, Patrick, has sent you the passenger manifest to work on next. The crew has had difficulty in the past retrieving information quickly from the manifest - likely due to not having your advanced data management skills and expertise! At least now, with you aboard, they realize the benefits that having a clean and organized dataset offers!
 
-For this module, you'll need to identify and correct the parts of the manifest that need correction before it can be used for any sort of analytical work. 
+For this module, you'll need to identify and correct the parts of the manifest that need correction before it can be used for any sort of analytical work.
 
+## Project setup
 
+If you haven't already, read through the landing page for [the course website](https://hc-sc.github.io/tdu-rph "R for Public Health"), in particular the sections on [setting up your workspace](https://hc-sc.github.io/tdu-rph/#preamble-setting-up-your-workspace "How to set up your workspace for R for Public Health").
+
+You'll want to make sure that you have accomplished the following before continuing on with the course:
+
+1.  Create a workspace somewhere safe on your computer where you have adequate write access (e.g., `C:/tdu-rph/`)
+2.  Downloaded the participant_data folder from the [course Github repository](https://downgit.github.io/#/home?url=https://github.com/hc-sc/tdu-rph/tree/main/participant_data "Download the participant_data folder") to your working directory.
+3.  Create an RStudio Project at this path.
+
+Once you've done all this - you'll notice that the participant_data/ folder contains three folders, each with their own subfolders:
+
+-   **module1/**
+    -   data/
+    -   output/
+    -   scripts/
+-   **module3/**
+    -   data/
+    -   output/
+    -   scripts/
+-   **module4/**
+    -   data/
+    -   output/
+    -   scripts/
+
+Datasets required for each module are kept in each of the `data/` folders. You can decide to use the output and scripts folders however you like, but we recommend keeping your scripts and outputs here to keep things tidy and organized.
+
+Once you're ready and have your workspace organized, create a new RScript by going to the top of your RStudio window and heading to: \> File \> New File ... \> RScript
+
+Once opened, you'll note that this file doesn't have a name, so head to \> File \> Save As...
+
+and save your script with a useful file name (e.g., `Module1.R`) in your working directory folders (`e.g., /module1/scripts/Module1.R`).
+
+::: callout-warning
+**Remember to add some comments to the top of your script to identify the author name, date created, date modified, and purpose of the script!**
+:::
 
 ## Loading our first dataset
 
@@ -79,43 +111,52 @@ p_load(tidyverse)
 
 Great - now we have all of the different functions from Tidyverse available to use! For this course, we'll only be using a very small number of the total available functions, but if you want to check out all that the Tidyverse has to offer, you can review the [included packages here](https://tidyverse.org/packages "Tidyverse Packages").
 
-Let's take a look inside the folders for **Module 1** - there should be three:
+Let's take a look inside the **participant_data** folder for **Module 1** - there should be three (mostly empty) folders for you to work with:
 
 1.  data/
 2.  scripts/
 3.  output/
 
-Inside the data/ folder you'll find the dataset for module 1, which is saved as an excel workbook. We'll want to convert this to an easier format to deal with later, but first let's try loading the file into R and having a quick look at what we're working with here!
+Inside the `data/` folder you'll find the dataset for module 1, which is saved as an excel workbook. We'll want to convert this to an easier format to deal with later, but first let's try loading the file into R and having a quick look at what we're working with here!
 
-In order to read the excel file directly into your computers memory without any format changes, we'll use the **readxl** package, which, lucky for us, works great with tidyverse. However, the package is **not** included in tidyverse, so we'll need to install and load it into memory separately. 
+In order to import the Excel file directly into your computer memory without any format changes, we'll use the **readxl** package, which, lucky for us, was installed when you installed the tidyverse. However, the package is **not** included among the core tidyverse packages, so we'll still need to load the package and its functions into our R workspace separately.
 
-Try installing and loading **readxl**, then using the function *read_excel()* to load the file "ship_manifest.xlsx"
+Try loading **readxl** with `p_load()`, then using the function *read_excel()* to import the file "ship_manifest.xlsx"
 
 ```{r Read Excel File}
-readxl::read_excel("participant_data/module1/ship_manifest.xlsx")
+p_load(readxl)
+read_excel("participant_data/module1/data/ship_manifest.xlsx")
 ```
+
+::: callout-warning
+Note: if you've opted to set up your work flow using the **here** package, then your commands might look something like this instead:
+
+`read_excel("participant_data", "module1", "data", "ship_manifest.xlsx")`
+
+Both approaches are equally valid, but we'll let you decide which one you like better!
+:::
 
 Okay, something appears to not be working as expected here. Let's open the file in Excel and see what's going on...
 
-::: callout-warning
+::: callout-note
+#### Something is funny with the passenger manifest header
 
 ![The header section of the passenger manifest](pics/passengermanifesttop.jpg){#pic_passmanifest fig-alt="An image of a data table showing a large header section"}
-
-::: 
+:::
 
 Yikes!
 
-When will these fictional-nautical-based-tourism-that-definitely-aren't-pirates-companies ever learn to make their data collection forms friendly with machine-readable tools?
+When will these fictional, *nautical-based-tourism-that-definitely-aren't-pirates* companies ever learn to make their data collection forms friendly with machine-readable tools?
 
 Okay but all kidding aside - get used to it! Navigating strange formatting issues is a highly-useful skill that will come in handy many times in your public health career!
 
-## Tidy data and R
+## Becoming versed in 'Tidy' data
 
-When we interpret tables in R, the software is expecting consistent columns, each containing a unique variable, with the top row of all the columns containing a name for each variable. If we look a little more closely, we can actually see that this is the case for the useful data in the form, however, we first need to tell R to remove, or skip, the rows of the form that do not contain useful information.
+When we interpret tables in R, the software expects consistent columns, each containing a unique variable, with the top row of all the columns containing a name for each variable. If we look a little more closely we see that this is actually the case for the useful data in this form, however, we first need to tell R to remove, or skip, the rows of the form that do not contain useful information.
 
-Fortunately, this is pretty easy to do with our **read_excel()** function. Review the function help using the following line of code.
+Fortunately, this is pretty easy to do with the **read_excel()** function. Review the function help using the following line of code.
 
-> help(read_excel)
+> `help(read_excel)`
 
 This should pop up the help file in the bottom right pane in RStudio, where you'll see the following under the function usage:
 
@@ -140,7 +181,7 @@ We'll also save the file to an object called 'manifest' so we can easily modify 
 
 ```{r}
 
-manifest <- readxl::read_excel("participant_data/module1/ship_manifest.xlsx", 
+manifest <- readxl::read_excel("participant_data/module1/data/ship_manifest.xlsx", 
                                skip = 10)
 
 
@@ -155,7 +196,7 @@ glimpse(manifest)
 
 ```
 
-Take a few minutes to further explore the data however you see fit, and jot down any characteristics about the dataset that you think might pose a problem later on. When you're done that, review the code provided below and note how your data-cleaning process compared to ours.
+Take a few minutes to further explore the data however you see fit, (e.g., you could try browsing the dataset with `view()`, sorting the data with `arrange()`, printing the `head()` and `tail()` of the dataset, or just opening it up in Excel!) and jot down any characteristics about the dataset that you think might pose a problem later on. When you're done that, review the code provided below and note how your data-cleaning process compared to ours.
 
 **A few tips to keep in mind when looking for potential data issues:**
 
@@ -165,14 +206,14 @@ Take a few minutes to further explore the data however you see fit, and jot down
 
 3.  Are there missing values within any of your variables? What about sentinel values like those in the following table? How will you plan to treat these?
 
-    | Value or symbol | Description                                                                                                                                                                     |
+    | Value or symbol | Description                                                                                                                                                                        |
     |-------------------------|-----------------------------------------------|
-    | .               | Period. Often used to denote purposely missing values in programs like Stata.                                                                                                   |
-    | \-              | Dash. Can denote missing value, negative, empty cell, or errors.                                                                                                                |
-    | 999             | Three nines (999). This code is often used to represent 'missing' or 'unknown'.                                                                                                 |
-    | N/A             | Not applicable. This is sometimes written purposively, and other times is an automatic replacement for blank cells.                                                             |
-    | *Missing*       | The word 'missing.' This is often input manually by someone who wants signify that the data were not collected, and that an empty cell is not the result of a data entry error. |
-    | (blank)         | Blank cell. Impossible to know whether a cell was left intentionally blank, or whether it is the result of data entry errors.                                                   |
+    | .               | Period. Often used to denote purposely missing values in programs like Stata.                                                                                                      |
+    | \-              | Dash. Can denote missing value, negative, empty cell, or errors.                                                                                                                   |
+    | 999             | Three nines (999). This code is often used to represent 'missing' or 'unknown'.                                                                                                    |
+    | N/A             | Not applicable. This is sometimes written purposively, and other times it is an automatic replacement for blank cells.                                                             |
+    | *Missing*       | The word 'missing.' This is often input manually by someone who wants to signify that the data were not collected, and that an empty cell is not the result of a data entry error. |
+    | (blank)         | Blank cell. It is impossible to know whether a cell was left intentionally blank, or whether it is the result of data entry errors.                                                |
 
     : Table of sentinel values
 
@@ -184,23 +225,23 @@ Take a few minutes to further explore the data however you see fit, and jot down
 
 ------------------------------------------------------------------------
 
-When you're ready - let's move on and see how your findings compared to ours! Below is a list of issues that we found with the passenger manifest table.
+When you're ready - let's move on and see how your findings compare to ours! Below is a list of issues that we found with the passenger manifest table.
 
 <details>
 
 <summary><strong>Click to show the list</strong></summary>
 
--   Once the header information was removed to make the file human-readable, we lost the information about whether variables were capturing **passenger information**, or **emergency contact information**. As a result, we now have duplicated variable names! This will not do! We'll need to remove or change the variables names to ensure that each one is unique and informative. While we're at it - we should make sure that none of our variables contain special characters or spaces in them too.
+-   Fix variable names. Once the header information was removed to make the file human-readable, we lost the information about whether variables were capturing **passenger information**, or **emergency contact information**. As a result, we now have duplicated variable names! This will not do! We'll need to remove or change the variables names to ensure that each one is unique and informative. While we're at it - we should make sure that none of our variables contain special characters or spaces in them too.
 
--   In the **DOB** variable, there appears to be multiple different formats. We'll need to fix this as this is a very important variable if we want to know the passenger's age.
+-   Multiple date of birth (DOB) formats. In the **DOB** variable, there appears to be multiple different formats. We'll need to fix this as this is a very important variable if we want to know the passenger's age.
 
--   Speaking of age.. it looks like someone was trying to use an Excel formula to calculate it - but pretty quickly ran into a snag due to some incorrect formatting in the DOB column, resulting in a lot of "#N/A" inputs. We'll want to replace the current **Age** variable with a corrected version.
+-   Missing ages. Speaking of age.. it looks like someone was trying to use an Excel formula to calculate it - but pretty quickly ran into a snag due to some incorrect formatting in the DOB column, resulting in a lot of "#N/A" inputs. We'll want to replace the current **Age** variable with a corrected version.
 
--   **Province** of residence appears to have quite a number of different formats going on, between fully-spelled-out versions of province names and abbreviated versions. We'll need to capture the unique set of these, and ensure that we take a consistent approach.
+-   Inconsistent formatting for Province. **Province** of residence appears to have quite a number of different formats going on, between fully-spelled-out versions of province names and abbreviated versions. We'll need to capture the unique set of these, and ensure that we take a consistent approach.
 
--   Emergency contact information appears to have undergone some input issues as well. Even though the variables are supposed to include **first** and **last** names, it appears that titles and professional designations somehow made it in, and is causing some issues. Also - there are quite a few missing entries, so we'll need to make some decisions on what to do with these data.
+-   Inconsistent and missing Emergency Contact Information. Emergency contact information appears to have undergone some input issues as well. Even though the variables are supposed to include **first** and **last** names, it appears that titles and professional designations somehow made it in, and is causing some issues. Also - there are quite a few missing entries, so we'll need to make some decisions on what to do with these data.
 
--   **Boarding Date** for some reason has the date written out in a non-date format. We should probably fix this as well.
+-   Poor Boarding Date formatting. **Boarding Date** for some reason has the date written out in a non-date format. We should probably fix this as well.
 
 </details>
 
@@ -224,7 +265,7 @@ print(vars)
 There appears to be two problems happening here:
 
 1.  First...1 and Last...2 versus First...11 and Last...12 - we'll need to fix these so that they make more sense and are easier to work with.
-2.  Several variables include spaces in their naming, so we'll fix that too.
+2.  Several variables include spaces in their naming, so we'll fix that too. Spaces in variable names introduce complexity to our coding, as we need to wrap them in back-ticks like so: \`variable name with spaces\` - this can make our code harder to read, and also introduces more opportunities for us to forget a character and run into errors. It is therefore much easier to just use variable names that do not include spaces or special characters.
 
 ```{r}
 #Create a new variable that includes the corrected names of variables for the passenger manifest:
@@ -268,6 +309,20 @@ glimpse(manifest %>% select(pass.dob))
 
 ```
 
+::: callout-note
+This might be the first time that you're seeing the `%>%` operator, also termed the 'Magrittr pipe' because it is considered a pipe operator, and was first introduced to R via the *Magrittr* package.
+
+This operator allows us to chain together operations when using the tidyverse, and helps to keep our code clean and easy-to-read. Wherever you see the `%>%` you can read it in your head as 'then' do something.
+
+For the code chunk above, we are therefore telling R to: "start with the `manifest` dataset, **then** select the variable `pass.dob`"
+
+The other nice thing about the %\>% operator is that it automatically uses the output from the previous step as the input to the subsequent step, so you don't have to keep filling in the .data argument for all the function calls.
+
+A somewhat older, but still useful explanation of pipes can be found in the [R for Data Science handbook](https://r4ds.had.co.nz/pipes.html "Tidyverse Pipes"). A newer implementation of the pipe operator is also available now as part of base R, and looks like this: `|>`. A shorter comparison of the two operators has been written up by Hadley Wickham on the [Tidyverse Blog site](https://tidyverse.org/blog/2023/04/base-vs-magrittr-pipe/ "Base R versus Magrittr Pipes").
+
+Note: we'll be sticking with the magrittr pipe (`%>%`) for this course, but feel free to try writing some of your code using both and seeing which one you like better!
+:::
+
 Wait a second.. oh no. Excel again..
 
 So it turns out, that by reading these data in directly from Excel, we have retained some Excel-scurvy! Dates in excel are formatted in a very unique way: it simply counts the number of days passed starting with "1" on January 1, 1900.
@@ -298,12 +353,12 @@ If we look through the data, there's actually only 5 entries with issues:
 
 -   Entry 568 - Jul 18, 1968
 
-These are all easy to fix if we stick with indices that we learned about in R-basics.. but we'll need to convert these dates into Excel format first, then revert everything into a more sensical format once everything is numeric.
+These are all easy to fix if we stick with indices that we learned about in R Basics.. but we'll need to convert these dates into Excel format first, then revert everything into a more sensical format once everything is numeric.
 
-We'll want to convert the intended date to a class that we can deal with numerically, then extract the number of days between that date and the beginning of 1900-01-01 to get the date as an excel format. Lubridate makes this pretty easy for us with the ymd() function!
+We'll want to convert the intended date to a class that we can deal with numerically, then extract the number of days between that date and the beginning of 1900-01-01 to get the date as an Excel format. Lubridate makes this pretty easy for us with the ymd() function!
 
 ```{r}
-# library(lubridate)
+# p_load(lubridate)
 
 birthdates[14] <- ymd("1992-08-21") - ymd("1899-12-30")
 birthdates[97] <- ymd("1982-08-30") - ymd("1899-12-30")
@@ -325,7 +380,7 @@ Now that we've created a new variable with the correct Excel formats, let's conv
 birthdates <- as_date(as.numeric(birthdates), origin= "1899-12-30")
 manifest$pass.dob <- birthdates
 
-# Doublecheck to make sure that the DOB column now looks good: 
+# Double check to make sure that the DOB column now looks good: 
 glimpse(manifest)
 ```
 
@@ -566,9 +621,9 @@ manifest %>%
 
 ### Saving your dataset to disk
 
-Have a look through your dataset with the **view()** function, and make sure that everything looks correct. When you're ready to save the final dataset to a file on your computer, use the **write_csv()** function like so:
+Have a look through your dataset with the **view()** function, and make sure that everything looks correct. When you're ready to save the final dataset to a file on your computer, use the **write_tsv()** function like so:
 
-> write_csv(dataset, "name_to_save_as.csv")
+> write_tsv(dataset, "pathway_and_name_to_save_as.tsv")
 
 ## Summary
 

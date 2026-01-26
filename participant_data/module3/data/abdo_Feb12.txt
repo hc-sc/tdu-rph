@@ -1,7 +1,7 @@
 S. S. Rainbow Cake Infirmary				
 Date of data entry	2025-02-12			
 Person recording data	Anita Hookhand, RN			
-Person_ID	Recorded Temperature			CEDIS_Summary
+Patient_ID	Recorded Temperature	Recorded Height (cm)	Recorded Weight (kg)	CEDIS
 P_003	38.8	162.0	54.8	251;257;254;260;404
 P_027	39.0	176.0	79.9	251;254;260
 P_044	38.8	175.5	58.7	251;257;254;260;404

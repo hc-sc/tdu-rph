@@ -72,11 +72,7 @@ We recommend that, if possible, you first create a working directory for the cou
 
 Once you've established a working folder, download the entire participant_data folder from the Github repository and place it inside your working folder (e.g., `C:/tdu-rph/participant_data`). This should simplify working from the case study as much as possible, as we've generally written the examples in a way that pulls from this folder (e.g., `participant_data/module1/examplefile1.txt`).
 
-For keeping ourselves organized, we also generally find it useful to create the following folders in your workspace: 
-1. scripts (to keep all your working scripts separated nicely)
-2. output (where you would send all the files you created using write commands)
-3. data (where you put your data inputs)
-
+For keeping ourselves organized, we also generally find it useful to create the following folders in your workspace: 1. scripts (to keep all your working scripts separated nicely) 2. output (where you would send all the files you created using write commands) 3. data (where you put your data inputs)
 
 Now, open RStudio, and navigate to:
 
@@ -88,7 +84,7 @@ A window will open asking whether you want to start the project in a new or exis
 
 Once you've done this, select *Create Project* and an **R project file** will be created inside your working directory, and R will open a fresh session using this project.
 
-::: callout-info
+::: callout-note
 
 ### RStudio Projects
 
@@ -109,13 +105,7 @@ Default behaviours for both your specific project and global user interface can 
 > Tools \> Project Options...
 
 For more information and a description of various options - see the [RStudio User Guide section on RStudio Projects](https://docs.posit.co/ide/user/ide/guide/code/projects.html#project-options "RStudio Projects").
-
-
 :::
-
-
-
-
 
 Great! Now you should be ready to proceed with the next step of the course.
 
@@ -173,4 +163,9 @@ We've done our best to embed as many explanations and resources as possible dire
 
 The case study itself exists on this website. You can navigate between Modules 1 - 4 using the tabs at the top of the screen. The navigation bar on the right-hand side of the page displays the headers throughout the current page.
 
+::: callout-important 
+
 At the bottom of the navigation bar is a link to download the materials in MS Word format. If you find yourself wanting to take notes directly in the case study material, or would like to retain these materials for future use - then please use this link to download them directly. We will not otherwise be providing handouts of the course case study.
+
+
+:::

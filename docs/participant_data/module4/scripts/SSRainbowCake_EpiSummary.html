@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Your name here">
+<meta name="dcterms.date" content="2026-01-26">
 
-<title>readme – R for Public Health</title>
+<title>S. S. Rainbow Cake Outbreak Report – R for Public Health</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,23 +25,23 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-9859ad12c646e21909f796ca9dd1bd29.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-9859ad12c646e21909f796ca9dd1bd29.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -69,7 +71,7 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<link rel="stylesheet" href="temp_styles.css">
+<link rel="stylesheet" href="../../../temp_styles.css">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -79,7 +81,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../../index.html">
     <span class="navbar-title">R for Public Health</span>
     </a>
   </div>
@@ -90,19 +92,19 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./module01.html"> 
+    <a class="nav-link" href="../../../module01.html"> 
 <span class="menu-text">Module 1</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./module02.html"> 
+    <a class="nav-link" href="../../../module02.html"> 
 <span class="menu-text">Module 2</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./module03.html"> 
+    <a class="nav-link" href="../../../module03.html"> 
 <span class="menu-text">Module 3</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./module04.html"> 
+    <a class="nav-link" href="../../../module04.html"> 
 <span class="menu-text">Module 4</span></a>
   </li>  
 </ul>
@@ -121,36 +123,88 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#welcome-to-r-for-public-health" id="toc-welcome-to-r-for-public-health" class="nav-link active" data-scroll-target="#welcome-to-r-for-public-health">Welcome to R for Public Health</a>
-  <ul>
-  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link" data-scroll-target="#learning-objectives">Learning Objectives</a></li>
-  </ul></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#case-summary" id="toc-case-summary" class="nav-link" data-scroll-target="#case-summary">Case Summary</a></li>
+  <li><a href="#case-symptoms-and-case-definition" id="toc-case-symptoms-and-case-definition" class="nav-link" data-scroll-target="#case-symptoms-and-case-definition">Case Symptoms and case definition</a></li>
+  <li><a href="#epidemiologic-curve" id="toc-epidemiologic-curve" class="nav-link" data-scroll-target="#epidemiologic-curve">Epidemiologic curve</a></li>
+  <li><a href="#food-investigation-summary" id="toc-food-investigation-summary" class="nav-link" data-scroll-target="#food-investigation-summary">Food investigation summary</a></li>
+  <li><a href="#recommendations-and-next-steps" id="toc-recommendations-and-next-steps" class="nav-link" data-scroll-target="#recommendations-and-next-steps">Recommendations and next steps</a></li>
   </ul>
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="readme.docx"><i class="bi bi-file-word"></i>MS Word</a></li></ul></div></nav>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="SSRainbowCake_EpiSummary.docx"><i class="bi bi-file-word"></i>MS Word</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">S. S. Rainbow Cake Outbreak Report</h1>
+</div>
 
 
 
+<div class="quarto-title-meta">
 
-<section id="welcome-to-r-for-public-health" class="level2">
-<h2 class="anchored" data-anchor-id="welcome-to-r-for-public-health">Welcome to R for Public Health</h2>
-<p>R for public health is a new course for 2026, created by the PHAC-ROEMB Training and Development Unit.</p>
-<p>Join us for three days of instruction and practice in R as we follow a case study that takes us aboard the <strong>S. S. Rainbow Cake</strong>, introduces us to her mysterious crew, and tracks an unknown disease aboard the vessel.</p>
-<section id="learning-objectives" class="level3">
-<h3 class="anchored" data-anchor-id="learning-objectives">Learning Objectives</h3>
-<p>By the end of this course, participants will be able to:</p>
-<ol type="1">
-<li>Apply a tidyverse workflow to set up and manage an efficient R project for public health investigations.</li>
-<li>Discuss strengths and caveats of using AI coding assistants in public health investigations.</li>
-<li>Analyze and clean various datasets, preparing them for epidemiological analyses by identifying missing data, assessing quality, and transforming variables.</li>
-<li>Create an epidemiological summary, including publication-quality tables, and foundational data visualizations, using R.</li>
-<li>Produce a reproducible RMarkdown report that integrates code, output, and text to present findings from a public health investigation.</li>
-</ol>
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Your name here </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">January 26, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
 
 
+</header>
+
+
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p><em>D.N.P. Cruise Lines</em> has recently emerged as a premier, budget-friendly cruise line that operates out of the port of Halifax, Nova Scotia. Shortly after departing Halifax on February 10th, passengers started reporting with symptoms of illness.</p>
+<p>An epidemiological investigation has been on-going with the assistance of the ship’s crew. The following report outlines the current status of the investigation and any leads that have been identified to date.</p>
 </section>
+<section id="case-summary" class="level2">
+<h2 class="anchored" data-anchor-id="case-summary">Case Summary</h2>
+<p>Please draft a short summary of cases in this section that includes a breakdown of the following:</p>
+<ol type="1">
+<li>Total number of cases who have reported to the ship infirmary</li>
+<li>Onset date range of cases</li>
+<li>Case breakdown by sex</li>
+<li>Case breakdown by age range</li>
+</ol>
+</section>
+<section id="case-symptoms-and-case-definition" class="level2">
+<h2 class="anchored" data-anchor-id="case-symptoms-and-case-definition">Case Symptoms and case definition</h2>
+<p>Please describe symptoms being experienced by cases, and provide the case definition for both cases reporting <strong>general illness</strong> and those reporting more <strong>serious illness</strong>.</p>
+<p>Provide a short statement about the concerns surrounding the <strong>serious illness</strong> cases and some examples of infectious disease that may cause them.</p>
+<p>Please provide total number of cases who meet each of the two case definitions either in tabular or text format.</p>
+</section>
+<section id="epidemiologic-curve" class="level2">
+<h2 class="anchored" data-anchor-id="epidemiologic-curve">Epidemiologic curve</h2>
+<p>Please embed your epidemiological curve of serious illnesses from Module 3 here, by including the code in the r-chunk below. We have included an extract of the symptoms_manifest dataset in the <code>participant_data/module4</code> folder for you to use.</p>
+<p>(Note: Normally, we would make several edits to the curve to have it look more like a proper epi-curve. For the purposes of this exercise though, replicating the code exactly how we did it in Module 3 is sufficient. If you’d like to challenge your self, however, please feel free to modify the curve how you see fit.)</p>
+<p>Provide a brief interpretation of the epidemiologic curve. In your interpretation, include why the curve appears to indicate a point-source outbreak, and provide additional details from your summaries including the <strong>boarding dates</strong> and <strong>membership status</strong> of passengers experiencing <strong>serious symptom outcomes</strong>.</p>
+</section>
+<section id="food-investigation-summary" class="level2">
+<h2 class="anchored" data-anchor-id="food-investigation-summary">Food investigation summary</h2>
+<p>Provide a brief description about the information you have received regarding the meal services provided on February 9th.</p>
+<p>Include the table of attack rates for general and serious illness outcomes for each menu item.</p>
+<p>Indicate which menu items appear to be the most risky for causing illnesses aboard the ship.</p>
+</section>
+<section id="recommendations-and-next-steps" class="level2">
+<h2 class="anchored" data-anchor-id="recommendations-and-next-steps">Recommendations and next steps</h2>
+<p>Using your best epidemiological skills, provide any recommendations you can to the captain of the ship, and outline any next-steps that you would undertake at this point in the cruise.</p>
+<p>Indicate any additional questions or concerns that you have about the epidemiologic investigation so far, and highlight any missing information.</p>
+
+
 </section>
 
 </main> <!-- /main -->
