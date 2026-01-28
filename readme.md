@@ -9,9 +9,8 @@ Join us for three days of instruction and practice in R as we follow a case stud
 
 By the end of this course, participants will be able to: 
 
-1. Apply a tidyverse workflow to set up and manage an efficient R project for public health investigations. 
-2. Discuss strengths and caveats of using AI coding assistants in public health investigations. 
-3. Analyze and clean various datasets, preparing them for epidemiological analyses by identifying missing data, assessing quality, and transforming variables. 
-4. Create an epidemiological summary, including publication-quality tables, and foundational data visualizations, using R. 
-5. Produce a reproducible RMarkdown report that integrates code, output, and text to present findings from a public health investigation. 
+1. Apply a Tidyverse workflow to set up and manage an efficient R project for public health investigations.
+2. Discuss strengths and caveats of using AI coding assistants in public health investigations.
+3. Analyze and clean various datasets, preparing them for epidemiological analysis by identifying missing data, assessing quality, and transforming variables.
+4. Use coding tools to explore how publication quality tables and reports can be automated using flextable and RMarkdown.
 
