@@ -183,7 +183,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#join-with-main-dataset" id="toc-join-with-main-dataset" class="nav-link" data-scroll-target="#join-with-main-dataset">Join() with main dataset</a></li>
   </ul></li>
   </ul></li>
-  <li><a href="#part-c-youre-an-epidemiologist-remember" id="toc-part-c-youre-an-epidemiologist-remember" class="nav-link" data-scroll-target="#part-c-youre-an-epidemiologist-remember">Part C: You’re an epidemiologist, remember?</a>
+  <li><a href="#part-c-put-your-skills-as-an-epidemiologist-to-use" id="toc-part-c-put-your-skills-as-an-epidemiologist-to-use" class="nav-link" data-scroll-target="#part-c-put-your-skills-as-an-epidemiologist-to-use">Part C: Put your skills as an epidemiologist to use!</a>
   <ul>
   <li><a href="#mean-median-and-range-of-ages" id="toc-mean-median-and-range-of-ages" class="nav-link" data-scroll-target="#mean-median-and-range-of-ages">Mean, median and range of ages</a></li>
   <li><a href="#number-and-proportions-of-female-vs.-male-cases" id="toc-number-and-proportions-of-female-vs.-male-cases" class="nav-link" data-scroll-target="#number-and-proportions-of-female-vs.-male-cases">Number and proportions of female vs.&nbsp;male cases</a></li>
@@ -337,7 +337,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="data-collation-plan" class="level3">
 <h3 class="anchored" data-anchor-id="data-collation-plan">Data collation plan</h3>
-<p>Now that we have an idea about what our datasets will look like, we should sketch out a strategy for how our data sets can be joined together. Starting with our <strong>abdo</strong> data: these are all in the same format, but the data have been separated out for each day. We’ll want to <strong>append</strong> these datasets together, and <strong>create a new variable</strong> to indicate what the date was that the symptoms were reported.</p>
+<p>Now that we have an idea about what our datasets will look like, we should sketch out a strategy for how to join them. Starting with our <strong>abdo</strong> data: these are all in the same format, but the data have been separated out for each day. We’ll want to <strong>append</strong> these datasets together, and <strong>create a new variable</strong> to indicate the date that symptoms were reported.</p>
 <p>For our append operation, we’ll be using the following function:</p>
 <blockquote class="blockquote">
 <p><code>bind_rows(dataset1, dataset2, etc..., .id = "id")</code></p>
@@ -350,7 +350,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <figcaption>Using bind_row() to append the abdo datasets into one.</figcaption>
 </figure>
 </div>
-<p>Once we have a working <strong>abdo dataset</strong> in place, we can turn our attention to the <strong>passenger manifest file</strong>. This manifest has already been cleaned by the ship’s staff, and contains the unique passenger ID variable that we can use as a key variable. The dataset is, however, still saved as an Excel workbook, and contains the messy header and extraneous variables - so you’ll need to revisit how we imported this properly in Module 1 if you’ve forgotten, and then select the variables to keep from the table above. When that’s done, we’ll join the two tables together with the key variable.</p>
+<p>Once we have a working <strong>abdo dataset</strong> in place, we can turn our attention to the <strong>passenger manifest file</strong>. This manifest has already been cleaned by the ship’s staff, and contains the unique passenger ID variable that we can use as a key variable. The dataset is, however, still saved as an Excel workbook, and contains the messy header and extraneous variables - so you’ll need to revisit how we imported this properly in Module 1 if you’ve forgotten, and then select the variables to keep from the table above. When that’s done, we’ll join the two tables together with the key variable (i.e., the unique passenger ID).</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="pics/module3_dataflow02.jpg" class="img-fluid figure-img"></p>
@@ -475,7 +475,7 @@ Important
 <li><p>A left join (<strong>left_join()</strong>) keeps all rows from the left (first) data frame, and adds matching columns from the right data frame based on the join key(s).</p></li>
 <li><p>If a row in the left data frame has no matching key in the right, the new columns are filled with NA.</p></li>
 <li><p>Rows in the right data frame that don’t match any left-side keys are dropped and do not appear in the result.</p></li>
-<li><p>Since we’re interested in the cases reporting abdominal symptoms primarily, and we’re looking to add supplementary demographic data, the left join makes the most sense, and keeps the results nice and tidy for us, without any extras.</p></li>
+<li><p>Since we’re primarily interested in the cases reporting abdominal symptoms, and we’re looking to add supplementary demographic data, the left join makes the most sense, and keeps the results nice and tidy for us, without any extras.</p></li>
 </ul>
 <div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -509,6 +509,7 @@ Warning
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>abdo_manifest <span class="ot">&lt;-</span> <span class="fu">left_join</span>(abdo_combined_onset, pass_manifest_trunc, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"pass.ID"</span> <span class="ot">=</span> <span class="st">"Pass_ID"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+<p>Before moving on to the next section, spend a few minutes exploring your new <em>abdo_manifest</em> dataset using functions like <code>glimpse()</code> and <code>view()</code>.</p>
 </section>
 </section>
 </section>
@@ -516,7 +517,7 @@ Warning
 <h2 class="anchored" data-anchor-id="part-b-separating-pivoting-and-rejoining-data">Part B: Separating, pivoting, and rejoining data</h2>
 <p>Let’s recap where we’re at so far:</p>
 <ol type="1">
-<li>According to our abdo_manifest dataset, as of Feb 14th, we have 69 passengers aboard the S.S. Rainbow Cake who have fallen ill, reporting symptoms of abdominal pain or worse.</li>
+<li>According to our <strong>abdo_manifest</strong> dataset, as of Feb 14th, we have 69 passengers aboard the S.S. Rainbow Cake who have fallen ill, reporting symptoms of abdominal pain or worse.</li>
 <li>We have established onset dates for each of the ill passengers by appending the individual abdo datasets together and establishing the date that they reported to the ship infirmary as a variable in our dataset.</li>
 <li>By joining the combined abdo dataset with a version of the passenger manifest that has a unique identifier assigned to each passenger, we were able to securely import demographic variables and attach them to the appropriate passengers.</li>
 </ol>
@@ -533,7 +534,7 @@ Warning
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The Canadian Emergency Department Information System (CEDIS) is a Canadian initiative to provide a systematic approach to data collection across hospital emergency departments nation-wide. The system was established through a collaborative, consensus based approach, and included input from hospital nurses, administrators, and researchers all across Canada. The goals of the approach were to create a system of systematically capturing and categorizing chief complaints in emergency departments and triage settings to facilitate clinical care, research and emergency department management with a specific, Canadian healthcare-system context.</p>
+<p>The Canadian Emergency Department Information System (CEDIS) is a Canadian initiative to provide a systematic approach to data collection across hospital emergency departments nation-wide. The system was established through a collaborative, consensus based approach, and included input from hospital nurses, administrators, and researchers all across Canada. The goals of the approach were to create a system to systematically capture and categorize chief complaints in emergency departments and triage settings to facilitate clinical care, research and emergency department management with a specific, Canadian healthcare-system context.</p>
 <p>Cool facts about CEDIS:</p>
 <ul>
 <li><p>CEDIS presenting complaint data are commonly used for syndromic surveillance systems (e.g., in Yukon, Yukon’s ED-SyS uses CEDIS codes from real-time ED data).</p></li>
@@ -578,10 +579,10 @@ Warning
 </section>
 <section id="code-along-for-part-b" class="level3">
 <h3 class="anchored" data-anchor-id="code-along-for-part-b">Code-along for Part B</h3>
-<p>First, we’ll start by saving a temporary subset of our abdo-manifest object that contains only the pass.ID and CEDIS variables. This will help to ensure that we don’t mistakenly manipulate other variables in our dataset accidentally.</p>
+<p>First, we’ll start by saving a temporary subset of our abdo-manifest object that contains only the pass.ID and CEDIS variables. This will help to ensure that we don’t accidentally manipulate other variables in our dataset.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># create a temporary subset of our abdo-manifest object</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>CEDIS_subset <span class="ot">&lt;-</span> abdo_manifest <span class="sc">%&gt;%</span></span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(pass.ID, CEDIS)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -607,16 +608,18 @@ Warning
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Note: the Tidyverse team has marked <strong>separate_rows()</strong> as end of lifecycle / deprecated. This doesn’t mean that the function won’t continue to work, but it does mean that the team will not continue to update it. The function that is intended to replace it is called <strong>separate_longer_delim()</strong>, however, it is still in experimental status, so we won’t official move to that one until a later time.</p>
+<p>Note: The Tidyverse team has marked <strong>separate_rows()</strong> as end of lifecycle / deprecated. This doesn’t mean that the function won’t continue to work, but it does mean that the team will not continue to update it. The function that is intended to replace it is called <strong>separate_longer_delim()</strong>, however, it is still in experimental status, so we won’t officially move to that one until a later time.</p>
 </div>
 </div>
 <p>Let’s hit the CEDIS variable with our separate_rows() function and see what we get!</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>CEDIS_subset_long <span class="ot">&lt;-</span> </span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>CEDIS_subset <span class="sc">%&gt;%</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate_rows</span>(CEDIS, <span class="at">sep =</span> <span class="st">';'</span>, <span class="at">convert =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co">#view(CEDIS_subset_long)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># separate CEDIS variable using the separate_rows() function</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>CEDIS_subset_long <span class="ot">&lt;-</span> </span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>CEDIS_subset <span class="sc">%&gt;%</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate_rows</span>(CEDIS, <span class="at">sep =</span> <span class="st">';'</span>, <span class="at">convert =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co">#view(CEDIS_subset_long)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="apply-pivot_wider" class="level4">
@@ -645,13 +648,15 @@ Warning
 </div>
 </div>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>CEDIS_subset_wide <span class="ot">&lt;-</span> </span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>CEDIS_subset_long <span class="sc">%&gt;%</span> </span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">value =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">id_cols =</span> pass.ID,</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">names_from =</span> CEDIS,</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">values_from =</span> value,</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>              <span class="at">values_fill =</span> <span class="dv">0</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply the pivot_wider() function</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>CEDIS_subset_wide <span class="ot">&lt;-</span> </span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>CEDIS_subset_long <span class="sc">%&gt;%</span> </span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">value =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">id_cols =</span> pass.ID,</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>              <span class="at">names_from =</span> CEDIS,</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>              <span class="at">values_from =</span> value,</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>              <span class="at">values_fill =</span> <span class="dv">0</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="rename-variables" class="level4">
@@ -663,7 +668,7 @@ Warning
 <strong>Click to see the codes</strong>
 </summary>
 <p>Just kidding! You didn’t think we’d do all the work for you, did you?</p>
-<p>Take a break from your RStudio console and give the PDF a quick read, you should be easily able to find the symptoms that correspond to the following CEDIS codes:</p>
+<p>Give your eyes a break from your RStudio console and have a quick read of the PDF. you should be easily able to find the symptoms that correspond to the following CEDIS codes:</p>
 <ul>
 <li>251</li>
 <li>254</li>
@@ -673,7 +678,7 @@ Warning
 </ul>
 </details>
 <div class="callout-info">
-<p>Need a short brain-break? Every thought about the differences between R and Python? <a href="https://youtu.be/mVzDPxKagxk?si=rJ9qpjkkFkiqDk8d" title="Hadley Wickham on R versus Python">Here’s a short video where Posit’s Chief Data Scientist, Dr.&nbsp;Hadley Wickham, talks about R versus Python.</a></p>
+<p>Need a brain-break? Have you ever thought about the differences between R and Python? <a href="https://youtu.be/mVzDPxKagxk?si=rJ9qpjkkFkiqDk8d" title="Hadley Wickham on R versus Python">Here’s a short video where Posit’s Chief Data Scientist, Dr.&nbsp;Hadley Wickham, talks about R versus Python.</a></p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="pics/module03_RvsPython.jpg" class="img-fluid figure-img" alt="An image featuring the branding logos of R and Python coding software"></p>
@@ -681,39 +686,43 @@ Warning
 </figure>
 </div>
 </div>
-<p>Ok - on to the coding step. If you <strong><em>still</em></strong> haven’t looked up the codes at this point - then follow along and see how we decided to rename the variables.</p>
-<p>The rename() function allows you to specify exactly which variables you want to rename, and uses a “new.name” = “old.name” syntax. When you’re working with more complex datasets, or in the middle of a series of operations, its generally much safer to rename variables this way.</p>
+<p>Okay, on to the coding step. If you <strong><em>still</em></strong> haven’t looked up the codes at this point - then follow along and see how we decided to rename the variables.</p>
+<p>The <strong>rename()</strong> function allows you to specify exactly which variables you want to rename, and uses a “new.name” = “old.name” syntax. When you’re working with more complex datasets, or in the middle of a series of operations, its generally much safer to rename variables this way.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>symptoms_table <span class="ot">&lt;-</span> </span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>CEDIS_subset_wide <span class="sc">%&gt;%</span> </span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="st">"abdo.pain"</span> <span class="ot">=</span> <span class="st">"251"</span>,</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>         <span class="st">"vomiting"</span> <span class="ot">=</span> <span class="st">"257"</span>,</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>         <span class="st">"diarrhea"</span> <span class="ot">=</span> <span class="st">"254"</span>,</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>         <span class="st">"bloody.stool"</span> <span class="ot">=</span> <span class="st">"260"</span>,</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>         <span class="st">"headache"</span> <span class="ot">=</span> <span class="st">"404"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">#rename the CEDIS variables</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>symptoms_table <span class="ot">&lt;-</span> </span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>CEDIS_subset_wide <span class="sc">%&gt;%</span> </span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="st">"abdo.pain"</span> <span class="ot">=</span> <span class="st">"251"</span>,</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>         <span class="st">"vomiting"</span> <span class="ot">=</span> <span class="st">"257"</span>,</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>         <span class="st">"diarrhea"</span> <span class="ot">=</span> <span class="st">"254"</span>,</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>         <span class="st">"bloody.stool"</span> <span class="ot">=</span> <span class="st">"260"</span>,</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>         <span class="st">"headache"</span> <span class="ot">=</span> <span class="st">"404"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="join-with-main-dataset" class="level4">
 <h4 class="anchored" data-anchor-id="join-with-main-dataset">Join() with main dataset</h4>
-<p>Finally it’s time to join our symptoms data back with our main manifest!</p>
-<p>Let’s go ahead and re-unite these data, using the pass.ID as the key variable! Note that this time, since the key variable is named the same in both datasets, we don’t actually need to specify the variable in our list of function arguments.</p>
+<p>Finally, it’s time to join our symptoms data back with our main manifest!</p>
+<p>Let’s go ahead and re-unite these data, using <strong>pass.ID</strong> as the key variable! Note that this time, since the key variable is named the same in both datasets, we don’t actually need to specify the variable in our list of function arguments.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>symptoms_manifest <span class="ot">&lt;-</span> <span class="fu">full_join</span>(symptoms_table, abdo_manifest)</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove all but the specified objects from memory</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co">#rm(rm(list = setdiff(ls(), c("symptoms_manifest"))))</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Join the symptom and main manifest datasets</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>symptoms_manifest <span class="ot">&lt;-</span> <span class="fu">full_join</span>(symptoms_table, abdo_manifest)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Review your symptoms manifest object to ensure that everything looks in order. Once that’s finished, clean up your workspace, removing any of your temporary/intermediate data objects.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Here's a neat way to remove every BUT the specified datasets from memory: </span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co">#rm(list = setdiff(ls(), c("symptoms_manifest")))</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 </section>
 </section>
 </section>
-<section id="part-c-youre-an-epidemiologist-remember" class="level2">
-<h2 class="anchored" data-anchor-id="part-c-youre-an-epidemiologist-remember">Part C: You’re an epidemiologist, remember?</h2>
-<p>Alright - up until now we’ve focused primarily on cleaning and manipulating data, which are <em>essential</em>&nbsp;skills for an epidemiologist to have. However, you were hired aboard the <strong>S. S. Rainbow Cake</strong> because you’re an epidemiologist and are trained to think about how data are used to solve public health issues, so let’s turn our focus now to exploring what are our data are telling us.</p>
-<p>We need a tool to help turn our observations into meaningful summaries, and the summarize() family of functions will provide just that!</p>
-<p>The <strong>summarize()</strong> function takes your specified data and summary functions (e.g., sum, mean, median, max, min, etc.) as input, and outputs a new data frame with the results stored as variables. The syntax should look fairly familiar at this point.</p>
+<section id="part-c-put-your-skills-as-an-epidemiologist-to-use" class="level2">
+<h2 class="anchored" data-anchor-id="part-c-put-your-skills-as-an-epidemiologist-to-use">Part C: Put your skills as an epidemiologist to use!</h2>
+<p>Alright - up until now we’ve focused primarily on cleaning and manipulating data, which are <em>essential</em>&nbsp;skills for any data-wrangler to have. However, you were hired aboard the <strong>S. S. Rainbow Cake</strong> because you’re an epidemiologist and are trained to think about how data are used to solve public health issues, so let’s now turn our focus to exploring what our data are telling us.</p>
+<p>We need a tool to help turn our observations into meaningful summaries, and the <strong>summarize()</strong> family of functions will provide just that!</p>
+<p>The <strong>summarize()</strong> function takes your specified data and summary functions (e.g., sum, mean, median, max, min, etc.) as input, and outputs a new data frame with the results stored as variables.</p>
 <p>e.g.,</p>
 <blockquote class="blockquote">
 <p><code>data %&gt;% summarize(</code></p>
@@ -754,19 +763,20 @@ Warning
 <h4 class="anchored" data-anchor-id="mean-median-and-range-of-ages">Mean, median and range of ages</h4>
 <p>Let’s first look at a description of cases in the data:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>symptoms_manifest <span class="sc">%&gt;%</span> </span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">.by =</span> Gender,</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_age   =</span> <span class="fu">mean</span>(Age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">median_age =</span> <span class="fu">median</span>(Age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">max_age    =</span> <span class="fu">min</span>(Age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">min_age    =</span> <span class="fu">max</span>(Age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 2 × 5</span></span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="do">##   Gender mean_age median_age max_age min_age</span></span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="do">##   &lt;chr&gt;     &lt;dbl&gt;      &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;</span></span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="do">## 1 Female     48.6       44.5      12      86</span></span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="do">## 2 Male       53.3       50        15      85</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co">#Summarize cases by gender (M/F) and age (mean, median, and range) </span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>symptoms_manifest <span class="sc">%&gt;%</span> </span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">.by =</span> Gender,</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_age   =</span> <span class="fu">mean</span>(Age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">median_age =</span> <span class="fu">median</span>(Age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">max_age    =</span> <span class="fu">min</span>(Age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">min_age    =</span> <span class="fu">max</span>(Age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 2 × 5</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="do">##   Gender mean_age median_age max_age min_age</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="do">##   &lt;chr&gt;     &lt;dbl&gt;      &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="do">## 1 Female     48.6       44.5      12      86</span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="do">## 2 Male       53.3       50        15      85</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>It doesn’t appear that there are any differences in the age distribution of female and male cases based on what we see here.</p>
 </section>
@@ -774,86 +784,91 @@ Warning
 <h4 class="anchored" data-anchor-id="number-and-proportions-of-female-vs.-male-cases">Number and proportions of female vs.&nbsp;male cases</h4>
 <p>Next, let’s tally the total number of female and male cases, and calculate their proportions as well.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>symptoms_manifest <span class="sc">%&gt;%</span> </span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Gender) <span class="sc">%&gt;%</span></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">Total =</span> <span class="fu">n</span>(),</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">Proportion =</span> <span class="fu">n</span>()<span class="sc">/</span><span class="fu">sum</span>(Total))</span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 2 × 3</span></span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="do">##   Gender Total Proportion</span></span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="do">##   &lt;chr&gt;  &lt;int&gt;      &lt;dbl&gt;</span></span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="do">## 1 Female    40          1</span></span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="do">## 2 Male      29          1</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co"># summarize proportions of male and females</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>symptoms_manifest <span class="sc">%&gt;%</span> </span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Gender) <span class="sc">%&gt;%</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">Total =</span> <span class="fu">n</span>(),</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">Proportion =</span> <span class="fu">n</span>()<span class="sc">/</span><span class="fu">sum</span>(Total))</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 2 × 3</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="do">##   Gender Total Proportion</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="do">##   &lt;chr&gt;  &lt;int&gt;      &lt;dbl&gt;</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="do">## 1 Female    40          1</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="do">## 2 Male      29          1</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Whoops! What do you notice above about our results? The proportion is returning the total number of female cases out of the total number of female cases, and vice-versa for males. This is because our .groups remain in effect in the summarize() function until we say otherwise. To get the correct proportions, we’ll need to adjust our code.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>symptoms_manifest <span class="sc">%&gt;%</span> </span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Gender) <span class="sc">%&gt;%</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">Total =</span> <span class="fu">n</span>(), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Proportion =</span> Total <span class="sc">/</span> <span class="fu">sum</span>(Total))</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 2 × 3</span></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="do">##   Gender Total Proportion</span></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="do">##   &lt;chr&gt;  &lt;int&gt;      &lt;dbl&gt;</span></span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="do">## 1 Female    40      0.580</span></span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="do">## 2 Male      29      0.420</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># summarize proportions of male and females, after dropping the groups</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>symptoms_manifest <span class="sc">%&gt;%</span> </span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Gender) <span class="sc">%&gt;%</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">Total =</span> <span class="fu">n</span>(), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Proportion =</span> Total <span class="sc">/</span> <span class="fu">sum</span>(Total))</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 2 × 3</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="do">##   Gender Total Proportion</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="do">##   &lt;chr&gt;  &lt;int&gt;      &lt;dbl&gt;</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="do">## 1 Female    40      0.580</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="do">## 2 Male      29      0.420</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>In the above summarize() call, we’ve told R that groups should be dropped in the result, and then used the <code>Total</code> variable to mutate a new variable that returns the proportion of the sum of the total for each female and male cases. This time, it works as expected.</p>
 </section>
 <section id="cases-reporting-with-fever" class="level4">
 <h4 class="anchored" data-anchor-id="cases-reporting-with-fever">Cases reporting with Fever</h4>
-<p>For this one, we’ll use mutate a new variable called “Fever” based on the temperature values, and then calculate the summaries based on that. Let’s go with anything over 38 degrees constituting a fever.</p>
+<p>For this one, we’ll use mutate to create a new variable called “Fever” based on the temperature values, and then summarize the data. Let’s define “fever” as any case temperature over 38 degrees Celsius.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>symptoms_manifest <span class="ot">&lt;-</span> </span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  symptoms_manifest <span class="sc">%&gt;%</span> </span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Fever =</span> <span class="fu">case_when</span>(</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    pass.temp <span class="sc">&gt;</span> <span class="fl">38.0</span> <span class="sc">~</span> <span class="dv">1</span>, </span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    pass.temp <span class="sc">&lt;=</span> <span class="fl">38.0</span> <span class="sc">~</span> <span class="dv">0</span>, </span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    <span class="cn">TRUE</span> <span class="sc">~</span> <span class="cn">NA</span></span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  ))</span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>symptoms_manifest <span class="sc">%&gt;%</span> </span>
-<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(Fever)</span>
-<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 2 × 2</span></span>
-<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a><span class="do">##   Fever     n</span></span>
-<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a><span class="do">##   &lt;dbl&gt; &lt;int&gt;</span></span>
-<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a><span class="do">## 1     0    31</span></span>
-<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a><span class="do">## 2     1    38</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co">#create a new fever variable for any temperature over 38 degrees</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>symptoms_manifest <span class="ot">&lt;-</span> </span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  symptoms_manifest <span class="sc">%&gt;%</span> </span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Fever =</span> <span class="fu">case_when</span>(</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    pass.temp <span class="sc">&gt;</span> <span class="fl">38.0</span> <span class="sc">~</span> <span class="dv">1</span>, </span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>    pass.temp <span class="sc">&lt;=</span> <span class="fl">38.0</span> <span class="sc">~</span> <span class="dv">0</span>, </span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>    <span class="cn">TRUE</span> <span class="sc">~</span> <span class="cn">NA</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>  ))</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Summarize the numbers of cases presenting with fever</span></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>symptoms_manifest <span class="sc">%&gt;%</span> </span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(Fever)</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 2 × 2</span></span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a><span class="do">##   Fever     n</span></span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a><span class="do">##   &lt;dbl&gt; &lt;int&gt;</span></span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a><span class="do">## 1     0    31</span></span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a><span class="do">## 2     1    38</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Hmm. Interesting - a little over half of our cases with abdominal pain were running a fever. Lets create some age groupings so that we can look a little more closely at age breakdowns.</p>
+<p>Hmm… interesting! A little over half of our cases with abdominal pain were running a fever. Lets create some age groupings so that we can look a little more closely at age breakdowns.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>symptoms_manifest <span class="ot">&lt;-</span> </span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>symptoms_manifest <span class="sc">%&gt;%</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">age.group =</span> <span class="fu">case_when</span>(</span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>      Age <span class="sc">&lt;</span> <span class="dv">12</span> <span class="sc">~</span> <span class="st">"0–11"</span>,</span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>      Age <span class="sc">&lt;</span> <span class="dv">18</span> <span class="sc">~</span> <span class="st">"12–17"</span>,</span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>      Age <span class="sc">&lt;</span> <span class="dv">30</span> <span class="sc">~</span> <span class="st">"18–29"</span>,</span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>      Age <span class="sc">&lt;</span> <span class="dv">50</span> <span class="sc">~</span> <span class="st">"30–49"</span>,</span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>      Age <span class="sc">&lt;</span> <span class="dv">65</span> <span class="sc">~</span> <span class="st">"50–64"</span>,</span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>      Age <span class="sc">&gt;=</span> <span class="dv">65</span> <span class="sc">~</span> <span class="st">"65+"</span>,</span>
-<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="cn">NA</span></span>
-<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>symptoms_manifest <span class="sc">%&gt;%</span></span>
-<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(age.group) <span class="sc">%&gt;%</span></span>
-<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(Fever)</span>
-<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 8 × 3</span></span>
-<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a><span class="do">## # Groups:   age.group [5]</span></span>
-<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a><span class="do">##   age.group Fever     n</span></span>
-<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a><span class="do">##   &lt;chr&gt;     &lt;dbl&gt; &lt;int&gt;</span></span>
-<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a><span class="do">## 1 12–17         0     2</span></span>
-<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a><span class="do">## 2 18–29         1     4</span></span>
-<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a><span class="do">## 3 30–49         0    12</span></span>
-<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a><span class="do">## 4 30–49         1    18</span></span>
-<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a><span class="do">## 5 50–64         0     9</span></span>
-<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a><span class="do">## 6 50–64         1     7</span></span>
-<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a><span class="do">## 7 65+           0     8</span></span>
-<span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a><span class="do">## 8 65+           1     9</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Create age groups</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>symptoms_manifest <span class="ot">&lt;-</span> </span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>symptoms_manifest <span class="sc">%&gt;%</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">age.group =</span> <span class="fu">case_when</span>(</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>      Age <span class="sc">&lt;</span> <span class="dv">12</span> <span class="sc">~</span> <span class="st">"0–11"</span>,</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>      Age <span class="sc">&lt;</span> <span class="dv">18</span> <span class="sc">~</span> <span class="st">"12–17"</span>,</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>      Age <span class="sc">&lt;</span> <span class="dv">30</span> <span class="sc">~</span> <span class="st">"18–29"</span>,</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>      Age <span class="sc">&lt;</span> <span class="dv">50</span> <span class="sc">~</span> <span class="st">"30–49"</span>,</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>      Age <span class="sc">&lt;</span> <span class="dv">65</span> <span class="sc">~</span> <span class="st">"50–64"</span>,</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>      Age <span class="sc">&gt;=</span> <span class="dv">65</span> <span class="sc">~</span> <span class="st">"65+"</span>,</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="cn">NA</span></span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Summarize age group by fever</span></span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>symptoms_manifest <span class="sc">%&gt;%</span></span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(age.group) <span class="sc">%&gt;%</span></span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(Fever)</span>
+<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 8 × 3</span></span>
+<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a><span class="do">## # Groups:   age.group [5]</span></span>
+<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a><span class="do">##   age.group Fever     n</span></span>
+<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a><span class="do">##   &lt;chr&gt;     &lt;dbl&gt; &lt;int&gt;</span></span>
+<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a><span class="do">## 1 12–17         0     2</span></span>
+<span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a><span class="do">## 2 18–29         1     4</span></span>
+<span id="cb19-28"><a href="#cb19-28" aria-hidden="true" tabindex="-1"></a><span class="do">## 3 30–49         0    12</span></span>
+<span id="cb19-29"><a href="#cb19-29" aria-hidden="true" tabindex="-1"></a><span class="do">## 4 30–49         1    18</span></span>
+<span id="cb19-30"><a href="#cb19-30" aria-hidden="true" tabindex="-1"></a><span class="do">## 5 50–64         0     9</span></span>
+<span id="cb19-31"><a href="#cb19-31" aria-hidden="true" tabindex="-1"></a><span class="do">## 6 50–64         1     7</span></span>
+<span id="cb19-32"><a href="#cb19-32" aria-hidden="true" tabindex="-1"></a><span class="do">## 7 65+           0     8</span></span>
+<span id="cb19-33"><a href="#cb19-33" aria-hidden="true" tabindex="-1"></a><span class="do">## 8 65+           1     9</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -876,38 +891,39 @@ Note
 <li>Bloody Stool</li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>symptoms_manifest <span class="sc">%&gt;%</span></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Gender) <span class="sc">%&gt;%</span></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">Vomit =</span> <span class="fu">sum</span>(vomiting),</span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">Diarrhea =</span> <span class="fu">sum</span>(diarrhea),</span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">Headache =</span> <span class="fu">sum</span>(headache), </span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">Bloody.Stool =</span> <span class="fu">sum</span>(bloody.stool)</span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 2 × 5</span></span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a><span class="do">##   Gender Vomit Diarrhea Headache Bloody.Stool</span></span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a><span class="do">##   &lt;chr&gt;  &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;        &lt;dbl&gt;</span></span>
-<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a><span class="do">## 1 Female    32       39       31           19</span></span>
-<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a><span class="do">## 2 Male      24       27       23           12</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># summarize symptoms by gender</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>symptoms_manifest <span class="sc">%&gt;%</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Gender) <span class="sc">%&gt;%</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">Vomit =</span> <span class="fu">sum</span>(vomiting),</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">Diarrhea =</span> <span class="fu">sum</span>(diarrhea),</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">Headache =</span> <span class="fu">sum</span>(headache), </span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">Bloody.Stool =</span> <span class="fu">sum</span>(bloody.stool)</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 2 × 5</span></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="do">##   Gender Vomit Diarrhea Headache Bloody.Stool</span></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="do">##   &lt;chr&gt;  &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;        &lt;dbl&gt;</span></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a><span class="do">## 1 Female    32       39       31           19</span></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="do">## 2 Male      24       27       23           12</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>symptoms_manifest <span class="sc">%&gt;%</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(age.group) <span class="sc">%&gt;%</span></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">Vomit =</span> <span class="fu">sum</span>(vomiting),</span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">Diarrhea =</span> <span class="fu">sum</span>(diarrhea),</span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">Headache =</span> <span class="fu">sum</span>(headache), </span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">Bloody.Stool =</span> <span class="fu">sum</span>(bloody.stool)</span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 5 × 5</span></span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="do">##   age.group Vomit Diarrhea Headache Bloody.Stool</span></span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="do">##   &lt;chr&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;        &lt;dbl&gt;</span></span>
-<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="do">## 1 12–17         2        2        2            0</span></span>
-<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a><span class="do">## 2 18–29         3        4        3            4</span></span>
-<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="do">## 3 30–49        24       29       23           13</span></span>
-<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a><span class="do">## 4 50–64        15       14       12            5</span></span>
-<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a><span class="do">## 5 65+          12       17       14            9</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># summarize symptoms by age group</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>symptoms_manifest <span class="sc">%&gt;%</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(age.group) <span class="sc">%&gt;%</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">Vomit =</span> <span class="fu">sum</span>(vomiting),</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">Diarrhea =</span> <span class="fu">sum</span>(diarrhea),</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">Headache =</span> <span class="fu">sum</span>(headache), </span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">Bloody.Stool =</span> <span class="fu">sum</span>(bloody.stool)</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 5 × 5</span></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a><span class="do">##   age.group Vomit Diarrhea Headache Bloody.Stool</span></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a><span class="do">##   &lt;chr&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;        &lt;dbl&gt;</span></span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a><span class="do">## 1 12–17         2        2        2            0</span></span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a><span class="do">## 2 18–29         3        4        3            4</span></span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a><span class="do">## 3 30–49        24       29       23           13</span></span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a><span class="do">## 4 50–64        15       14       12            5</span></span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a><span class="do">## 5 65+          12       17       14            9</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Have a look at the results of the symptom breakdown by gender and age. Does anything stand out to you? Why or why not? What age ranges are the majority of your cases in? Is this any different than the general population on the ship?</p>
 </section>
@@ -915,21 +931,22 @@ Note
 <h4 class="anchored" data-anchor-id="symptom-onset-dates">Symptom onset dates</h4>
 <p>We’ll take a look next at symptom onset dates, and see if there’s any discernible pattern that we can identify from the summaries.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>symptoms_manifest <span class="sc">%&gt;%</span></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(onset.date) <span class="sc">%&gt;%</span></span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>() </span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 5 × 2</span></span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="do">## # Groups:   onset.date [5]</span></span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="do">##   onset.date     n</span></span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="do">##   &lt;date&gt;     &lt;int&gt;</span></span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="do">## 1 2025-02-10     4</span></span>
-<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a><span class="do">## 2 2025-02-11    22</span></span>
-<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a><span class="do">## 3 2025-02-12    28</span></span>
-<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a><span class="do">## 4 2025-02-13    13</span></span>
-<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a><span class="do">## 5 2025-02-14     2</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Summarize cases by symptom onset date</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>symptoms_manifest <span class="sc">%&gt;%</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(onset.date) <span class="sc">%&gt;%</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>() </span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 5 × 2</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="do">## # Groups:   onset.date [5]</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="do">##   onset.date     n</span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="do">##   &lt;date&gt;     &lt;int&gt;</span></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="do">## 1 2025-02-10     4</span></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a><span class="do">## 2 2025-02-11    22</span></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a><span class="do">## 3 2025-02-12    28</span></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a><span class="do">## 4 2025-02-13    13</span></span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a><span class="do">## 5 2025-02-14     2</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Are you starting to see a pattern here? These numbers appear to read very much like an outbreak curve typical of a point-source exposure.</p>
+<p>Are you starting to see a pattern here? These numbers appear to show an outbreak curve typical of a point-source exposure.</p>
 <p>Let’s plot these numbers using the ggplot() function so that we can have a quick visualization.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -952,7 +969,7 @@ Note
 </ul>
 </div>
 </div>
-<p>To keep things simple for now, we’ll be using a very simple ggplot to look at the distribution of cases over time. We can easily incorporate this into our summary statement using the pipe operator <code>%&gt;%</code>.</p>
+<p>To keep things simple for now, we’ll be using a very basic ggplot to look at the distribution of cases over time. We can easily incorporate this into our summary statement using the pipe operator <code>%&gt;%</code>.</p>
 <p>For this ggplot, you’ll need to specify the following arguments:</p>
 <ul>
 <li><p><code>aes()</code> - the chart aesthetics (which variables should map to x and y on the chart?)</p></li>
@@ -961,16 +978,17 @@ Note
 <p>Since we’re already summarizing the data using our <code>summarize()</code> function, we’ll apply a <code>geom_col()</code> layer to visualize the summary as columns. If we were going to let ggplot do the summary for us, we could instead feed our raw data into the function, and use the <code>geom_bar()</code> argument.</p>
 <p><strong>Note that once ggplot has been called, additional layers to the chart must be chained using the <code>+</code> operator, not the <code>%&gt;%</code> operator.</strong></p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>symptoms_manifest <span class="sc">%&gt;%</span></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(onset.date) <span class="sc">%&gt;%</span></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> onset.date, <span class="at">y =</span> n)) <span class="sc">+</span> </span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create a basic ggplot to look at the cases by onset date</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>symptoms_manifest <span class="sc">%&gt;%</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(onset.date) <span class="sc">%&gt;%</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> onset.date, <span class="at">y =</span> n)) <span class="sc">+</span> </span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="module03_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="module03_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -979,15 +997,15 @@ Note
 </section>
 <section id="further-exploring-the-dataset" class="level3">
 <h3 class="anchored" data-anchor-id="further-exploring-the-dataset">Further exploring the dataset</h3>
-<p>Luckily, at this stage, the outbreak appears to be in decline, and may even be over. However, as epidemiologists, we know that if we don’t identify the source of the illnesses, then they could occur again. Using our data-swashbuckling abilities - we have uncovered a number of very strong clues in this scenario so far.</p>
-<p>Take a couple of minutes to summarize, from an epidemiological perspective, what you have learned about the cases and illnesses aboard the <strong>S. S. Rainbow Cake</strong> so far. This may help to hone your focus on where to investigate next!</p>
+<p>Luckily, the outbreak appears to be in decline, and may even be over. However, as epidemiologists, we know that if we don’t identify the source of the illnesses, then they could occur again. Using our data-swashbuckling abilities - we have uncovered a number of very strong clues in this scenario so far.</p>
+<p>Take a couple of minutes to summarize, from an epidemiological perspective, what you have learned about the cases and illnesses aboard the <strong>S. S. Rainbow Cake</strong> so far. This may help you to hone your focus on where to investigate next!</p>
 <details>
 <summary>
 <strong>Click to see the present clues in the investigation</strong>
 </summary>
 <p>Here’s some of the main considerations so far:</p>
 <ul>
-<li>There is a very strong point-source outbreak signal. We should be thinking about exposures that may have occurred at a single setting (e.g., meals, events).</li>
+<li>There is a very strong point-source outbreak signal. We should be thinking about exposures that may have occurred in a single setting (e.g., meals, events).</li>
 <li>While all of our cases reported abdominal pain / discomfort, there are some that have reported much more serious symptoms. We may want to investigate these further.</li>
 <li>There does not appear to be any strong signals based on age and sex of cases.</li>
 <li>We are on a cruise ship and historically, gastrointestinal outbreaks cause by contaminated food are a common occurrence.</li>
@@ -996,25 +1014,26 @@ Note
 <section id="differences-in-symptoms-by-onset-date" class="level4">
 <h4 class="anchored" data-anchor-id="differences-in-symptoms-by-onset-date">Differences in symptoms by onset date</h4>
 <p>Let’s go back to our symptoms and see if there are any differences in the symptoms by onset date. This time, we’ll summarize all of different symptoms by date using a clever little function called <code>across()</code>.</p>
-<p>The <code>across()</code> function works within either a mutate() or summarize() call, and allows you to repeat the same operation on a range of variables, rather than having to type them in over and over again. Here, we’ll use it to sum up the number of cases that reported each symptom for each each day in our dataset.</p>
+<p>The <code>across()</code> function works within either a mutate() or summarize() call, and allows you to repeat the same operation on a range of variables, rather than having to type them in over and over again. Here, we’ll use it to sum up the number of cases that reported each symptom for each day in our dataset.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>symptoms_manifest <span class="sc">%&gt;%</span></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(onset.date) <span class="sc">%&gt;%</span></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">across</span>(</span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>      <span class="fu">c</span>(vomiting, diarrhea, headache, bloody.stool, Fever),</span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>      <span class="sc">~</span> <span class="fu">sum</span>(.x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>      )</span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 5 × 6</span></span>
-<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a><span class="do">##   onset.date vomiting diarrhea headache bloody.stool Fever</span></span>
-<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a><span class="do">##   &lt;date&gt;        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;        &lt;dbl&gt; &lt;dbl&gt;</span></span>
-<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a><span class="do">## 1 2025-02-10        3        4        3            1     1</span></span>
-<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a><span class="do">## 2 2025-02-11       19       21       17            8    11</span></span>
-<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a><span class="do">## 3 2025-02-12       22       27       24           17    20</span></span>
-<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a><span class="do">## 4 2025-02-13       10       12        9            5     6</span></span>
-<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a><span class="do">## 5 2025-02-14        2        2        1            0     0</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Sum the number of cases presenting with each symptom for each day</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>symptoms_manifest <span class="sc">%&gt;%</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(onset.date) <span class="sc">%&gt;%</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>( </span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">across</span>(</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>      <span class="fu">c</span>(vomiting, diarrhea, headache, bloody.stool, Fever),</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>      <span class="sc">~</span> <span class="fu">sum</span>(.x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 5 × 6</span></span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a><span class="do">##   onset.date vomiting diarrhea headache bloody.stool Fever</span></span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a><span class="do">##   &lt;date&gt;        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;        &lt;dbl&gt; &lt;dbl&gt;</span></span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a><span class="do">## 1 2025-02-10        3        4        3            1     1</span></span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a><span class="do">## 2 2025-02-11       19       21       17            8    11</span></span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a><span class="do">## 3 2025-02-12       22       27       24           17    20</span></span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a><span class="do">## 4 2025-02-13       10       12        9            5     6</span></span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a><span class="do">## 5 2025-02-14        2        2        1            0     0</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -1026,7 +1045,8 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Do you notice any differences between the numbers of passengers reporting symptoms? Why might vomiting, diarrhea, and headache be reported less often than the more severe symptoms of bloody stool and fever. What types of gastrointestinal diseases might cause bloody stool and fever?</p>
+<p>Do you notice any differences between the numbers of passengers reporting symptoms? Why might vomiting, diarrhea, and headache be reported less often than the more severe symptoms of bloody stool and fever?</p>
+<p>What types of gastrointestinal diseases might cause bloody stool and fever?</p>
 </div>
 </div>
 </section>
@@ -1039,37 +1059,38 @@ Note
 </ol>
 <p>Let’s leave no stones unturned, and see if we can identify any differences between the passenger’s symptoms and either their cruise-member-status or the day that they boarded the ship. Since bloody stool and fever are definitely the greater cause for concern, we’ll focus on those symptoms only.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>symptoms_manifest <span class="sc">%&gt;%</span></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(<span class="st">`</span><span class="at">Member Status</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">across</span>(</span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>      <span class="fu">c</span>(bloody.stool, Fever),</span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>      <span class="sc">~</span> <span class="fu">sum</span>(.x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>      )</span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 3 × 3</span></span>
-<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a><span class="do">##   `Member Status` bloody.stool Fever</span></span>
-<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a><span class="do">##   &lt;chr&gt;                  &lt;dbl&gt; &lt;dbl&gt;</span></span>
-<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a><span class="do">## 1 Gold                       3     6</span></span>
-<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a><span class="do">## 2 Platinum                   3     4</span></span>
-<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a><span class="do">## 3 Silver                    25    28</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Symptoms by member status</span></span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>symptoms_manifest <span class="sc">%&gt;%</span></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(<span class="st">`</span><span class="at">Boarding Date</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(<span class="st">`</span><span class="at">Member Status</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
 <span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">across</span>(</span>
 <span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>      <span class="fu">c</span>(bloody.stool, Fever),</span>
 <span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>      <span class="sc">~</span> <span class="fu">sum</span>(.x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>      )</span>
 <span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 2 × 3</span></span>
-<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a><span class="do">##   `Boarding Date`     bloody.stool Fever</span></span>
-<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a><span class="do">##   &lt;dttm&gt;                     &lt;dbl&gt; &lt;dbl&gt;</span></span>
-<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a><span class="do">## 1 2025-02-09 00:00:00           31    38</span></span>
-<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a><span class="do">## 2 2025-02-10 00:00:00            0     0</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 3 × 3</span></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a><span class="do">##   `Member Status` bloody.stool Fever</span></span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a><span class="do">##   &lt;chr&gt;                  &lt;dbl&gt; &lt;dbl&gt;</span></span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a><span class="do">## 1 Gold                       3     6</span></span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a><span class="do">## 2 Platinum                   3     4</span></span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a><span class="do">## 3 Silver                    25    28</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Symptoms by boarding date</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>symptoms_manifest <span class="sc">%&gt;%</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(<span class="st">`</span><span class="at">Boarding Date</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">across</span>(</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>      <span class="fu">c</span>(bloody.stool, Fever),</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>      <span class="sc">~</span> <span class="fu">sum</span>(.x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 2 × 3</span></span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a><span class="do">##   `Boarding Date`     bloody.stool Fever</span></span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a><span class="do">##   &lt;dttm&gt;                     &lt;dbl&gt; &lt;dbl&gt;</span></span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a><span class="do">## 1 2025-02-09 00:00:00           31    38</span></span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a><span class="do">## 2 2025-02-10 00:00:00            0     0</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -1081,8 +1102,9 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Whoa! Did you just crack the outbreak code here!? There definitely looks to be something going on related to the <strong>date that passengers boarded the ship</strong>, as well as potentially their <strong>cruise-member-status</strong>.</p>
+<p>Whoa! Did you just crack the outbreak code here!? It definitely looks like something is going on related to the <strong>date that passengers boarded the ship</strong>, as well as potentially their <strong>cruise-member-status</strong>.</p>
 <p>Excellent epi-investigative skills!</p>
+<p>We’ll be exploring these findings further in Module 4. For now, proceed to the summary and quiz below!</p>
 </div>
 </div>
 </section>
@@ -1103,7 +1125,7 @@ Note
 <li>Creating a basic epidemiological curve</li>
 <li>Applying the across() function to summarize with multiple variables at once</li>
 </ol>
-<p>That’s a lot! We even managed to sneak a small preview of regular expressions in there!</p>
+<p>That’s a lot! Enjoy a well-deserved break!</p>
 </section>
 <section id="quiz" class="level3">
 <h3 class="anchored" data-anchor-id="quiz">Quiz</h3>

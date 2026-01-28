@@ -163,6 +163,11 @@ We've done our best to embed as many explanations and resources as possible dire
 
 The case study itself exists on this website. You can navigate between Modules 1 - 4 using the tabs at the top of the screen. The navigation bar on the right-hand side of the page displays the headers throughout the current page.
 
+
+In order to complete the case study, you'll need to download the datasets available on the course Github repository. While you can download the entire course as a .zip file and extract the files you need, we've provided a link here to the [participant_data folder](https://downgit.github.io/#/home?url=https://github.com/hc-sc/tdu-rph/tree/main/participant_data "Download the participant_data folder"). You can download just this folder and extract it to your working directory. 
+
+
+
 ::: callout-important 
 
 At the bottom of the navigation bar is a link to download the materials in MS Word format. If you find yourself wanting to take notes directly in the case study material, or would like to retain these materials for future use - then please use this link to download them directly. We will not otherwise be providing handouts of the course case study.

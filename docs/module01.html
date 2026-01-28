@@ -1076,17 +1076,18 @@ Note
 </section>
 <section id="step-6-fix-boarding-date." class="level3">
 <h3 class="anchored" data-anchor-id="step-6-fix-boarding-date.">Step 6: Fix boarding date.</h3>
-<p>The last thing to do to get our dataset into tip-top shape is to fix the <strong>boarding date</strong> variable. Since there’s only two variations in this one (e.g., Feb 9th and Feb 10th) this should be an easy fix using our case_when() function. Keep in mind, however, that we may want to be able to use this variable in calculations later, so we should also restore it to a date format using Lubridate’s <strong>ymd()</strong> function.</p>
+<p>The last thing to do to get our dataset into tip-top shape is to fix the <strong>boarding date</strong> variable. Since there’s only two variations in this one (e.g., Feb 9th and Feb 10th) this should be an easy fix using our <strong>case_when()</strong> function. Keep in mind, however, that we may want to be able to use this variable in calculations later, so we should also restore it to a date format using Lubridate’s <strong>ymd()</strong> function.</p>
 <p>Let’s wrap these together into one operation:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>manifest <span class="ot">&lt;-</span> </span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>manifest <span class="sc">%&gt;%</span> </span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">board.date =</span> <span class="fu">case_when</span>(</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    board.date <span class="sc">==</span> <span class="st">"Feb 9th"</span> <span class="sc">~</span> <span class="fu">ymd</span>(<span class="st">'2025-02-09'</span>),</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    board.date <span class="sc">==</span> <span class="st">"Feb 10th"</span> <span class="sc">~</span> <span class="fu">ymd</span>(<span class="st">'2025-02-10'</span>),</span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    <span class="cn">TRUE</span> <span class="sc">~</span> <span class="cn">NA</span>)</span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>  </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">#store the manifest as an object after creating the boarding date variable.  </span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>manifest <span class="ot">&lt;-</span> </span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>manifest <span class="sc">%&gt;%</span> </span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">board.date =</span> <span class="fu">case_when</span>(</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    board.date <span class="sc">==</span> <span class="st">"Feb 9th"</span> <span class="sc">~</span> <span class="fu">ymd</span>(<span class="st">'2025-02-09'</span>),</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    board.date <span class="sc">==</span> <span class="st">"Feb 10th"</span> <span class="sc">~</span> <span class="fu">ymd</span>(<span class="st">'2025-02-10'</span>),</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>    <span class="cn">TRUE</span> <span class="sc">~</span> <span class="cn">NA</span>)</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>  </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="saving-your-dataset-to-disk" class="level3">

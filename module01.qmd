@@ -604,11 +604,12 @@ manifest %>%
 
 ### Step 6: Fix boarding date.
 
-The last thing to do to get our dataset into tip-top shape is to fix the **boarding date** variable. Since there's only two variations in this one (e.g., Feb 9th and Feb 10th) this should be an easy fix using our case_when() function. Keep in mind, however, that we may want to be able to use this variable in calculations later, so we should also restore it to a date format using Lubridate's **ymd()** function.
+The last thing to do to get our dataset into tip-top shape is to fix the **boarding date** variable. Since there's only two variations in this one (e.g., Feb 9th and Feb 10th) this should be an easy fix using our **case_when()** function. Keep in mind, however, that we may want to be able to use this variable in calculations later, so we should also restore it to a date format using Lubridate's **ymd()** function.
 
 Let's wrap these together into one operation:
 
 ```{r}
+#store the manifest as an object after creating the boarding date variable.  
 manifest <- 
 manifest %>% 
   mutate(board.date = case_when(

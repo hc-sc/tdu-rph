@@ -103,7 +103,7 @@ Also - lucky us, it seems as though the ship's infirmary does a **much** better 
 
 ### Data collation plan
 
-Now that we have an idea about what our datasets will look like, we should sketch out a strategy for how our data sets can be joined together. Starting with our **abdo** data: these are all in the same format, but the data have been separated out for each day. We'll want to **append** these datasets together, and **create a new variable** to indicate what the date was that the symptoms were reported.
+Now that we have an idea about what our datasets will look like, we should sketch out a strategy for how to join them. Starting with our **abdo** data: these are all in the same format, but the data have been separated out for each day. We'll want to **append** these datasets together, and **create a new variable** to indicate the date that symptoms were reported.
 
 For our append operation, we'll be using the following function:
 
@@ -115,7 +115,7 @@ The argument .id="id" will produce a new column that contains a character string
 
 ![Using bind_row() to append the abdo datasets into one.](pics/module3_dataflow01.jpg){fig-alt="A simple data-flow diagram showing five data sets combining into one."}
 
-Once we have a working **abdo dataset** in place, we can turn our attention to the **passenger manifest file**. This manifest has already been cleaned by the ship's staff, and contains the unique passenger ID variable that we can use as a key variable. The dataset is, however, still saved as an Excel workbook, and contains the messy header and extraneous variables - so you'll need to revisit how we imported this properly in Module 1 if you've forgotten, and then select the variables to keep from the table above. When that's done, we'll join the two tables together with the key variable.
+Once we have a working **abdo dataset** in place, we can turn our attention to the **passenger manifest file**. This manifest has already been cleaned by the ship's staff, and contains the unique passenger ID variable that we can use as a key variable. The dataset is, however, still saved as an Excel workbook, and contains the messy header and extraneous variables - so you'll need to revisit how we imported this properly in Module 1 if you've forgotten, and then select the variables to keep from the table above. When that's done, we'll join the two tables together with the key variable (i.e., the unique passenger ID).
 
 ![Collating abdo and manifest datasets using table join](pics/module3_dataflow02.jpg)
 
@@ -252,7 +252,7 @@ For this operation, we decided that a **left_join** would work best!
 
 -   Rows in the right data frame that don’t match any left-side keys are dropped and do not appear in the result.
 
--   Since we're interested in the cases reporting abdominal symptoms primarily, and we're looking to add supplementary demographic data, the left join makes the most sense, and keeps the results nice and tidy for us, without any extras.
+-   Since we're primarily interested in the cases reporting abdominal symptoms, and we're looking to add supplementary demographic data, the left join makes the most sense, and keeps the results nice and tidy for us, without any extras.
 
 ::: callout-warning
 Don't forget that the order of tables matters when invoking **left_join()**.
@@ -279,11 +279,13 @@ abdo_manifest <- left_join(abdo_combined_onset, pass_manifest_trunc, by = c("pas
 
 ```
 
+Before moving on to the next section, spend a few minutes exploring your new *abdo_manifest* dataset using functions like `glimpse()` and `view()`.
+
 ## Part B: Separating, pivoting, and rejoining data
 
 Let's recap where we're at so far:
 
-1.  According to our abdo_manifest dataset, as of Feb 14th, we have 69 passengers aboard the S.S. Rainbow Cake who have fallen ill, reporting symptoms of abdominal pain or worse.
+1.  According to our **abdo_manifest** dataset, as of Feb 14th, we have 69 passengers aboard the S.S. Rainbow Cake who have fallen ill, reporting symptoms of abdominal pain or worse.
 2.  We have established onset dates for each of the ill passengers by appending the individual abdo datasets together and establishing the date that they reported to the ship infirmary as a variable in our dataset.
 3.  By joining the combined abdo dataset with a version of the passenger manifest that has a unique identifier assigned to each passenger, we were able to securely import demographic variables and attach them to the appropriate passengers.
 
@@ -296,7 +298,7 @@ Now it's time that we address the manatee-in-the-room: the CEDIS variable! All o
 ::: callout-note
 ### Did you know
 
-The Canadian Emergency Department Information System (CEDIS) is a Canadian initiative to provide a systematic approach to data collection across hospital emergency departments nation-wide. The system was established through a collaborative, consensus based approach, and included input from hospital nurses, administrators, and researchers all across Canada. The goals of the approach were to create a system of systematically capturing and categorizing chief complaints in emergency departments and triage settings to facilitate clinical care, research and emergency department management with a specific, Canadian healthcare-system context.
+The Canadian Emergency Department Information System (CEDIS) is a Canadian initiative to provide a systematic approach to data collection across hospital emergency departments nation-wide. The system was established through a collaborative, consensus based approach, and included input from hospital nurses, administrators, and researchers all across Canada. The goals of the approach were to create a system to systematically capture and categorize chief complaints in emergency departments and triage settings to facilitate clinical care, research and emergency department management with a specific, Canadian healthcare-system context.
 
 Cool facts about CEDIS:
 
@@ -347,11 +349,11 @@ Conceptually the approach that we'll take will follow something like this:
 
 ### Code-along for Part B
 
-First, we'll start by saving a temporary subset of our abdo-manifest object that contains only the pass.ID and CEDIS variables. This will help to ensure that we don't mistakenly manipulate other variables in our dataset accidentally.
+First, we'll start by saving a temporary subset of our abdo-manifest object that contains only the pass.ID and CEDIS variables. This will help to ensure that we don't accidentally manipulate other variables in our dataset.
 
 ```{r}
 
-
+# create a temporary subset of our abdo-manifest object
 CEDIS_subset <- abdo_manifest %>%
   select(pass.ID, CEDIS)
 
@@ -372,12 +374,14 @@ Easy enough, next, let's check out the arguments we'll need to specify in the **
 -   convert = (T/F) this tells R whether or not we want to convert the resulting columns into whatever class the individual values are. For example, the CEDIS variable is presently stored as a character string because it mixes both numeric and character values. If we set convert = T, then the separated CEDIS codes will be treated as numeric, and if we set convert = F, then they'll stay as characters.
 
 ::: callout-warning
-Note: the Tidyverse team has marked **separate_rows()** as end of lifecycle / deprecated. This doesn't mean that the function won't continue to work, but it does mean that the team will not continue to update it. The function that is intended to replace it is called **separate_longer_delim()**, however, it is still in experimental status, so we won't official move to that one until a later time.
+Note: The Tidyverse team has marked **separate_rows()** as end of lifecycle / deprecated. This doesn't mean that the function won't continue to work, but it does mean that the team will not continue to update it. The function that is intended to replace it is called **separate_longer_delim()**, however, it is still in experimental status, so we won't officially move to that one until a later time.
 :::
 
 Let's hit the CEDIS variable with our separate_rows() function and see what we get!
 
 ```{r}
+
+# separate CEDIS variable using the separate_rows() function
 CEDIS_subset_long <- 
 CEDIS_subset %>%
   separate_rows(CEDIS, sep = ';', convert = FALSE)
@@ -402,6 +406,8 @@ Note: **pivot_wider()** assumes that each combination of the *id_cols* and *name
 :::
 
 ```{r}
+
+# Apply the pivot_wider() function
 CEDIS_subset_wide <- 
 CEDIS_subset_long %>% 
   mutate(value = 1) %>%
@@ -425,7 +431,7 @@ Take a few minutes to review the CEDIS table that was provided in your participa
 
 Just kidding! You didn't think we'd do all the work for you, did you?
 
-Take a break from your RStudio console and give the PDF a quick read, you should be easily able to find the symptoms that correspond to the following CEDIS codes:
+Give your eyes a break from your RStudio console and have a quick read of the PDF. you should be easily able to find the symptoms that correspond to the following CEDIS codes:
 
 -   251
 -   254
@@ -436,16 +442,17 @@ Take a break from your RStudio console and give the PDF a quick read, you should
 </details>
 
 ::: callout-info
-Need a short brain-break? Every thought about the differences between R and Python? [Here's a short video where Posit's Chief Data Scientist, Dr. Hadley Wickham, talks about R versus Python.](https://youtu.be/mVzDPxKagxk?si=rJ9qpjkkFkiqDk8d "Hadley Wickham on R versus Python")
+Need a brain-break? Have you ever thought about the differences between R and Python? [Here's a short video where Posit's Chief Data Scientist, Dr. Hadley Wickham, talks about R versus Python.](https://youtu.be/mVzDPxKagxk?si=rJ9qpjkkFkiqDk8d "Hadley Wickham on R versus Python")
 
 ![R versus Python - more alike than different!](pics/module03_RvsPython.jpg){fig-alt="An image featuring the branding logos of R and Python coding software"}
 :::
 
-Ok - on to the coding step. If you ***still*** haven't looked up the codes at this point - then follow along and see how we decided to rename the variables.
+Okay, on to the coding step. If you ***still*** haven't looked up the codes at this point - then follow along and see how we decided to rename the variables.
 
-The rename() function allows you to specify exactly which variables you want to rename, and uses a "new.name" = "old.name" syntax. When you're working with more complex datasets, or in the middle of a series of operations, its generally much safer to rename variables this way.
+The **rename()** function allows you to specify exactly which variables you want to rename, and uses a "new.name" = "old.name" syntax. When you're working with more complex datasets, or in the middle of a series of operations, its generally much safer to rename variables this way.
 
 ```{r}
+#rename the CEDIS variables
 
 symptoms_table <- 
 CEDIS_subset_wide %>% 
@@ -460,28 +467,33 @@ CEDIS_subset_wide %>%
 
 #### Join() with main dataset
 
-Finally it's time to join our symptoms data back with our main manifest!
+Finally, it's time to join our symptoms data back with our main manifest!
 
-Let's go ahead and re-unite these data, using the pass.ID as the key variable! Note that this time, since the key variable is named the same in both datasets, we don't actually need to specify the variable in our list of function arguments.
+Let's go ahead and re-unite these data, using **pass.ID** as the key variable! Note that this time, since the key variable is named the same in both datasets, we don't actually need to specify the variable in our list of function arguments.
 
 ```{r}
-
+# Join the symptom and main manifest datasets
 symptoms_manifest <- full_join(symptoms_table, abdo_manifest)
-
-# Remove all but the specified objects from memory
-#rm(rm(list = setdiff(ls(), c("symptoms_manifest"))))
 
 ```
 
 Review your symptoms manifest object to ensure that everything looks in order. Once that's finished, clean up your workspace, removing any of your temporary/intermediate data objects.
 
-## Part C: You're an epidemiologist, remember?
+```{r}
 
-Alright - up until now we've focused primarily on cleaning and manipulating data, which are *essential* skills for an epidemiologist to have. However, you were hired aboard the **S. S. Rainbow Cake** because you're an epidemiologist and are trained to think about how data are used to solve public health issues, so let's turn our focus now to exploring what are our data are telling us.
+# Here's a neat way to remove every BUT the specified datasets from memory: 
 
-We need a tool to help turn our observations into meaningful summaries, and the summarize() family of functions will provide just that!
+#rm(list = setdiff(ls(), c("symptoms_manifest")))
 
-The **summarize()** function takes your specified data and summary functions (e.g., sum, mean, median, max, min, etc.) as input, and outputs a new data frame with the results stored as variables. The syntax should look fairly familiar at this point.
+```
+
+## Part C: Put your skills as an epidemiologist to use!
+
+Alright - up until now we've focused primarily on cleaning and manipulating data, which are *essential* skills for any data-wrangler to have. However, you were hired aboard the **S. S. Rainbow Cake** because you're an epidemiologist and are trained to think about how data are used to solve public health issues, so let's now turn our focus to exploring what our data are telling us.
+
+We need a tool to help turn our observations into meaningful summaries, and the **summarize()** family of functions will provide just that!
+
+The **summarize()** function takes your specified data and summary functions (e.g., sum, mean, median, max, min, etc.) as input, and outputs a new data frame with the results stored as variables.
 
 e.g.,
 
@@ -540,6 +552,7 @@ Let's first look at a description of cases in the data:
 
 ```{r}
 
+#Summarize cases by gender (M/F) and age (mean, median, and range) 
 symptoms_manifest %>% 
   summarize(.by = Gender,
     mean_age   = mean(Age, na.rm = TRUE),
@@ -559,6 +572,7 @@ Next, let's tally the total number of female and male cases, and calculate their
 
 ```{r}
 
+# summarize proportions of male and females
 symptoms_manifest %>% 
   group_by(Gender) %>%
   summarize(Total = n(),
@@ -569,7 +583,7 @@ symptoms_manifest %>%
 Whoops! What do you notice above about our results? The proportion is returning the total number of female cases out of the total number of female cases, and vice-versa for males. This is because our .groups remain in effect in the summarize() function until we say otherwise. To get the correct proportions, we'll need to adjust our code.
 
 ```{r}
-
+# summarize proportions of male and females, after dropping the groups
 symptoms_manifest %>% 
   group_by(Gender) %>%
   summarize(Total = n(), .groups = "drop") %>%
@@ -581,10 +595,11 @@ In the above summarize() call, we've told R that groups should be dropped in the
 
 #### Cases reporting with Fever
 
-For this one, we'll use mutate a new variable called "Fever" based on the temperature values, and then calculate the summaries based on that. Let's go with anything over 38 degrees constituting a fever.
+For this one, we'll use mutate to create a new variable called "Fever" based on the temperature values, and then summarize the data. Let's define "fever" as any case temperature over 38 degrees Celsius.
 
 ```{r}
 
+#create a new fever variable for any temperature over 38 degrees
 symptoms_manifest <- 
   symptoms_manifest %>% 
   mutate(Fever = case_when(
@@ -593,16 +608,18 @@ symptoms_manifest <-
     TRUE ~ NA
   ))
 
-
+# Summarize the numbers of cases presenting with fever
 symptoms_manifest %>% 
   count(Fever)
 
 
 ```
 
-Hmm. Interesting - a little over half of our cases with abdominal pain were running a fever. Lets create some age groupings so that we can look a little more closely at age breakdowns.
+Hmm... interesting! A little over half of our cases with abdominal pain were running a fever. Lets create some age groupings so that we can look a little more closely at age breakdowns.
 
 ```{r}
+
+# Create age groups
 symptoms_manifest <- 
 symptoms_manifest %>%
   mutate(
@@ -617,6 +634,7 @@ symptoms_manifest %>%
     )
   )
 
+# Summarize age group by fever
 
 symptoms_manifest %>%
   group_by(age.group) %>%
@@ -636,7 +654,7 @@ Now let's look at our remaining symptoms by gender and by age group:
 -   Bloody Stool
 
 ```{r}
-
+# summarize symptoms by gender
 symptoms_manifest %>%
   group_by(Gender) %>%
   summarize(
@@ -648,6 +666,7 @@ symptoms_manifest %>%
 ```
 
 ```{r}
+# summarize symptoms by age group
 symptoms_manifest %>%
   group_by(age.group) %>%
   summarize(
@@ -667,13 +686,14 @@ We'll take a look next at symptom onset dates, and see if there's any discernibl
 
 ```{r}
 
+# Summarize cases by symptom onset date
 symptoms_manifest %>%
   group_by(onset.date) %>%
   count() 
 
 ```
 
-Are you starting to see a pattern here? These numbers appear to read very much like an outbreak curve typical of a point-source exposure.
+Are you starting to see a pattern here? These numbers appear to show an outbreak curve typical of a point-source exposure.
 
 Let's plot these numbers using the ggplot() function so that we can have a quick visualization.
 
@@ -689,7 +709,7 @@ If you're ever looking for inspiration, here's a link to a large collection of e
 -   [Ggplot2 extensions gallery](https://exts.ggplot2.tidyverse.org/gallery/ "A link to ggplot2 extensions")
 :::
 
-To keep things simple for now, we'll be using a very simple ggplot to look at the distribution of cases over time. We can easily incorporate this into our summary statement using the pipe operator `%>%`.
+To keep things simple for now, we'll be using a very basic ggplot to look at the distribution of cases over time. We can easily incorporate this into our summary statement using the pipe operator `%>%`.
 
 For this ggplot, you'll need to specify the following arguments:
 
@@ -702,6 +722,7 @@ Since we're already summarizing the data using our `summarize()` function, we'll
 **Note that once ggplot has been called, additional layers to the chart must be chained using the `+` operator, not the `%>%` operator.**
 
 ```{r}
+# create a basic ggplot to look at the cases by onset date
 
 symptoms_manifest %>%
   group_by(onset.date) %>%
@@ -717,9 +738,9 @@ While there are many improvements that could be made to this chart, it does conf
 
 ### Further exploring the dataset
 
-Luckily, at this stage, the outbreak appears to be in decline, and may even be over. However, as epidemiologists, we know that if we don't identify the source of the illnesses, then they could occur again. Using our data-swashbuckling abilities - we have uncovered a number of very strong clues in this scenario so far.
+Luckily, the outbreak appears to be in decline, and may even be over. However, as epidemiologists, we know that if we don't identify the source of the illnesses, then they could occur again. Using our data-swashbuckling abilities - we have uncovered a number of very strong clues in this scenario so far.
 
-Take a couple of minutes to summarize, from an epidemiological perspective, what you have learned about the cases and illnesses aboard the **S. S. Rainbow Cake** so far. This may help to hone your focus on where to investigate next!
+Take a couple of minutes to summarize, from an epidemiological perspective, what you have learned about the cases and illnesses aboard the **S. S. Rainbow Cake** so far. This may help you to hone your focus on where to investigate next!
 
 <details>
 
@@ -727,7 +748,7 @@ Take a couple of minutes to summarize, from an epidemiological perspective, what
 
 Here's some of the main considerations so far:
 
--   There is a very strong point-source outbreak signal. We should be thinking about exposures that may have occurred at a single setting (e.g., meals, events).
+-   There is a very strong point-source outbreak signal. We should be thinking about exposures that may have occurred in a single setting (e.g., meals, events).
 -   While all of our cases reported abdominal pain / discomfort, there are some that have reported much more serious symptoms. We may want to investigate these further.
 -   There does not appear to be any strong signals based on age and sex of cases.
 -   We are on a cruise ship and historically, gastrointestinal outbreaks cause by contaminated food are a common occurrence.
@@ -738,13 +759,14 @@ Here's some of the main considerations so far:
 
 Let's go back to our symptoms and see if there are any differences in the symptoms by onset date. This time, we'll summarize all of different symptoms by date using a clever little function called `across()`.
 
-The `across()` function works within either a mutate() or summarize() call, and allows you to repeat the same operation on a range of variables, rather than having to type them in over and over again. Here, we'll use it to sum up the number of cases that reported each symptom for each each day in our dataset.
+The `across()` function works within either a mutate() or summarize() call, and allows you to repeat the same operation on a range of variables, rather than having to type them in over and over again. Here, we'll use it to sum up the number of cases that reported each symptom for each day in our dataset.
 
 ```{r}
 
+# Sum the number of cases presenting with each symptom for each day
 symptoms_manifest %>%
   group_by(onset.date) %>%
-  summarize(
+  summarize( 
     across(
       c(vomiting, diarrhea, headache, bloody.stool, Fever),
       ~ sum(.x, na.rm = TRUE)
@@ -755,7 +777,9 @@ symptoms_manifest %>%
 ```
 
 ::: callout-note
-Do you notice any differences between the numbers of passengers reporting symptoms? Why might vomiting, diarrhea, and headache be reported less often than the more severe symptoms of bloody stool and fever. What types of gastrointestinal diseases might cause bloody stool and fever?
+Do you notice any differences between the numbers of passengers reporting symptoms? Why might vomiting, diarrhea, and headache be reported less often than the more severe symptoms of bloody stool and fever?
+
+What types of gastrointestinal diseases might cause bloody stool and fever?
 :::
 
 #### Differences in symptoms by other variables
@@ -768,7 +792,7 @@ If you recall, there are still two variables in our dataset that we haven't take
 Let's leave no stones unturned, and see if we can identify any differences between the passenger's symptoms and either their cruise-member-status or the day that they boarded the ship. Since bloody stool and fever are definitely the greater cause for concern, we'll focus on those symptoms only.
 
 ```{r}
-
+# Symptoms by member status
 symptoms_manifest %>%
   group_by(`Member Status`) %>%
   summarize(
@@ -783,6 +807,7 @@ symptoms_manifest %>%
 
 ```{r}
 
+# Symptoms by boarding date
 symptoms_manifest %>%
   group_by(`Boarding Date`) %>%
   summarize(
@@ -796,9 +821,11 @@ symptoms_manifest %>%
 ```
 
 ::: callout-note
-Whoa! Did you just crack the outbreak code here!? There definitely looks to be something going on related to the **date that passengers boarded the ship**, as well as potentially their **cruise-member-status**.
+Whoa! Did you just crack the outbreak code here!? It definitely looks like something is going on related to the **date that passengers boarded the ship**, as well as potentially their **cruise-member-status**.
 
 Excellent epi-investigative skills!
+
+We'll be exploring these findings further in Module 4. For now, proceed to the summary and quiz below!
 :::
 
 ## Summary and quiz
@@ -817,7 +844,7 @@ You managed to do all of the following, using only tidyverse functions:
 6.  Creating a basic epidemiological curve
 7.  Applying the across() function to summarize with multiple variables at once
 
-That's a lot! We even managed to sneak a small preview of regular expressions in there!
+That's a lot! Enjoy a well-deserved break!
 
 ### Quiz
 
