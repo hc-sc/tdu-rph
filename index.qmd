@@ -59,8 +59,25 @@ If you share, re-use or re-purpose our training materials, please inform us via 
 
 In order to complete this course, you will require the following:
 
-1.  R version 4.4.3.0 or newer
-2.  RStudio version 2024.12.1 or newer
+1. R version 4.4.3.0 or newer
+2. RStudio version 2024.12.1 or newer
+3. Access to this website, or an offline version of the case study materials
+
+### Access to case study materials and downloads
+
+The case study itself exists on this website. You can navigate between Modules 1 - 4 using the tabs at the top of the screen. The navigation bar on the right-hand side of the page displays the headers throughout the current page.
+
+
+In order to complete the case study, you'll need to download the datasets available on the course Github repository. While you can download the entire course as a .zip file and extract the files you need, we've provided a link here to the [participant_data folder](https://downgit.github.io/#/home?url=https://github.com/hc-sc/tdu-rph/tree/main/participant_data "Download the participant_data folder"). You can download just this folder and extract it to your working directory. 
+
+
+
+::: callout-important 
+
+At the bottom of the navigation bar is a link to download the materials in MS Word format. If you find yourself wanting to take notes directly in the case study material, or would like to retain these materials for future use - then please use this link to download them directly. We will not otherwise be providing handouts of the course case study.
+
+
+:::
 
 ## Preamble: Setting-up your workspace
 
@@ -159,18 +176,3 @@ We've done our best to embed as many explanations and resources as possible dire
 2.  (*Second+ demonstration*) We ask you to strategize and execute an operation that you've already seen, and provide the code in a hidden drop-down. This is intended to allow you to try the code out yourself first, then compare how your coding approach may have differed from ours.
 3.  (*Third + demonstration / Challenge*) You may find toward the end of the course that there are a couple of instructions where we don't actually provide you with the explicit code you'll need to complete the instruction. This is intended as a challenge to have you reflect on the examples and instruction already provided, and use these to build the code on your own. Don't worry - your instructors will be able to help you if you do get stuck!
 
-### Access to case study materials and downloads
-
-The case study itself exists on this website. You can navigate between Modules 1 - 4 using the tabs at the top of the screen. The navigation bar on the right-hand side of the page displays the headers throughout the current page.
-
-
-In order to complete the case study, you'll need to download the datasets available on the course Github repository. While you can download the entire course as a .zip file and extract the files you need, we've provided a link here to the [participant_data folder](https://downgit.github.io/#/home?url=https://github.com/hc-sc/tdu-rph/tree/main/participant_data "Download the participant_data folder"). You can download just this folder and extract it to your working directory. 
-
-
-
-::: callout-important 
-
-At the bottom of the navigation bar is a link to download the materials in MS Word format. If you find yourself wanting to take notes directly in the case study material, or would like to retain these materials for future use - then please use this link to download them directly. We will not otherwise be providing handouts of the course case study.
-
-
-:::
